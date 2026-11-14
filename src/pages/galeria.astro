@@ -1,0 +1,11 @@
+---
+import Gallery from '../components/pages/Gallery.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useT } from '../i18n';
+
+const t = useT('es');
+---
+
+<BaseLayout title={`${t('nav.gallery')} — ${t('ui.titleSuffix')}`} description={t('meta.gallery')}>
+  <Gallery locale="es" />
+</BaseLayout>

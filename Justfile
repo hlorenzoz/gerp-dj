@@ -18,6 +18,13 @@ dev:
 media:
     npm run media
     npm run images
+    just cdn-images
+
+# Mirror every processed image (masters + AVIF/WebP variants) into .agents/cdn/gerp-dj/images/ for the CDN upload
+cdn-images:
+    mkdir -p .agents/cdn/gerp-dj/images
+    rsync -a --delete public/images/ .agents/cdn/gerp-dj/images/
+    @echo "cdn    $(ls .agents/cdn/gerp-dj/images | wc -l | tr -d ' ') images in .agents/cdn/gerp-dj/images"
 
 # AVIF/WebP variants + manifest only (pass --force to regenerate)
 images *args:

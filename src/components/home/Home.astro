@@ -44,7 +44,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
   <LoopVideo
     id="hero-video"
     mode="hero"
-    src={`/videos/${site.media.hero}.mp4`}
+    src={site.video(site.media.hero)}
     labels={videoLabels}
     class="absolute inset-0 -z-10 size-full object-cover transition-opacity duration-700"
     buttonClass="right-4 top-20 sm:right-8 sm:top-24"
@@ -131,8 +131,8 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
       <LoopVideo
         id="action-video"
         mode="visible"
-        src="/videos/gerp-dj-sesion-terraza-ourense.mp4"
-        poster="/images/gerp-dj-sesion-terraza-ourense-848.webp"
+        src={site.video(site.media.action)}
+        poster={`/images/${site.media.action}-848.webp`}
         labels={videoLabels}
         class="aspect-video w-full object-cover"
         buttonClass="right-4 top-4 sm:right-6 sm:top-6"

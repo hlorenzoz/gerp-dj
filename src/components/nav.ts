@@ -17,6 +17,7 @@ const sections: Item[] = [
   ...enabledPages()
     .filter((p) => 'feature' in p)
     .map((p) => ({ key: p.title, path: p.path })),
+  { key: 'nav.gallery', path: '/galeria' },
   { key: 'nav.bio', path: '/bio' },
 ];
 

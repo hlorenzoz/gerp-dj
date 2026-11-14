@@ -1,0 +1,59 @@
+---
+import Picture from '../Picture.astro';
+import manifest from '../../lib/images/manifest.json';
+import { site, type Locale } from '../../config/site';
+import { useT } from '../../i18n';
+
+const { locale } = Astro.props as { locale: Locale };
+const t = useT(locale);
+type Entry = { webp: { w: number; src: string }[] };
+/** Poster: the 640-wide WebP variant, or the widest one when the master is narrower (portrait clips). */
+const poster = (name: string) => {
+  const { webp } = (manifest as Record<string, Entry>)[`/images/${name}.webp`];
+  return (webp.find((v) => v.w >= 640) ?? webp.at(-1)!).src;
+};
+const sizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw';
+---
+
+<section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+  <h1 class="display text-[clamp(3rem,14vw,11rem)]">{t('nav.gallery')}</h1>
+  <p class="mt-6 max-w-2xl text-xl">{t('gallery.lede')}</p>
+  <!-- Masonry columns: portrait clips keep 9:16, landscape 16:9. Nothing downloads until play (preload="none"). -->
+  <ul class="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3" role="list">
+    {
+      site.videos.map((v, i) => (
+        <li class="glass mb-6 break-inside-avoid overflow-hidden rounded-3xl">
+          <figure>
+            <div class="theme-dark bg-ground">
+              <video
+                controls
+                playsinline
+                preload="none"
+                poster={poster(v.name)}
+                aria-labelledby={`video-${i}`}
+                class:list={['w-full object-cover', v.orientation === 'portrait' ? 'aspect-[9/16]' : 'aspect-video']}
+              >
+                <source src={site.video(v.name)} type="video/mp4" />
+              </video>
+            </div>
+            <figcaption class="p-5">
+              <span id={`video-${i}`} class="block text-xl font-bold">
+                {t(v.title)}
+              </span>
+              <span class="text-muted">{t(v.caption)}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))
+    }
+    <li class="glass mb-6 break-inside-avoid overflow-hidden rounded-3xl">
+      <figure>
+        <Picture name="gerp-dj-ourense-equipo-sonido-luces" alt={t('gallery.photoAlt')} sizes={sizes} class="aspect-[16/11] w-full object-cover" />
+        <figcaption class="p-5">
+          <span class="block text-xl font-bold">{t('gallery.photo')}</span>
+          <span class="text-muted">{t('gallery.photoMeta')}</span>
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>
