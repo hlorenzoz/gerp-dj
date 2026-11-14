@@ -1,0 +1,76 @@
+---
+import { site, type Locale } from '../../config/site';
+import { waLink } from '../../lib/whatsapp';
+import Legal from './Legal.astro';
+
+const { locale } = Astro.props as { locale: Locale };
+const wa = waLink();
+---
+
+<Legal {locale} title="legal.privacy">
+  {
+    locale === 'es' ? (
+      <>
+        <h2>Política de privacidad</h2>
+        <p>Última actualización: 14 de noviembre de 2026.</p>
+        <h2>Responsable del tratamiento</h2>
+        <p>
+          [Nombre y apellidos o razón social] («GERP DJ»), NIF [NIF], con domicilio en [dirección], Ourense (España). Contacto: WhatsApp Business{' '}
+          <a target="_blank" rel="noopener" href={wa}>{site.whatsapp.display}</a>.
+        </p>
+        <h2>Qué datos tratamos y para qué</h2>
+        <ul>
+          <li>
+            <strong>Solicitudes de contratación y presupuestos.</strong> Cuando nos escribes por WhatsApp (desde el formulario o los botones de esta web), tratamos tu nombre, tu número de teléfono y los datos del evento que nos envíes (fecha, lugar, tipo de evento y mensaje) para responderte, preparar el presupuesto y, si llegamos a un acuerdo, gestionar la actuación.
+          </li>
+          <li>
+            <strong>Canal de WhatsApp.</strong> Si sigues el canal, WhatsApp no nos muestra tu número ni a nosotros ni a otros seguidores. Ese tratamiento lo realiza WhatsApp según su propia política.
+          </li>
+          <li>
+            <strong>Navegación.</strong> El servicio que aloja la web (Cloudflare) registra datos técnicos, como la dirección IP y el navegador, para servir las páginas y protegerlas frente a ataques.
+          </li>
+        </ul>
+        <p>El formulario de contratación no envía datos a ningún servidor nuestro: solo prepara el mensaje y abre WhatsApp. No se envía nada hasta que pulsas «enviar» en WhatsApp.</p>
+        <h2>Base legal</h2>
+        <p>Aplicación de medidas precontractuales a petición tuya y ejecución del contrato (art. 6.1.b RGPD) para las solicitudes; interés legítimo en la seguridad del sitio (art. 6.1.f RGPD) para los datos técnicos.</p>
+        <h2>Cuánto tiempo los conservamos</h2>
+        <p>Las conversaciones de solicitudes que no lleguen a contrato se eliminan en un plazo máximo de [12 meses]. Los datos de las actuaciones contratadas se conservan mientras dure la relación y, después, durante los plazos que exige la normativa fiscal y mercantil.</p>
+        <h2>Con quién se comparten</h2>
+        <p>No cedemos tus datos a terceros salvo obligación legal. Usamos estos proveedores: WhatsApp Ireland Limited (mensajería) y Cloudflare, Inc. (alojamiento y seguridad). Algunos pueden tratar datos fuera del Espacio Económico Europeo con las garantías previstas en el RGPD, como el Marco de Privacidad de Datos UE-EE. UU. o las cláusulas contractuales tipo.</p>
+        <h2>Tus derechos</h2>
+        <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiéndonos por WhatsApp o por correo postal a la dirección indicada arriba. Si consideras que no hemos atendido tu solicitud, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+      </>
+    ) : (
+      <>
+        <h2>Política de privacidade</h2>
+        <p>Última actualización: 14 de novembro de 2026.</p>
+        <h2>Responsable do tratamento</h2>
+        <p>
+          [Nome e apelidos ou razón social] («GERP DJ»), NIF [NIF], con domicilio en [enderezo], Ourense (España). Contacto: WhatsApp Business{' '}
+          <a target="_blank" rel="noopener" href={wa}>{site.whatsapp.display}</a>.
+        </p>
+        <h2>Que datos tratamos e para que</h2>
+        <ul>
+          <li>
+            <strong>Solicitudes de contratación e orzamentos.</strong> Cando nos escribes por WhatsApp (dende o formulario ou os botóns desta web), tratamos o teu nome, o teu número de teléfono e os datos do evento que nos envíes (data, lugar, tipo de evento e mensaxe) para responderche, preparar o orzamento e, se chegamos a un acordo, xestionar a actuación.
+          </li>
+          <li>
+            <strong>Canle de WhatsApp.</strong> Se segues a canle, WhatsApp non nos amosa o teu número nin a nós nin a outras persoas seguidoras. Ese tratamento realízao WhatsApp segundo a súa propia política.
+          </li>
+          <li>
+            <strong>Navegación.</strong> O servizo que aloxa a web (Cloudflare) rexistra datos técnicos, como o enderezo IP e o navegador, para servir as páxinas e protexelas fronte a ataques.
+          </li>
+        </ul>
+        <p>O formulario de contratación non envía datos a ningún servidor noso: só prepara a mensaxe e abre WhatsApp. Non se envía nada ata que premes «enviar» en WhatsApp.</p>
+        <h2>Base legal</h2>
+        <p>Aplicación de medidas precontractuais por petición túa e execución do contrato (art. 6.1.b RXPD) para as solicitudes; interese lexítimo na seguridade do sitio (art. 6.1.f RXPD) para os datos técnicos.</p>
+        <h2>Canto tempo os conservamos</h2>
+        <p>As conversas de solicitudes que non cheguen a contrato elimínanse nun prazo máximo de [12 meses]. Os datos das actuacións contratadas consérvanse mentres dure a relación e, despois, durante os prazos que esixe a normativa fiscal e mercantil.</p>
+        <h2>Con quen se comparten</h2>
+        <p>Non cedemos os teus datos a terceiros salvo obriga legal. Usamos estes provedores: WhatsApp Ireland Limited (mensaxería) e Cloudflare, Inc. (aloxamento e seguridade). Algúns poden tratar datos fóra do Espazo Económico Europeo coas garantías previstas no RXPD, como o Marco de Privacidade de Datos UE-EUA ou as cláusulas contractuais tipo.</p>
+        <h2>Os teus dereitos</h2>
+        <p>Podes exercer os teus dereitos de acceso, rectificación, supresión, oposición, limitación do tratamento e portabilidade escribíndonos por WhatsApp ou por correo postal ao enderezo indicado arriba. Se consideras que non atendemos a túa solicitude, podes reclamar ante a Axencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+      </>
+    )
+  }
+</Legal>

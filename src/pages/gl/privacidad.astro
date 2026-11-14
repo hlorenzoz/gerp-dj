@@ -1,0 +1,11 @@
+---
+import Privacy from '../../components/pages/Privacy.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useT } from '../../i18n';
+
+const t = useT('gl');
+---
+
+<BaseLayout title={`${t('legal.privacy')} — ${t('ui.titleSuffix')}`} description={t('meta.privacy')}>
+  <Privacy locale="gl" />
+</BaseLayout>
