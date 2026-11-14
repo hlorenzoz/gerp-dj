@@ -2,19 +2,27 @@
 import { Font } from 'astro:assets';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { alternatePath, getLocale, useT } from '../i18n';
+import { site } from '../config/site';
+import { alternatePath, getLocale, locales, useT } from '../i18n';
+import { buildGraph } from '../lib/seo';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  /** The 404 page: no canonical, hreflang, og:url or JSON-LD (it is not a real URL of the site). */
+  notFound?: boolean;
 }
 
 const locale = getLocale(Astro.currentLocale);
 const t = useT(locale);
-const { title = t('ui.title'), description = t('meta.description') } = Astro.props;
-const site = Astro.site;
+const { title = t('ui.title'), description = t('meta.description'), notFound = false } = Astro.props;
 const path = Astro.url.pathname;
+const canonical = site.url + alternatePath(path, locale);
+const ogLocale = (l: string) => `${l}_ES`;
+const image = site.media.og;
+// `<` escaped so the JSON can never close the script element.
+const jsonLd = JSON.stringify(buildGraph({ locale, path, title, description })).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -26,15 +34,33 @@ const path = Astro.url.pathname;
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {
-      site && (
+      !notFound && (
         <>
-          <link rel="canonical" href={new URL(path, site)} />
-          <link rel="alternate" hreflang="es" href={new URL(alternatePath(path, 'es'), site)} />
-          <link rel="alternate" hreflang="gl" href={new URL(alternatePath(path, 'gl'), site)} />
-          <link rel="alternate" hreflang="x-default" href={new URL(alternatePath(path, 'es'), site)} />
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="es" href={site.url + alternatePath(path, 'es')} />
+          <link rel="alternate" hreflang="gl" href={site.url + alternatePath(path, 'gl')} />
+          <link rel="alternate" hreflang="x-default" href={site.url + alternatePath(path, 'es')} />
+          <meta property="og:url" content={canonical} />
         </>
       )
     }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={site.url + image.src} />
+    <meta property="og:image:type" content={image.type} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={t(image.alt)} />
+    <meta property="og:locale" content={ogLocale(locale)} />
+    {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocale(l)} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={site.url + image.src} />
+    <meta name="twitter:image:alt" content={t(image.alt)} />
+    {!notFound && <script type="application/ld+json" set:html={jsonLd} />}
     <Font cssVariable="--font-archivo" />
   </head>
   <body class="min-h-dvh overflow-x-clip">

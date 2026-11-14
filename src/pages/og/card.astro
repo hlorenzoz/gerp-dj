@@ -1,0 +1,83 @@
+---
+// OpenGraph card source (1200×630, site.media.og). `just og` screenshots /og/card/ into public/og/gerp-dj.jpg.
+// Built but not linked, noindex and disallowed in robots.txt.
+import { Font } from 'astro:assets';
+import { site } from '../../config/site';
+import { useT } from '../../i18n';
+import { pressImage } from '../../lib/press-images';
+
+const t = useT('es');
+const { width, height } = site.media.og;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{t('ui.title')}</title>
+    <Font cssVariable="--font-archivo" preload />
+    <style is:global>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        overflow: hidden;
+        background: #07070a;
+      }
+      body {
+        position: relative;
+        font-family: var(--font-archivo), system-ui, sans-serif;
+        color: #f3f2ee;
+      }
+      img {
+        position: absolute;
+        inset: 0 0 0 auto;
+        width: 62%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 30%;
+      }
+      .shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #07070a 38%, rgb(7 7 10 / 0.75) 55%, rgb(7 7 10 / 0) 85%);
+      }
+      main {
+        position: absolute;
+        inset: 0;
+        padding: 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 28px;
+      }
+      h1 {
+        font-size: 176px;
+        font-stretch: 125%;
+        font-weight: 850;
+        letter-spacing: -0.035em;
+        line-height: 0.85;
+      }
+      p {
+        align-self: flex-start;
+        background: #dcff3c;
+        color: #07070a;
+        border-radius: 999px;
+        padding: 12px 30px;
+        font-size: 40px;
+        font-weight: 750;
+      }
+    </style>
+  </head>
+  <body style={`width:${width}px;height:${height}px`}>
+    <img src={pressImage('gerp-dj-ourense-cabina-iluminacion-led')} alt="" />
+    <div class="shade"></div>
+    <main>
+      <h1>{site.brand}</h1>
+      <p>{t('svc.title')}</p>
+    </main>
+  </body>
+</html>
