@@ -31,3 +31,4 @@ Branch: `feat/ssot-seo` from `main` `2ed9382`. Test runner: Vitest + `astro chec
 
 - **L4 (2026-11-14):** T1 done (S1–S5, S7, S8); README written by a parallel agent (`fbb4390`); independent verifier: MERGE ready, advisories applied (shipped HTML comments, `{year}`, `{country}` documented). Theme (S9) running in an isolated worktree.
 - **L5 (2026-11-14):** S9 theme delegated to an isolated worktree in parallel (user: "Y usa múltiples agentes porfa"); merged with 7 one-hunk conflicts (data refs from SSoT, classes from theme). Post-merge: vitest 41/41, build 14 pages, e2e 11/11, theme probe PASS, Lighthouse a11y 100 in both themes.
+- **L6 (2026-11-14, user, verbatim):** "Sí, el dominio principal del sitio es: https://gerp-dj.com/" — S8 now uses `https://gerp-dj.com`; `gerp-dj.hlorenzoz.com` should redirect (301) to it.

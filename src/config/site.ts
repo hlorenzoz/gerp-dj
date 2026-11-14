@@ -1,4 +1,4 @@
-// Single source of truth: every business fact is written here once. Copy in src/i18n interpolates these values
+'';
 // ({brand}, {city}, {phone}…); pages, legal texts, WhatsApp messages, OpenGraph, JSON-LD, llms.txt, sitemap and
 // the press kit read them from here.
 export type Locale = 'es' | 'gl';
@@ -6,7 +6,7 @@ export type Locale = 'es' | 'gl';
 const whatsappE164 = '+34613340500';
 // SITE_URL only overrides the production domain (previews). Read through globalThis: this module also ships to
 // Svelte islands, where `process` does not exist.
-const siteUrl = (globalThis.process?.env.SITE_URL?.trim() || 'https://gerp-dj.hlorenzoz.com').replace(/\/+$/, '');
+const siteUrl = (globalThis.process?.env.SITE_URL?.trim() || 'https://gerp-dj.com').replace(/\/+$/, '');
 const cdn = 'https://cdn.gerp-dj.com';
 
 export const site = {
