@@ -191,7 +191,6 @@ Local alternatives: `just deploy-dry` (all gates + `wrangler deploy --dry-run`) 
 
 Client inputs:
 
-- WhatsApp Channel URL (`site.channelUrl` is a placeholder).
 - The GERP DJ story for the bio (`about.story` placeholder).
 - Real press quotes (`press.placeholder`).
 - Higher-resolution videos (current copies are 848×480).

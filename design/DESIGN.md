@@ -38,7 +38,7 @@ No email anywhere, no form backend, no newsletter provider. The site is therefor
 Source: `src/pages/dossier/[locale].astro` (noindex, unlinked) — A4 landscape, 6 pages: cover · bio + facts · services + own equipment · "En acción" photos + press placeholder · what's included / what we need · booking (WhatsApp, QR to `wa.me`). All data from `src/config/site.ts` + dictionaries; images are the JPEG copies in `design/press/img/`.
 Output: `public/press/dossier-gerp-dj-{es,gl}.pdf`. The site's "Descargar dossier de prensa (PDF)" buttons link to the file of the current language and open in a new tab.
 Regenerate with `just press` (builds, serves `dist/`, prints both PDFs with headless Chrome) after any change to `site.ts`, the dictionaries or the photos.
-Sample content to confirm: "what we need on site" items, press quotes, the GERP DJ story, channel URL, domain.
+Sample content to confirm: "what we need on site" items, press quotes, the GERP DJ story.
 
 ## Client media
 
@@ -140,5 +140,5 @@ Entrance per section (heading → text → media, 70ms stagger, 24px rise), slow
 ## Open items for the client
 
 - Higher-resolution originals of the videos (current WhatsApp copies are 848×480), the GERP DJ story, logo file.
-- WhatsApp Business: +34 613 34 05 00 (confirmed). Pending: business hours and WhatsApp Channel URL.
+- WhatsApp Business: +34 613 34 05 00 (confirmed). WhatsApp Channel: https://whatsapp.com/channel/0029VbDytKl0rGiQqtirGx0W (confirmed). Pending: business hours.
 - Galician copy review by a native speaker.
