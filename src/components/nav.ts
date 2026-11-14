@@ -1,4 +1,4 @@
-import { type Locale, site } from '../config/site';
+import { enabledPages, type Locale, site } from '../config/site';
 import { type Key, localizePath, useT } from '../i18n';
 
 export interface NavLink {
@@ -7,15 +7,16 @@ export interface NavLink {
   external?: boolean;
 }
 
-type Item = { key: Key; path: string; feature?: keyof typeof site.features };
+type Item = { key: Key; path: string };
 
 const sections: Item[] = [
   { key: 'nav.services', path: '/#servicios' },
   { key: 'nav.action', path: '/#en-accion' },
   { key: 'nav.kit', path: '/#equipo' },
-  { key: 'nav.tour', path: '/gira', feature: 'tour' },
-  { key: 'nav.music', path: '/musica', feature: 'music' },
-  { key: 'nav.sets', path: '/sesiones', feature: 'sets' },
+  // Enabled feature pages (gira, música, sesiones) come from the route registry in site.ts.
+  ...enabledPages()
+    .filter((p) => 'feature' in p)
+    .map((p) => ({ key: p.title, path: p.path })),
   { key: 'nav.bio', path: '/bio' },
 ];
 
@@ -27,9 +28,7 @@ export function navLinks(locale: Locale, variant: 'header' | 'mobile' | 'footer'
     ...sections,
     ...(variant === 'footer' ? [{ key: 'cta.book', path: '/contratacion' } as Item] : []),
   ];
-  const links: NavLink[] = items
-    .filter((i) => !i.feature || site.features[i.feature])
-    .map((i) => ({ href: localizePath(i.path, locale), label: t(i.key) }));
+  const links: NavLink[] = items.map((i) => ({ href: localizePath(i.path, locale), label: t(i.key) }));
   if (variant !== 'footer' && site.features.shop)
     links.push({ href: site.shopUrl, label: t('nav.shop'), external: true });
   return links;

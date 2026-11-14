@@ -5,7 +5,7 @@ import {
   eventTypes,
   formatDate,
   pressMessage,
-  serviceMessages,
+  serviceMessage,
   waLink,
 } from './whatsapp';
 
@@ -88,12 +88,12 @@ describe('event types', () => {
   });
 });
 
-describe('serviceMessages', () => {
-  it('starts with the popular-fiesta quote', () => {
-    expect(serviceMessages.es[0]).toBe('Hola, quiero presupuesto para una fiesta popular.');
-    expect(serviceMessages.gl[0]).toBe('Ola, quero orzamento para unha festa popular.');
-    expect(serviceMessages.es).toHaveLength(4);
-    expect(serviceMessages.gl).toHaveLength(4);
+describe('serviceMessage', () => {
+  it('asks for a quote for each service', () => {
+    expect(serviceMessage('es', 'popular')).toBe('Hola, quiero presupuesto para una fiesta popular.');
+    expect(serviceMessage('gl', 'popular')).toBe('Ola, quero orzamento para unha festa popular.');
+    expect(serviceMessage('es', 'corporate')).toBe('Hola, quiero presupuesto para un evento de empresa.');
+    expect(serviceMessage('gl', 'corporate')).toBe('Ola, quero orzamento para un evento de empresa.');
   });
 });
 

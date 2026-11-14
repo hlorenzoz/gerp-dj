@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { site, type Locale } from '../../config/site';
+  import type { Locale } from '../../config/site';
   import { useT } from '../../i18n';
   import { bookingMessage, eventTypes, waLink, type EventType } from '../../lib/whatsapp';
 
@@ -26,7 +26,7 @@
 </script>
 
 <form
-  action={`https://wa.me/${site.whatsapp.number}`}
+  action={waLink()}
   method="get"
   target="_blank"
   {onsubmit}

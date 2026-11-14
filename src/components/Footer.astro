@@ -27,11 +27,11 @@ const t = useT(locale);
       }
       <div class="grid h-fit gap-2 lg:col-span-5 lg:col-start-8">
         <p class="text-lg font-semibold">WhatsApp Business</p>
-        <a href={waLink()} target="_blank" rel="noopener" class="display text-3xl text-acid hover:text-ink">{site.whatsapp.display}</a>
+        <a href={waLink()} target="_blank" rel="noopener" class="display text-3xl text-acid hover:text-ink">{site.contact.display}</a>
         <p class="text-muted">{t('c.hours')}</p>
       </div>
     </div>
-    <p class="display mt-10 text-center text-[min(calc((100vw-4rem)/5.9),14.5rem)] leading-[0.8]" aria-hidden="true">GERP DJ</p>
+    <p class="display mt-10 text-center text-[min(calc((100vw-4rem)/5.9),14.5rem)] leading-[0.8]" aria-hidden="true">{site.brand}</p>
     <div class="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted">
       <span>{t('footer.copy')}</span>
       <span

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Locale } from '../../config/site';
+  import { site, type Locale } from '../../config/site';
   import { useT } from '../../i18n';
   import { availabilityMessage, eventTypes, waLink, type EventType } from '../../lib/whatsapp';
 
@@ -50,7 +50,7 @@
         name="place"
         required
         autocomplete="address-level2"
-        placeholder="Ourense"
+        placeholder={site.location.locality}
         class="glass-subtle rounded-2xl px-4 py-3 placeholder:text-muted focus:ring-2 focus:ring-acid focus:outline-none"
       /></label
     >

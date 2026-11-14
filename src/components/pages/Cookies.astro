@@ -1,10 +1,12 @@
 ---
 import type { Locale } from '../../config/site';
+import { siteVars } from '../../i18n';
 import { waLink } from '../../lib/whatsapp';
 import Legal from './Legal.astro';
 
 const { locale } = Astro.props as { locale: Locale };
 const wa = waLink();
+const { updated } = siteVars(locale);
 ---
 
 <Legal {locale} title="legal.cookies">
@@ -12,7 +14,7 @@ const wa = waLink();
     locale === 'es' ? (
       <>
         <h2>Política de cookies</h2>
-        <p>Última actualización: 14 de noviembre de 2026. Una cookie es un pequeño archivo que un sitio web guarda en tu navegador.</p>
+        <p>Última actualización: {updated}. Una cookie es un pequeño archivo que un sitio web guarda en tu navegador.</p>
         <h2>Cookies que usa esta web</h2>
         <p>Esta web no usa cookies propias de análisis, publicidad ni personalización, y no carga herramientas de seguimiento. Por eso no te mostramos un aviso de consentimiento.</p>
         <h2>Cookies técnicas de nuestro proveedor</h2>
@@ -28,7 +30,7 @@ const wa = waLink();
     ) : (
       <>
         <h2>Política de cookies</h2>
-        <p>Última actualización: 14 de novembro de 2026. Unha cookie é un pequeno ficheiro que un sitio web garda no teu navegador.</p>
+        <p>Última actualización: {updated}. Unha cookie é un pequeno ficheiro que un sitio web garda no teu navegador.</p>
         <h2>Cookies que usa esta web</h2>
         <p>Esta web non usa cookies propias de análise, publicidade nin personalización, e non carga ferramentas de seguimento. Por iso non che amosamos un aviso de consentimento.</p>
         <h2>Cookies técnicas do noso provedor</h2>

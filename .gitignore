@@ -7,3 +7,4 @@ dist/
 # Raw client media (30 MB): inputs of `npm run media`, kept local
 .agents/context/
 .atl/
+.claude/

@@ -20,7 +20,7 @@ const t = useT(locale);
     <div class="grid h-fit gap-4 lg:col-span-4 lg:col-start-9">
       <div class="glass reveal rounded-3xl p-6" style="--d:160ms">
         <h2 class="font-semibold text-acid">WhatsApp Business</h2>
-        <a target="_blank" rel="noopener" href={waLink()} class="mt-1 block text-2xl font-bold hover:text-acid">{site.whatsapp.display}</a>
+        <a target="_blank" rel="noopener" href={waLink()} class="mt-1 block text-2xl font-bold hover:text-acid">{site.contact.display}</a>
         <p class="mt-2 text-muted">{t('c.hours')}</p>
       </div>
       <a target="_blank" rel="noopener" href={waLink(pressMessage(locale))} class="press glass reveal rounded-3xl p-6 hover:bg-ink/10" style="--d:200ms">
@@ -28,7 +28,7 @@ const t = useT(locale);
         <span class="mt-1 block text-lg">{t('c.press')}</span>
       </a>
       <a
-        href={site.pressPdf(locale)}
+        href={site.press.pdf(locale)}
         target="_blank"
         rel="noopener"
         class="press reveal rounded-full bg-ink px-6 py-4 text-center font-semibold text-ground hover:bg-acid"
