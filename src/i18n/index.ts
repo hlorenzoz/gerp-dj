@@ -19,9 +19,14 @@ const unlocalize = (path: string) => path.replace(/^\/gl(?=\/|$)/, '') || '/';
 
 /** Spanish stays unprefixed, Galician lives under `/gl/`. Accepts `/bio`, `/`, `/#servicios`. */
 export function localizePath(path: string, locale: Locale): string {
-  const clean = unlocalize(path);
-  return locale === defaultLocale ? clean : `/gl${clean}`;
+  const [pathname, hash] = path.split('#');
+  let clean = unlocalize(pathname);
+  // Workers static assets redirect `/bio` → `/bio/` (307); link to the final URL. Files keep their extension.
+  if (!clean.endsWith('/') && !/\.[a-z0-9]+$/i.test(clean)) clean += '/';
+  const localized = locale === defaultLocale ? clean : `/gl${clean}`;
+  return hash === undefined ? localized : `${localized}#${hash}`;
 }
 
-/** The same page in another locale (used by the ES | GL switcher and hreflang). */
-export const alternatePath = (currentPath: string, targetLocale: Locale) => localizePath(currentPath, targetLocale);
+/** The same page in another locale (used by the ES | GL switcher and hreflang). The 404 has no /gl/404/: go home. */
+export const alternatePath = (currentPath: string, targetLocale: Locale) =>
+  localizePath(/^(\/gl)?\/404(\.html)?\/?$/.test(currentPath) ? '/' : currentPath, targetLocale);
