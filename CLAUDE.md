@@ -18,7 +18,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 
 ## Single source of truth (ALWAYS)
 
-- `src/config/site.ts` is the ONLY place business data is written: brand, URL (`https://gerp-dj.hlorenzoz.com`, `SITE_URL` overrides it for previews), WhatsApp number/display, channel URL, hours, response time, location and area served, services, kit, languages, legal facts (retention, last update), media, press PDFs, the page registry (`site.pages`), noindex paths and feature flags.
+- `src/config/site.ts` is the ONLY place business data is written: brand, URL (`https://gerp-dj.hlorenzoz.com`, `SITE_URL` overrides it for previews), WhatsApp number/display, channel URL, hours, response time, location and area served, business address and price range (JSON-LD + footer), services, kit, languages, legal facts (retention, last update), media, press PDFs, the page registry (`site.pages`), noindex paths and feature flags.
 - Never hardcode any of those values in components, dictionaries, messages, JSON-LD, OpenGraph, `llms.txt`, `robots.txt`, `sitemap.xml` or the press kit. Dictionaries use placeholders (`{brand}`, `{city}`, `{region}`, `{phone}`, `{responseHours}`, `{days}`, `{hoursFrom}`, `{hoursTo}`, `{retentionMonths}`, `{updated}`, `{year}`, `{country}`, `{web}`, `{channel}`) that `useT(locale)` fills from `site`; a new fact means a new field in `site.ts` + a placeholder, never a literal.
 - New pages go in the `site.pages` registry so nav, sitemap and `llms.txt` pick them up. Change a fact once in `site.ts`, then rebuild and run `just press` (and `just og` if the brand/visual changes).
 - `design/index.html` is a frozen design reference, not a data source.

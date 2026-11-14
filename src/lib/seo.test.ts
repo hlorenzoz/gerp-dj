@@ -42,14 +42,22 @@ describe('buildGraph', () => {
     });
   });
 
-  it('describes the business from site.ts only (no street, no ratings, no prices)', () => {
+  it('describes the business from site.ts only (real address and price range, no invented ratings)', () => {
     const business = byType(graph, 'EntertainmentBusiness');
     expect(business).toMatchObject({
       name: 'GERP DJ',
       url: 'https://example.org/',
       image: 'https://example.org/og/gerp-dj.jpg',
       telephone: '+34613340500',
-      address: { '@type': 'PostalAddress', addressLocality: 'Ourense', addressRegion: 'Galicia', addressCountry: 'ES' },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Carretera Xinzo de Limia, Avande No 2',
+        postalCode: '32643',
+        addressLocality: 'Porqueira',
+        addressRegion: 'Ourense',
+        addressCountry: 'ES',
+      },
+      priceRange: '€300-500',
       areaServed: [
         { '@type': 'City', name: 'Ourense' },
         { '@type': 'AdministrativeArea', name: 'Galicia' },
@@ -76,7 +84,7 @@ describe('buildGraph', () => {
       'Eventos de empresa',
     ]);
     const json = JSON.stringify(graph);
-    expect(json).not.toMatch(/streetAddress|aggregateRating|review|price|\{\w+\}/);
+    expect(json).not.toMatch(/aggregateRating|review|\{\w+\}/);
   });
 
   it('links the official social profiles from site.ts as sameAs', () => {

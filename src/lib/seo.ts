@@ -27,7 +27,7 @@ export function buildGraph({ base = site.url, locale, path, title, description }
   const home = `${base}/`;
   const ids = { website: `${base}/#website`, business: `${base}/#business` };
   const url = base + localizePath(path, locale);
-  const { locality, region, countryCode, areaServed } = site.location;
+  const { countryCode, areaServed } = site.location;
   const places = areaServed.map(({ type, name }) => ({ '@type': type, name }));
   return {
     '@context': 'https://schema.org',
@@ -48,13 +48,15 @@ export function buildGraph({ base = site.url, locale, path, title, description }
         description: t('meta.description'),
         image: base + site.media.og.src,
         telephone: site.contact.whatsappE164,
-        // Mobile DJ (service-area business): locality only, no street address.
         address: {
           '@type': 'PostalAddress',
-          addressLocality: locality,
-          addressRegion: region,
+          streetAddress: site.address.street,
+          postalCode: site.address.postalCode,
+          addressLocality: site.address.locality,
+          addressRegion: site.address.province,
           addressCountry: countryCode,
         },
+        priceRange: site.priceRange,
         areaServed: places,
         knowsLanguage: [...site.languages],
         ...(site.features.socials && { sameAs: site.socials.map((s) => s.url) }),

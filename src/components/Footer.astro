@@ -29,6 +29,9 @@ const t = useT(locale);
         <p class="text-lg font-semibold">WhatsApp Business</p>
         <a href={waLink()} target="_blank" rel="noopener" class="display text-3xl text-acid-ink hover:text-ink">{site.contact.display}</a>
         <p class="text-muted">{t('c.hours')}</p>
+        <address class="text-muted not-italic">
+          {site.address.street}, {site.address.postalCode} {site.address.locality} ({site.address.province})
+        </address>
       </div>
     </div>
     <p class="display mt-10 text-center text-[min(calc((100vw-4rem)/5.9),14.5rem)] leading-[0.8]" aria-hidden="true">{site.brand}</p>

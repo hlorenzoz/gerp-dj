@@ -34,6 +34,15 @@ export const site = {
       { type: 'AdministrativeArea', name: 'Galicia' },
     ],
   },
+  /** Business address (structured data + footer). Locality from postal code 32643 (Porqueira) — confirm with the client. */
+  address: {
+    street: 'Carretera Xinzo de Limia, Avande No 2',
+    postalCode: '32643',
+    locality: 'Porqueira',
+    province: 'Ourense',
+  },
+  /** Typical booking price, schema.org `priceRange` format. */
+  priceRange: '€300-500',
   /** Service ids in display order; copy lives in the dictionaries as `svc.<id>.t|d|msg`. */
   services: ['popular', 'wedding', 'private', 'corporate'],
   /** Own equipment in display order; labels are `kit.<id>`. */
