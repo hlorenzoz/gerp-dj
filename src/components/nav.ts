@@ -1,7 +1,11 @@
-import { site, type Locale } from '../config/site';
-import { localizePath, useT, type Key } from '../i18n';
+import { type Locale, site } from '../config/site';
+import { type Key, localizePath, useT } from '../i18n';
 
-export interface NavLink { href: string; label: string; external?: boolean }
+export interface NavLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
 
 type Item = { key: Key; path: string; feature?: keyof typeof site.features };
 
@@ -26,6 +30,7 @@ export function navLinks(locale: Locale, variant: 'header' | 'mobile' | 'footer'
   const links: NavLink[] = items
     .filter((i) => !i.feature || site.features[i.feature])
     .map((i) => ({ href: localizePath(i.path, locale), label: t(i.key) }));
-  if (variant !== 'footer' && site.features.shop) links.push({ href: site.shopUrl, label: t('nav.shop'), external: true });
+  if (variant !== 'footer' && site.features.shop)
+    links.push({ href: site.shopUrl, label: t('nav.shop'), external: true });
   return links;
 }
