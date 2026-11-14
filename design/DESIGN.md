@@ -46,8 +46,8 @@ Raw files: `.agents/context/` (4 photos, 5 WhatsApp videos; videos 4 and 5 are t
 
 | Master (`public/images/`) | Source | Used in |
 | --- | --- | --- |
-| `gerp-dj-fiesta-aldea-ourense` + `public/videos/…mp4` | village fiesta video | Hero loop + still, En acción, gallery, dossier |
-| `gerp-dj-sesion-terraza-ourense` + `public/videos/…mp4` | terrace session video | En acción loop, booking band, gallery, dossier |
+| `gerp-dj-fiesta-aldea-ourense` + `cdn.gerp-dj.com/videos/…mp4` | village fiesta video | Hero loop + still, En acción, gallery, dossier |
+| `gerp-dj-sesion-terraza-ourense` + `cdn.gerp-dj.com/videos/…mp4` | terrace session video | En acción loop, booking band, gallery, dossier |
 | `gerp-dj-luces-fiesta-ourense` | terrace video still | Ambient background, gallery, dossier |
 | `gerp-dj-ourense-controladora-denon-dj` | photo (hands on controller) | Services, gallery, dossier |
 | `gerp-dj-ourense-cabina-iluminacion-led` | photo (booth + LED lights) | Equipo propio, gallery, dossier cover |

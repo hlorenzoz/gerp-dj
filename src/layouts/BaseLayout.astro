@@ -93,7 +93,7 @@ const jsonLd = JSON.stringify(buildGraph({ locale, path, title, description })).
   <body class="min-h-dvh overflow-x-clip">
     <!-- Ambient layer: gives every glass surface something to blur. -->
     <div aria-hidden="true" class="fixed inset-0 -z-10">
-      <img src="/images/gerp-dj-luces-fiesta-ourense-848.webp" alt="" class="size-full scale-110 object-cover opacity-35 blur-sm" />
+      <img src={site.image('/images/gerp-dj-luces-fiesta-ourense-848.webp')} alt="" class="size-full scale-110 object-cover opacity-35 blur-sm" />
       <div class="absolute inset-0 bg-ground/70"></div>
     </div>
 

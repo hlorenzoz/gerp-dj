@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { enabledPages, site } from '../config/site';
+import manifest from './images/manifest.json';
 import { buildGraph, buildLlmsTxt, buildRobots, buildSitemap, pageUrl } from './seo';
 
 const base = 'https://example.org';
@@ -105,6 +106,8 @@ describe('buildSitemap', () => {
     expect(locs).toHaveLength(enabledPages().length * 2);
     expect(locs).toContain('https://example.org/');
     expect(locs).toContain('https://example.org/gl/bio/');
+    expect(locs).toContain('https://example.org/galeria/');
+    expect(locs).toContain('https://example.org/gl/galeria/');
     expect(xml.match(/<xhtml:link /g)).toHaveLength(locs.length * 3);
     expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://example.org/bio/"/>');
     expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(locs.length);
@@ -154,6 +157,8 @@ describe('buildLlmsTxt', () => {
     expect(txt).toContain('- [Fiestas populares](https://example.org/#servicios): ');
     expect(txt).toContain('(https://example.org/contratacion/)');
     expect(txt).toContain('(https://example.org/gl/bio/)');
+    expect(txt).toContain('(https://example.org/galeria/)');
+    expect(txt).toContain('(https://example.org/gl/galeria/)');
     expect(txt).toContain('(https://example.org/press/dossier-gerp-dj-es.pdf)');
     expect(txt).toContain('(https://example.org/press/dossier-gerp-dj-gl.pdf)');
     expect(txt).toContain('+34 613 34 05 00');
@@ -163,5 +168,49 @@ describe('buildLlmsTxt', () => {
   it('has no placeholders and no disabled features', () => {
     expect(txt).not.toMatch(/\{\w+\}/);
     expect(txt).not.toMatch(/gira|musica|sesiones|dossier\/|\/og\//);
+  });
+});
+
+describe('site images (CDN)', () => {
+  it('serves every manifest path from the CDN base', () => {
+    expect(site.image('/images/gerp-dj-fiesta-aldea-ourense-640.avif')).toBe(
+      'https://cdn.gerp-dj.com/images/gerp-dj-fiesta-aldea-ourense-640.avif',
+    );
+  });
+});
+
+describe('site videos (CDN)', () => {
+  const cdn = 'https://cdn.gerp-dj.com';
+
+  it('lists exactly the client videos published on the CDN', () => {
+    expect(site.cdn).toBe(cdn);
+    expect(site.videos.map((v) => v.name).sort()).toEqual([
+      'gerp-dj-fiesta-aldea-ourense',
+      'gerp-dj-fiesta-sala-ourense-vertical',
+      'gerp-dj-fiesta-terraza-invitados-ourense',
+      'gerp-dj-mezcla-controladora-ourense-vertical',
+      'gerp-dj-montaje-equipo-casa-ourense-vertical',
+      'gerp-dj-montaje-luces-casa-ourense',
+      'gerp-dj-sesion-luces-casa-ourense',
+      'gerp-dj-sesion-pub-ourense-vertical',
+      'gerp-dj-sesion-terraza-microfono-ourense',
+      'gerp-dj-sesion-terraza-ourense',
+    ]);
+  });
+
+  it('derives every URL from the CDN base and the SEO file name', () => {
+    for (const { name } of site.videos) expect(site.video(name)).toBe(`${cdn}/videos/${name}.mp4`);
+  });
+
+  it('hero and En acción loops are entries of the list, each with a poster master', () => {
+    const names = site.videos.map((v) => v.name);
+    expect(names).toContain(site.media.hero);
+    expect(names).toContain(site.media.action);
+    for (const { name } of site.videos) expect(manifest).toHaveProperty([`/images/${name}.webp`]);
+  });
+
+  it('marks vertical clips as portrait', () => {
+    for (const { name, orientation } of site.videos)
+      expect([name, orientation]).toEqual([name, name.endsWith('-vertical') ? 'portrait' : 'landscape']);
   });
 });

@@ -31,6 +31,62 @@
       }
     ]
   },
+  "/images/gerp-dj-fiesta-sala-ourense-vertical.webp": {
+    "width": 480,
+    "height": 862,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-fiesta-sala-ourense-vertical-320.avif"
+      },
+      {
+        "w": 480,
+        "src": "/images/gerp-dj-fiesta-sala-ourense-vertical-480.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-fiesta-sala-ourense-vertical-320.webp"
+      },
+      {
+        "w": 480,
+        "src": "/images/gerp-dj-fiesta-sala-ourense-vertical-480.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-fiesta-terraza-invitados-ourense.webp": {
+    "width": 848,
+    "height": 480,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-320.avif"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-640.avif"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-848.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-320.webp"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-640.webp"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-fiesta-terraza-invitados-ourense-848.webp"
+      }
+    ]
+  },
   "/images/gerp-dj-luces-fiesta-ourense.webp": {
     "width": 848,
     "height": 480,
@@ -60,6 +116,86 @@
       {
         "w": 848,
         "src": "/images/gerp-dj-luces-fiesta-ourense-848.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-mezcla-controladora-ourense-vertical.webp": {
+    "width": 478,
+    "height": 850,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-mezcla-controladora-ourense-vertical-320.avif"
+      },
+      {
+        "w": 478,
+        "src": "/images/gerp-dj-mezcla-controladora-ourense-vertical-478.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-mezcla-controladora-ourense-vertical-320.webp"
+      },
+      {
+        "w": 478,
+        "src": "/images/gerp-dj-mezcla-controladora-ourense-vertical-478.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-montaje-equipo-casa-ourense-vertical.webp": {
+    "width": 480,
+    "height": 860,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-montaje-equipo-casa-ourense-vertical-320.avif"
+      },
+      {
+        "w": 480,
+        "src": "/images/gerp-dj-montaje-equipo-casa-ourense-vertical-480.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-montaje-equipo-casa-ourense-vertical-320.webp"
+      },
+      {
+        "w": 480,
+        "src": "/images/gerp-dj-montaje-equipo-casa-ourense-vertical-480.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-montaje-luces-casa-ourense.webp": {
+    "width": 848,
+    "height": 478,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-320.avif"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-640.avif"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-848.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-320.webp"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-640.webp"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-montaje-luces-casa-ourense-848.webp"
       }
     ]
   },
@@ -143,6 +279,46 @@
       }
     ]
   },
+  "/images/gerp-dj-ourense-equipo-sonido-luces.webp": {
+    "width": 1600,
+    "height": 1100,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-320.avif"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-640.avif"
+      },
+      {
+        "w": 960,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-960.avif"
+      },
+      {
+        "w": 1024,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-1024.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-320.webp"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-640.webp"
+      },
+      {
+        "w": 960,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-960.webp"
+      },
+      {
+        "w": 1024,
+        "src": "/images/gerp-dj-ourense-equipo-sonido-luces-1024.webp"
+      }
+    ]
+  },
   "/images/gerp-dj-ourense-retrato-equipo-sonido.webp": {
     "width": 1200,
     "height": 1480,
@@ -180,6 +356,94 @@
       {
         "w": 1024,
         "src": "/images/gerp-dj-ourense-retrato-equipo-sonido-1024.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-sesion-luces-casa-ourense.webp": {
+    "width": 854,
+    "height": 480,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-320.avif"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-640.avif"
+      },
+      {
+        "w": 854,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-854.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-320.webp"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-640.webp"
+      },
+      {
+        "w": 854,
+        "src": "/images/gerp-dj-sesion-luces-casa-ourense-854.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-sesion-pub-ourense-vertical.webp": {
+    "width": 478,
+    "height": 850,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-pub-ourense-vertical-320.avif"
+      },
+      {
+        "w": 478,
+        "src": "/images/gerp-dj-sesion-pub-ourense-vertical-478.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-pub-ourense-vertical-320.webp"
+      },
+      {
+        "w": 478,
+        "src": "/images/gerp-dj-sesion-pub-ourense-vertical-478.webp"
+      }
+    ]
+  },
+  "/images/gerp-dj-sesion-terraza-microfono-ourense.webp": {
+    "width": 848,
+    "height": 480,
+    "avif": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-320.avif"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-640.avif"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-848.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 320,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-320.webp"
+      },
+      {
+        "w": 640,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-640.webp"
+      },
+      {
+        "w": 848,
+        "src": "/images/gerp-dj-sesion-terraza-microfono-ourense-848.webp"
       }
     ]
   },

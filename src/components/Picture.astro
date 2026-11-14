@@ -1,4 +1,5 @@
 ---
+import { site } from '../config/site';
 import manifest from '../lib/images/manifest.json';
 
 interface Props {
@@ -15,13 +16,13 @@ const { name, alt, sizes, class: className, loading = 'lazy', fetchpriority } = 
 const entry = (manifest as Record<string, (typeof manifest)[keyof typeof manifest]>)[`/images/${name}.webp`];
 if (!entry) throw new Error(`Picture: "${name}" is not in src/lib/images/manifest.json (run npm run images)`);
 
-const srcset = (list: { w: number; src: string }[]) => list.map(({ w, src }) => `${src} ${w}w`).join(', ');
+const srcset = (list: { w: number; src: string }[]) => list.map(({ w, src }) => `${site.image(src)} ${w}w`).join(', ');
 ---
 
 <picture>
   <source type="image/avif" srcset={srcset(entry.avif)} sizes={sizes} />
   <img
-    src={entry.webp.at(-1)!.src}
+    src={site.image(entry.webp.at(-1)!.src)}
     srcset={srcset(entry.webp)}
     sizes={sizes}
     alt={alt}

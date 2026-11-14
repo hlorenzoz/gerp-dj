@@ -6,7 +6,7 @@ booth to village fiestas, weddings, private and corporate events. The site is pu
 
 Production: <https://gerp-dj.hlorenzoz.com>
 
-Features: home with hero video, booking page, bio, privacy and cookie pages, a print-only press kit, generated SEO
+Features: home with hero video, booking page, video gallery, bio, privacy and cookie pages, a print-only press kit, generated SEO
 files, and a light/dark theme (follows the system, remembers the visitor's choice).
 
 ## Stack
@@ -117,9 +117,12 @@ odd/tasks/              feature logbooks
 Raw client media lives in `.agents/context/` (git-ignored, about 30 MB, kept local). `just media` runs:
 
 1. `scripts/media-masters.sh` (ffmpeg + ImageMagick): SEO-named WebP masters in `public/images/`
-   (`gerp-dj-<keywords>-ourense…`), muted H.264 loops in `public/videos/`, context frames, and JPEG copies in
-   `design/press/img/` for the press kit and OG card. It also blurs private people in the background and crops
-   camera watermarks.
+   (`gerp-dj-<keywords>-ourense…`), one poster master per video, SEO-named lossless video copies in
+   `.agents/cdn/gerp-dj/videos/`, context frames, and JPEG copies in `design/press/img/` for the press kit and OG
+   card. It also blurs private people in the background and crops camera watermarks.
+
+Videos are not part of the build: they stream from the CDN (`https://cdn.gerp-dj.com/videos/<name>.mp4`, Cloudflare
+R2). `site.cdn` and `site.videos` in `src/config/site.ts` list them; upload a new copy there before adding its entry.
 2. `scripts/images.mjs` (sharp): AVIF + WebP variants at 320/640/960/1024 px (no upscaling) and
    `src/lib/images/manifest.json`.
 

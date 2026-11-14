@@ -14,7 +14,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 - `just test` / `just check` / `just build` — single gates; one test file: `npx vitest run src/lib/shows.test.ts`
 - `just preview` — serve `dist/` with the Workers runtime; `just deploy-dry` validates the deploy without publishing
 - `just deploy` — quality gates + `wrangler deploy` (only when the user asks)
-- `just media` — raw client media in `.agents/context/` → SEO-named WebP masters in `public/images/`, muted MP4 loops in `public/videos/`, context frames and press-kit JPEGs; then AVIF + WebP variants and `src/lib/images/manifest.json`
+- `just media` — raw client media in `.agents/context/` → SEO-named WebP masters and video posters in `public/images/`, SEO-named lossless video copies in `.agents/cdn/gerp-dj/videos/`, context frames and press-kit JPEGs; then AVIF + WebP variants, `src/lib/images/manifest.json` and an image mirror in `.agents/cdn/gerp-dj/images/` (`just cdn-images`)
 
 ## Single source of truth (ALWAYS)
 
@@ -30,7 +30,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 - Tailwind v4 through the Vite plugin: `@import "tailwindcss"` in `src/styles/global.css`, tokens in `@theme`. No `tailwind.config.*`, no `@astrojs/tailwind`.
 - Cloudflare Workers as a **fully static** site: no `@astrojs/cloudflare` adapter, `wrangler.jsonc` with `assets.directory: "./dist"`. There is no backend; add the adapter only if the user asks for on-demand rendering.
 - **Contact and booking ONLY via WhatsApp Business**: `wa.me` click-to-chat links with prefilled text, plus the WhatsApp Channel for announcements. Never add email, `mailto:`, form endpoints, Astro Actions for contact, or newsletter providers. Number and channel URL live in one place (`src/config/site.ts`).
-- Images: never reference a master or a raw file; render `<picture>` (AVIF then WebP) from `src/lib/images/manifest.json`. File names are `gerp-dj-<keywords>-ourense…` in Spanish; new media goes through `npm run media` + `npm run images`.
+- Images: never reference a master or a raw file; render `<picture>` (AVIF then WebP) from `src/lib/images/manifest.json`. Every image URL goes through `site.image(manifestPath)` → `https://cdn.gerp-dj.com/images/…` (never a local `/images/` path); after `npm run images`, run `just cdn-images` and have the client upload `.agents/cdn/gerp-dj/images/` before release, then verify each URL answers 200. File names are `gerp-dj-<keywords>-ourense…` in Spanish; new media goes through `npm run media` + `npm run images`.
 - Content (tour dates, releases, sets) lives in content collections (`src/content.config.ts`), not hardcoded in components.
 
 ## Conventions
@@ -58,6 +58,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 - `wa.me` numbers are digits only in full international format (`34613340500`: no `+`, spaces or leading `0`); the prefilled text goes through `encodeURIComponent` and is written in the visitor's current language. Every WhatsApp link (chat, quote, channel, booking form) opens in a new tab: `target="_blank" rel="noopener"`.
 - Press kit: `src/pages/dossier/[locale].astro` renders it from `site` + dictionaries (noindex, unlinked); `just press` prints `public/press/dossier-gerp-dj-{es,gl}.pdf` with headless Chrome. It embeds the JPEG copies in `design/press/img/` (WebP sources make Chrome's PDF ~10× bigger). Regenerate after any data or photo change. OG image: `just og` (renders `/og/card/` → `public/og/gerp-dj.jpg`).
 - SEO is generated, never hand-written: OpenGraph/Twitter tags and the JSON-LD `@graph` (`WebSite`, `EntertainmentBusiness`, page node) come from `src/lib/seo.ts`; `llms.txt`, `robots.txt` and `sitemap.xml` are static endpoints in `src/pages/`.
+- Videos live ONLY on the CDN (`site.cdn` = `https://cdn.gerp-dj.com`, URLs from `site.video(name)`, list in `site.videos`); never commit MP4s or reference `/videos/` locally. New clip: add a `cdn` line in `scripts/media-masters.sh`, a poster, a `site.videos` entry, and the client uploads the copy from `.agents/cdn/gerp-dj/videos/` to `cdn.gerp-dj.com/videos/` before release.
 - Hero video: a still `<picture>` (fetchpriority high) paints first and the video fades in on `playing`; videos have a pause button (WCAG 2.2.2) and stay still under `prefers-reduced-motion`.
 - WhatsApp message dates are built as `dd/mm/yyyy` by hand: `Intl` may lack Galician data and silently fall back to English.
 - Client photos: blur private people in the background (family photos) and crop camera watermarks (e.g. "HONOR 400") — see `scripts/media-masters.sh`.
