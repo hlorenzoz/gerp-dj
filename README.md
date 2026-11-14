@@ -4,7 +4,7 @@ Official site of **GERP DJ**, a mobile DJ based in Ourense (Galicia, Spain) who 
 booth to village fiestas, weddings, private and corporate events. The site is published in Spanish (`/`) and Galician
 (`/gl/`). Bookings happen only through WhatsApp Business: there is no email, form backend or newsletter.
 
-Production: <https://gerp-dj.hlorenzoz.com>
+Production: <https://gerp-dj.com>
 
 Features: home with hero video, booking page, video gallery, bio, privacy and cookie pages, a print-only press kit, generated SEO
 files, and a light/dark theme (follows the system, remembers the visitor's choice).
@@ -172,7 +172,7 @@ branch `main`.
 |---|---|
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Custom domain | `gerp-dj.hlorenzoz.com` (Worker → Domains tab) |
+| Custom domain | `gerp-dj.com` (Worker → Domains tab); `gerp-dj.hlorenzoz.com` should 301 to it |
 | `SITE_URL` | unset in production; set it only to override the site URL for previews |
 
 Local alternatives: `just deploy-dry` (all gates + `wrangler deploy --dry-run`) and `just deploy` (all gates +

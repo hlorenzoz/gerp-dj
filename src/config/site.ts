@@ -1,4 +1,4 @@
-// Single source of truth: every business fact is written here once. Copy in src/i18n interpolates these values
+'';
 // ({brand}, {city}, {phone}…); pages, legal texts, WhatsApp messages, OpenGraph, JSON-LD, llms.txt, sitemap and
 // the press kit read them from here.
 export type Locale = 'es' | 'gl';
@@ -6,7 +6,7 @@ export type Locale = 'es' | 'gl';
 const whatsappE164 = '+34613340500';
 // SITE_URL only overrides the production domain (previews). Read through globalThis: this module also ships to
 // Svelte islands, where `process` does not exist.
-const siteUrl = (globalThis.process?.env.SITE_URL?.trim() || 'https://gerp-dj.hlorenzoz.com').replace(/\/+$/, '');
+const siteUrl = (globalThis.process?.env.SITE_URL?.trim() || 'https://gerp-dj.com').replace(/\/+$/, '');
 const cdn = 'https://cdn.gerp-dj.com';
 
 export const site = {
@@ -34,6 +34,15 @@ export const site = {
       { type: 'AdministrativeArea', name: 'Galicia' },
     ],
   },
+  /** Business address (structured data + footer). Locality from postal code 32643 (Porqueira) — confirm with the client. */
+  address: {
+    street: 'Carretera Xinzo de Limia, Avande No 2',
+    postalCode: '32643',
+    locality: 'Porqueira',
+    province: 'Ourense',
+  },
+  /** Typical booking price, schema.org `priceRange` format. */
+  priceRange: '€300-500',
   /** Service ids in display order; copy lives in the dictionaries as `svc.<id>.t|d|msg`. */
   services: ['popular', 'wedding', 'private', 'corporate'],
   /** Own equipment in display order; labels are `kit.<id>`. */
