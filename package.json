@@ -1,0 +1,12 @@
+{
+  "name": "gerp-dj",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "media": "bash scripts/media-masters.sh",
+    "images": "node scripts/images.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

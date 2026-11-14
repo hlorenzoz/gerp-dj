@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.DS_Store
+.taste-skill/
+# Raw client media (30 MB): inputs of `npm run media`, kept local
+.agents/context/

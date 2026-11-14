@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GERP DJ — DJ en Ourense</title>
+<meta name="description" content="GERP DJ, DJ en Ourense (Galicia) con equipo de sonido e iluminación propio: fiestas populares, bodas, fiestas privadas y eventos de empresa. Contratación por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-ground: #07070a;
+    --color-surface: #121217;
+    --color-ink: #f3f2ee;
+    --color-muted: #a9a8a3;
+    --color-acid: #dcff3c;
+    --color-signal: #ff5a36;
+    --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  }
+  @utility glass-subtle {
+    background-color: rgb(243 242 238 / 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(243 242 238 / 0.08);
+  }
+  @utility glass {
+    background-color: rgb(7 7 10 / 0.35);
+    backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgb(243 242 238 / 0.12);
+  }
+  @utility glass-strong {
+    background-color: rgb(7 7 10 / 0.6);
+    backdrop-filter: blur(28px) saturate(140%);
+    border: 1px solid rgb(243 242 238 / 0.16);
+  }
+  @utility display {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+  }
+  @layer base {
+    html { background: var(--color-ground); color: var(--color-ink); scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.55; }
+    :focus-visible { outline: 2px solid var(--color-acid); outline-offset: 3px; }
+    ::selection { background: var(--color-acid); color: var(--color-ground); }
+    .legal h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.2; margin-top: 2.5rem; }
+    .legal h2:first-child { margin-top: 0; }
+    .legal p, .legal ul { margin-top: .75rem; }
+    .legal ul { list-style: disc; padding-left: 1.5rem; }
+    .legal li + li { margin-top: .5rem; }
+    .legal a { text-decoration: underline; }
+    [hidden] { display: none !important; }
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass, .glass-strong, .glass-subtle { background-color: rgb(18 18 23 / 0.92); }
+  }
+  /* motion */
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .drift { animation: drift 30s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: scale(1.04) translate3d(0,0,0); } to { transform: scale(1.14) translate3d(-2%,-1%,0); } }
+  .js #hero-video:not(.ready) { opacity: 0; }
+  .press { transition: transform .15s ease, background-color .2s ease, color .2s ease; }
+  .press:active { transform: scale(.97); }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .drift { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body class="min-h-dvh overflow-x-clip">
+
+<!-- Ambient layer: gives every glass surface something to blur. -->
+<div aria-hidden="true" class="fixed inset-0 -z-10">
+  <img src="../public/images/gerp-dj-luces-fiesta-ourense-848.webp" alt="" class="size-full scale-110 object-cover opacity-35 blur-sm">
+  <div class="absolute inset-0 bg-ground/70"></div>
+</div>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-ground" data-t="skip">Saltar al contenido</a>
+
+<!-- Header -->
+<header class="glass fixed inset-x-0 top-0 z-50 border-x-0 border-t-0">
+  <div class="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-4 sm:px-8">
+    <a href="#/" data-route="" class="display text-2xl tracking-tight">GERP DJ</a>
+    <nav aria-label="Principal" class="ml-auto hidden items-center gap-1 lg:flex">
+      <a href="#/servicios" data-route="servicios" class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.services">Servicios</a>
+      <a href="#/en-accion" data-route="en-accion" class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.action">En acción</a>
+      <a href="#/equipo" data-route="equipo" class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.kit">Equipo</a>
+      <a href="#/gira" data-route="gira" data-feature="tour" hidden class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.tour">Gira</a>
+      <a href="#/musica" data-route="musica" data-feature="music" hidden class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.music">Música</a>
+      <a href="#/sesiones" data-route="sesiones" data-feature="sets" hidden class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.sets">Sesiones</a>
+      <a href="#/bio" data-route="bio" class="nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.bio">Bio</a>
+      <a href="https://shop.example.com" data-feature="shop" hidden class="press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10" data-t="nav.shop">Tienda ↗</a>
+    </nav>
+    <div class="ml-auto flex items-center gap-2 lg:ml-0">
+      <div class="glass-subtle flex rounded-full p-1 text-sm font-semibold" role="group" aria-label="Idioma">
+        <button type="button" class="lang press rounded-full px-3 py-1" data-lang="es" lang="es">ES</button>
+        <button type="button" class="lang press rounded-full px-3 py-1" data-lang="gl" lang="gl">GL</button>
+      </div>
+      <a href="#/contratacion" data-route="contratacion" class="press hidden rounded-full bg-acid px-5 py-2 text-[15px] font-semibold text-ground hover:bg-ink sm:inline-block" data-t="cta.book">Contratar</a>
+      <button type="button" id="menu-open" class="press glass-subtle rounded-full px-4 py-2 text-[15px] font-medium lg:hidden" aria-haspopup="dialog" data-t="menu">Menú</button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<dialog id="menu" class="glass-strong m-0 ml-auto h-dvh max-h-none w-full max-w-sm bg-transparent p-0 text-ink backdrop:bg-ground/60" aria-label="Menú">
+  <div class="flex h-full flex-col p-6">
+    <button type="button" id="menu-close" class="press glass-subtle self-end rounded-full px-4 py-2 font-medium" data-t="close">Cerrar</button>
+    <nav aria-label="Móvil" class="mt-10 flex flex-col gap-2">
+      <a href="#/" data-route="" class="display py-2 text-5xl" data-t="nav.home">Inicio</a>
+      <a href="#/servicios" data-route="servicios" class="display py-2 text-5xl" data-t="nav.services">Servicios</a>
+      <a href="#/en-accion" data-route="en-accion" class="display py-2 text-5xl" data-t="nav.action">En acción</a>
+      <a href="#/equipo" data-route="equipo" class="display py-2 text-5xl" data-t="nav.kit">Equipo</a>
+      <a href="#/gira" data-route="gira" data-feature="tour" hidden class="display py-2 text-5xl" data-t="nav.tour">Gira</a>
+      <a href="#/musica" data-route="musica" data-feature="music" hidden class="display py-2 text-5xl" data-t="nav.music">Música</a>
+      <a href="#/sesiones" data-route="sesiones" data-feature="sets" hidden class="display py-2 text-5xl" data-t="nav.sets">Sesiones</a>
+      <a href="#/bio" data-route="bio" class="display py-2 text-5xl" data-t="nav.bio">Bio</a>
+      <a href="https://shop.example.com" data-feature="shop" hidden class="display py-2 text-5xl" data-t="nav.shop">Tienda ↗</a>
+    </nav>
+    <a href="#/contratacion" data-route="contratacion" class="press mt-auto rounded-full bg-acid px-6 py-4 text-center text-lg font-semibold text-ground" data-t="cta.book">Contratar</a>
+  </div>
+</dialog>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<div data-page="">
+
+  <!-- Hero: the client's own footage (village fiesta) as a muted loop -->
+  <section class="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-24 pb-10 sm:pb-14">
+    <!-- Still frame first: paints immediately, the video fades in over it once it is actually playing. -->
+    <picture class="absolute inset-0 -z-10"><source type="image/avif" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.avif 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.avif 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.avif 848w" sizes="100vw"><img src="../public/images/gerp-dj-fiesta-aldea-ourense-848.webp" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.webp 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.webp 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.webp 848w" sizes="100vw" alt="" width="848" height="478" fetchpriority="high" decoding="async" class="size-full object-cover"></picture>
+    <video id="hero-video" class="absolute inset-0 -z-10 size-full object-cover transition-opacity duration-700" autoplay muted loop playsinline preload="auto" poster="../public/images/gerp-dj-fiesta-aldea-ourense-848.webp" aria-hidden="true">
+      <source src="../public/videos/gerp-dj-fiesta-aldea-ourense.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 -z-10 bg-ground/45"></div>
+    <button type="button" class="vid-toggle press glass-strong absolute right-4 top-20 sm:right-8 sm:top-24 z-10 grid size-11 place-items-center rounded-full" data-video="hero-video" aria-label="Pausar vídeo"><span class="i-pause" aria-hidden="true"><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span><span class="i-play hidden" aria-hidden="true"><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>
+    <div class="mx-auto w-full max-w-[1440px] px-4 sm:px-8">
+      <!-- shortcut: font-size fitted by hand to Archivo 125/850 ("GERP DJ" ~5.7em wide); use an SVG/fit script if the wordmark changes -->
+      <h1 class="display reveal text-[min(calc((100vw-4rem)/5.9),14.5rem)]">GERP DJ</h1>
+    </div>
+    <div class="mx-auto mt-8 grid w-full max-w-[1440px] gap-8 px-4 sm:px-8 lg:grid-cols-12 lg:items-end">
+      <div class="min-w-0 lg:col-span-7">
+        <p class="reveal max-w-xl text-xl text-ink sm:text-2xl" style="--d:80ms" data-t="hero.lede">DJ para fiestas, bodas y eventos en Ourense, con equipo de sonido e iluminación propio.</p>
+        <div class="reveal mt-8 flex flex-wrap gap-3" style="--d:160ms">
+          <a href="#/contratacion" data-route="contratacion" class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-ground hover:bg-ink" data-t="cta.bookFull">Contratar a GERP DJ</a>
+          <a href="https://wa.me/34613340500" target="_blank" rel="noopener" class="wa-chat press glass rounded-full px-7 py-4 text-lg font-semibold hover:bg-ink/15" data-t="cta.wa">Escribir por WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Availability check: the live element while no tour is planned. Builds a WhatsApp question. -->
+      <form id="avail" action="https://wa.me/34613340500" method="get" target="_blank" class="glass-strong reveal min-w-0 rounded-3xl p-6 sm:p-7 lg:col-span-5 lg:col-start-8" style="--d:240ms" aria-labelledby="avail-h">
+        <h2 id="avail-h" class="text-3xl font-bold leading-tight" data-t="avail.title">¿Tienes fecha?</h2>
+        <p class="mt-1 text-muted" data-t="avail.p">Cuéntanos cuándo y dónde y te confirmamos la disponibilidad por WhatsApp.</p>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          <label class="grid gap-1.5"><span class="text-sm font-medium" data-t="f.when">Fecha</span>
+            <input name="date" type="date" required class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:outline-none focus:ring-2 focus:ring-acid"></label>
+          <label class="grid gap-1.5"><span class="text-sm font-medium" data-t="f.where">Localidad</span>
+            <input name="place" required autocomplete="address-level2" placeholder="Ourense" class="glass-subtle rounded-2xl px-4 py-3 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-acid"></label>
+          <label class="grid gap-1.5 sm:col-span-2"><span class="text-sm font-medium" data-t="f.type">Tipo de evento</span>
+            <select name="type" class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:outline-none focus:ring-2 focus:ring-acid">
+              <option value="popular" data-t="f.popular">Fiesta popular</option>
+              <option value="wedding" data-t="f.wedding">Boda</option>
+              <option value="private" data-t="f.private">Fiesta privada</option>
+              <option value="corporate" data-t="f.corporate">Empresa</option>
+              <option value="other" data-t="f.other">Otro</option>
+            </select></label>
+        </div>
+        <button class="press mt-5 w-full rounded-full bg-ink px-6 py-3 font-semibold text-ground hover:bg-acid" data-t="avail.cta">Consultar disponibilidad</button>
+      </form>
+      <!-- Next show: the live element -->
+      <aside data-feature="tour" hidden class="glass-strong reveal min-w-0 rounded-3xl p-6 sm:p-7 lg:col-span-5 lg:col-start-8" style="--d:240ms" aria-labelledby="next-where">
+        <h2 class="text-3xl font-bold leading-tight" id="next-where">—</h2>
+        <p class="mt-1"><span class="font-semibold text-acid" data-t="next.title">Próxima actuación</span> <span class="text-muted" id="next-when">—</span></p>
+        <div class="mt-6 grid grid-cols-4 gap-2 text-center" aria-live="off" id="countdown">
+          <div class="glass-subtle rounded-2xl py-3"><span class="block text-3xl font-bold tabular-nums" data-cd="d">00</span><span class="text-sm text-muted" data-t="cd.d">días</span></div>
+          <div class="glass-subtle rounded-2xl py-3"><span class="block text-3xl font-bold tabular-nums" data-cd="h">00</span><span class="text-sm text-muted" data-t="cd.h">horas</span></div>
+          <div class="glass-subtle rounded-2xl py-3"><span class="block text-3xl font-bold tabular-nums" data-cd="m">00</span><span class="text-sm text-muted" data-t="cd.m">min</span></div>
+          <div class="glass-subtle rounded-2xl py-3"><span class="block text-3xl font-bold tabular-nums text-acid" data-cd="s">00</span><span class="text-sm text-muted" data-t="cd.s">seg</span></div>
+        </div>
+        <a href="#" id="next-tickets" class="press mt-6 block rounded-full bg-ink px-6 py-3 text-center font-semibold text-ground hover:bg-acid" data-t="tickets">Entradas</a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Services: Ourense first -->
+  <section id="servicios" class="mx-auto max-w-[1440px] scroll-mt-20 px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="svc-h">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h2 id="svc-h" class="display reveal text-[clamp(3rem,5.5vw,5rem)]" data-t="svc.title">DJ en Ourense</h2>
+        <p class="reveal mt-6 text-xl" style="--d:70ms" data-t="svc.lede">Con base en Ourense y disponible en toda Galicia. Llega con su propio equipo de sonido e iluminación y adapta la música a cada celebración.</p>
+        <div class="reveal mt-8 hidden lg:block" style="--d:140ms"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-controladora-denon-dj-320.avif 320w, ../public/images/gerp-dj-ourense-controladora-denon-dj-640.avif 640w, ../public/images/gerp-dj-ourense-controladora-denon-dj-960.avif 960w, ../public/images/gerp-dj-ourense-controladora-denon-dj-1024.avif 1024w" sizes="(min-width: 1024px) 30vw, 100vw"><img src="../public/images/gerp-dj-ourense-controladora-denon-dj-1024.webp" srcset="../public/images/gerp-dj-ourense-controladora-denon-dj-320.webp 320w, ../public/images/gerp-dj-ourense-controladora-denon-dj-640.webp 640w, ../public/images/gerp-dj-ourense-controladora-denon-dj-960.webp 960w, ../public/images/gerp-dj-ourense-controladora-denon-dj-1024.webp 1024w" sizes="(min-width: 1024px) 30vw, 100vw" alt="Manos de GERP DJ sobre su controladora Denon DJ" data-ta="svc.alt" width="1500" height="2000" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-3xl object-cover"></picture></div>
+      </div>
+      <ul class="grid gap-3 lg:col-span-7 lg:col-start-6" id="services"></ul>
+    </div>
+  </section>
+
+  <!-- In action: the client's own footage (terrace session) -->
+  <section id="en-accion" class="mx-auto max-w-[1440px] scroll-mt-20 px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="action-h">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <h2 id="action-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)] lg:col-span-7" data-t="action.title">En acción</h2>
+      <p class="reveal text-xl lg:col-span-5" style="--d:70ms" data-t="action.p">Música, luces y micrófono en mano: así suena una noche con GERP DJ.</p>
+    </div>
+    <div class="mt-10 grid gap-6 lg:grid-cols-12">
+      <figure class="reveal relative isolate overflow-hidden rounded-3xl lg:col-span-8">
+        <video id="action-video" class="aspect-video w-full object-cover" muted loop playsinline preload="none" poster="../public/images/gerp-dj-sesion-terraza-ourense-848.webp" data-autoplay-visible>
+          <source src="../public/videos/gerp-dj-sesion-terraza-ourense.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="vid-toggle press glass-strong absolute right-4 top-4 sm:right-6 sm:top-6 z-10 grid size-11 place-items-center rounded-full" data-video="action-video" aria-label="Pausar vídeo"><span class="i-pause" aria-hidden="true"><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span><span class="i-play hidden" aria-hidden="true"><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <figcaption class="glass absolute inset-x-4 bottom-4 rounded-2xl p-4 sm:inset-x-6 sm:bottom-6">
+          <span class="block text-xl font-bold" data-t="action.cap">Sesión en terraza</span>
+          <span class="text-muted" data-t="action.capMeta">GERP DJ en directo, con su cabina y sus luces</span>
+        </figcaption>
+      </figure>
+      <figure class="reveal relative isolate overflow-hidden rounded-3xl lg:col-span-4" style="--d:90ms">
+        <picture><source type="image/avif" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.avif 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.avif 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.avif 848w" sizes="(min-width: 1024px) 33vw, 100vw"><img src="../public/images/gerp-dj-fiesta-aldea-ourense-848.webp" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.webp 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.webp 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.webp 848w" sizes="(min-width: 1024px) 33vw, 100vw" alt="Cabina de GERP DJ con altavoces y luces en una fiesta de aldea" data-ta="action.alt2" width="848" height="478" loading="lazy" decoding="async" class="aspect-video h-full w-full object-cover lg:aspect-auto"></picture>
+        <figcaption class="glass absolute inset-x-4 bottom-4 rounded-2xl p-4">
+          <span class="block text-xl font-bold" data-t="action.cap2">Fiesta de aldea</span>
+          <span class="text-muted" data-t="action.cap2Meta">Montaje completo al aire libre</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Own equipment: shown in the client's photos and videos -->
+  <section id="equipo" class="scroll-mt-20 py-28 lg:py-40" aria-labelledby="kit-h">
+    <div class="mx-auto grid max-w-[1440px] gap-10 px-4 sm:px-8 lg:grid-cols-12 lg:items-center">
+      <div class="reveal lg:col-span-5"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-cabina-iluminacion-led-320.avif 320w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-640.avif 640w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-960.avif 960w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.avif 1024w" sizes="(min-width: 1024px) 40vw, 100vw"><img src="../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.webp" srcset="../public/images/gerp-dj-ourense-cabina-iluminacion-led-320.webp 320w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-640.webp 640w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-960.webp 960w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.webp 1024w" sizes="(min-width: 1024px) 40vw, 100vw" alt="GERP DJ preparando su cabina con iluminación LED" data-ta="kit.alt" width="1500" height="2000" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-3xl object-cover"></picture></div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <h2 id="kit-h" class="display reveal text-[clamp(3rem,7vw,6.5rem)]" data-t="kit.title">Equipo propio</h2>
+        <p class="reveal mt-6 text-xl" style="--d:70ms" data-t="kit.p">GERP DJ llega con todo lo necesario para que la fiesta suene y se vea bien.</p>
+        <ul class="reveal mt-8 grid gap-3 sm:grid-cols-2" style="--d:140ms">
+          <li class="glass rounded-2xl p-5 text-lg font-semibold" data-t="kit.1">Cabina GERP DJ</li>
+          <li class="glass rounded-2xl p-5 text-lg font-semibold" data-t="kit.2">Equipo de sonido completo</li>
+          <li class="glass rounded-2xl p-5 text-lg font-semibold" data-t="kit.3">Iluminación LED y efectos de luz</li>
+          <li class="glass rounded-2xl p-5 text-lg font-semibold" data-t="kit.4">Micrófono para dedicatorias y anuncios</li>
+          <li class="glass rounded-2xl p-5 text-lg font-semibold sm:col-span-2" data-t="kit.5">Controladora Denon DJ</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest release -->
+  <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="rel-h" data-feature="music" hidden>
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+      <div class="reveal lg:col-span-6">
+        <div class="cover aspect-square w-full" data-cover="0"></div>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">
+        <h2 id="rel-h" class="display reveal text-[clamp(3rem,5.6vw,5.25rem)]">Afterglow</h2>
+        <p class="reveal mt-6 text-xl" style="--d:70ms" data-t="rel.lede">Nuevo single. Siete minutos pensados para la última hora de la noche, cuando la pista ya no quiere irse.</p>
+        <p class="reveal mt-2 text-muted" style="--d:100ms" data-t="rel.meta">Single · 2026 · Sello de ejemplo</p>
+        <!-- Prototype player; production uses the Spotify embed behind a facade -->
+        <div class="glass reveal mt-8 flex items-center gap-4 rounded-full p-2 pr-6" style="--d:140ms">
+          <button type="button" class="press grid size-14 place-items-center rounded-full bg-acid text-ground" aria-label="Reproducir avance" data-ta="play">
+            <svg viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="h-1.5 flex-1 rounded-full bg-ink/15"><div class="h-full w-1/3 rounded-full bg-ink"></div></div>
+          <span class="text-sm tabular-nums text-muted">2:21 / 7:04</span>
+        </div>
+        <h3 class="reveal mt-8 font-semibold" style="--d:180ms" data-t="rel.listen">Escúchalo en</h3>
+        <ul class="reveal mt-3 flex flex-wrap gap-2" style="--d:200ms">
+          <li><a href="#" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">Spotify</a></li>
+          <li><a href="#" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">Apple Music</a></li>
+          <li><a href="#" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">Beatport</a></li>
+          <li><a href="#" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">SoundCloud</a></li>
+          <li><a href="#" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming shows -->
+  <section class="relative isolate py-28 lg:py-40" aria-labelledby="shows-h" data-feature="tour" hidden>
+    <img src="../public/images/gerp-dj-luces-fiesta-ourense-640.webp" alt="" class="absolute inset-0 -z-10 size-full object-cover">
+    <div class="absolute inset-0 -z-10 bg-ground/45"></div>
+    <div class="mx-auto max-w-[1440px] px-4 sm:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <h2 id="shows-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]" data-t="shows.title">Próximas fechas</h2>
+        <div class="filters reveal flex flex-wrap gap-2" style="--d:80ms" data-target="home-shows"></div>
+      </div>
+      <ol class="reveal mt-10 grid gap-2" style="--d:120ms" id="home-shows" data-limit="5"></ol>
+      <a href="#/gira" data-route="gira" class="press reveal mt-8 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid" data-t="shows.all">Todas las fechas</a>
+    </div>
+  </section>
+
+  <!-- Music rail -->
+  <section class="py-28 lg:py-40" aria-labelledby="music-h" data-feature="music" hidden>
+    <div class="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-6 px-4 sm:px-8">
+      <h2 id="music-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]" data-t="nav.music">Música</h2>
+      <a href="#/musica" data-route="musica" class="press reveal glass-subtle rounded-full px-6 py-3 font-semibold hover:bg-ink hover:text-ground" data-t="music.all">Discografía completa</a>
+    </div>
+    <ul class="mx-auto mt-10 grid max-w-[1440px] grid-cols-2 gap-4 px-4 sm:gap-6 sm:px-8 lg:grid-cols-4" id="rail"></ul>
+  </section>
+
+  <!-- Live sets -->
+  <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="sets-h" data-feature="sets" hidden>
+    <h2 id="sets-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]" data-t="sets.title">En directo</h2>
+    <div class="mt-10 grid gap-6 lg:grid-cols-12">
+      <a href="#" class="group reveal relative isolate block overflow-hidden rounded-3xl lg:col-span-8" aria-label="Ver la sesión del Entroido en Xinzo de Limia">
+        <img src="../public/images/gerp-dj-luces-fiesta-ourense-640.webp" alt="" class="aspect-video w-full object-cover transition duration-700 group-hover:scale-105">
+        <span class="glass-strong absolute left-1/2 top-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition group-hover:bg-acid group-hover:text-ground">
+          <svg viewBox="0 0 24 24" class="size-9" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="glass absolute inset-x-4 bottom-4 rounded-2xl p-4 sm:inset-x-6 sm:bottom-6">
+          <span class="block text-xl font-bold" data-t="sets.feat">Entroido, Xinzo de Limia</span>
+          <span class="text-muted" data-t="sets.featMeta">Sesión completa · 2 h 04 min</span>
+        </span>
+      </a>
+      <ul class="flex flex-col gap-4 lg:col-span-4" id="sets-list"></ul>
+    </div>
+  </section>
+
+
+  <!-- About teaser -->
+  <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="about-h">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+      <div class="reveal lg:col-span-5"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-retrato-equipo-sonido-320.avif 320w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-640.avif 640w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-960.avif 960w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.avif 1024w" sizes="(min-width: 1024px) 40vw, 100vw"><img src="../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.webp" srcset="../public/images/gerp-dj-ourense-retrato-equipo-sonido-320.webp 320w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-640.webp 640w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-960.webp 960w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.webp 1024w" sizes="(min-width: 1024px) 40vw, 100vw" alt="Retrato de GERP DJ junto a su equipo de sonido" data-ta="about.alt" width="1200" height="1480" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-3xl object-cover object-top"></picture></div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <h2 id="about-h" class="display reveal text-[clamp(3rem,7vw,6.5rem)]" data-t="about.title">Sobre GERP DJ</h2>
+        <p class="reveal mt-6 text-xl" style="--d:70ms" data-t="about.p1">GERP DJ pone la música y las luces en fiestas, bodas y celebraciones de Ourense y de toda Galicia, y anima la noche micrófono en mano.</p>
+        <p class="reveal mt-4 text-muted" style="--d:100ms" data-t="about.story">[Pendiente: la historia de GERP DJ, sus años de experiencia y cómo empezó]</p>
+        <dl class="reveal mt-10 grid gap-4 sm:grid-cols-3" style="--d:140ms">
+          <div class="glass-subtle rounded-2xl p-5"><dt class="text-muted" data-t="about.baseK">Base</dt><dd class="mt-1 text-lg font-semibold">Ourense</dd></div>
+          <div class="glass-subtle rounded-2xl p-5"><dt class="text-muted" data-t="about.kitK">Equipo</dt><dd class="mt-1 text-lg font-semibold" data-t="about.kitV">Sonido y luces propios</dd></div>
+          <div class="glass-subtle rounded-2xl p-5"><dt class="text-muted" data-t="about.zoneK">Zona</dt><dd class="mt-1 text-lg font-semibold" data-t="about.zoneV">Ourense y toda Galicia</dd></div>
+        </dl>
+        <a href="#/bio" data-route="bio" class="press reveal mt-10 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid" style="--d:200ms" data-t="about.more">Leer la bio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking band -->
+  <section class="relative isolate py-28 lg:py-40" aria-labelledby="band-h">
+    <div class="absolute inset-0 -z-10"><picture><source type="image/avif" srcset="../public/images/gerp-dj-sesion-terraza-ourense-320.avif 320w, ../public/images/gerp-dj-sesion-terraza-ourense-640.avif 640w, ../public/images/gerp-dj-sesion-terraza-ourense-848.avif 848w" sizes="100vw"><img src="../public/images/gerp-dj-sesion-terraza-ourense-848.webp" srcset="../public/images/gerp-dj-sesion-terraza-ourense-320.webp 320w, ../public/images/gerp-dj-sesion-terraza-ourense-640.webp 640w, ../public/images/gerp-dj-sesion-terraza-ourense-848.webp 848w" sizes="100vw" alt="" width="848" height="480" loading="lazy" decoding="async" class="size-full object-cover"></picture></div>
+    <div class="absolute inset-0 -z-10 bg-ground/55"></div>
+    <div class="mx-auto grid max-w-[1440px] gap-8 px-4 sm:px-8 lg:grid-cols-12 lg:items-end">
+      <h2 id="band-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)] lg:col-span-7" data-t="band.title">GERP DJ en tu fiesta</h2>
+      <div class="glass-strong reveal rounded-3xl p-7 lg:col-span-5" style="--d:100ms">
+        <p class="text-xl" data-t="band.p">Fiestas populares, bodas, celebraciones privadas y empresas en Ourense y toda Galicia. Cuéntanos fecha y lugar por WhatsApp y te respondemos en 48 horas.</p>
+        <a href="#/contratacion" data-route="contratacion" class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink" data-t="band.cta">Solicitar fecha</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp channel (replaces an email newsletter: all communication is WhatsApp) -->
+  <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="news-h">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <h2 id="news-h" class="display reveal text-[clamp(2.75rem,6vw,5.5rem)] lg:col-span-7" data-t="news.title">Entérate antes</h2>
+      <div class="glass reveal rounded-3xl p-7 lg:col-span-5" style="--d:100ms">
+        <p class="text-xl" data-t="channel.p">Fechas, novedades y fotos de las fiestas, primero en el canal de WhatsApp de GERP DJ.</p>
+        <a target="_blank" rel="noopener" href="https://whatsapp.com/channel/CHANNEL_ID" class="wa-channel press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink" data-t="channel.cta">Seguir el canal</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TOUR ============ -->
+<div data-page="gira" data-feature="tour" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <h1 class="display reveal text-[clamp(4.5rem,15vw,13rem)]" data-t="nav.tour">Gira</h1>
+    <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms" data-t="tour.lede">Fechas confirmadas en Ourense, Galicia y el resto de España. Las entradas se venden en la web de cada sala o festa.</p>
+    <div class="filters reveal mt-10 flex flex-wrap gap-2" style="--d:120ms" data-target="tour-shows"></div>
+    <ol class="reveal mt-6 grid gap-2" style="--d:160ms" id="tour-shows"></ol>
+
+    <div class="mt-28 grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-6">
+        <h2 class="display text-[clamp(2.5rem,5vw,4.5rem)]" data-t="tour.past">Fechas pasadas</h2>
+        <ol class="mt-6 grid gap-2 opacity-80" id="past-shows"></ol>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">
+        <h2 class="display text-[clamp(2.5rem,5vw,4.5rem)]" data-t="tour.notify">Avísame</h2>
+        <div class="glass-strong mt-6 rounded-3xl p-7">
+          <p class="text-xl" data-t="tour.notifyP">Las fechas nuevas se anuncian primero en el canal de WhatsApp de GERP DJ.</p>
+          <a target="_blank" rel="noopener" href="https://whatsapp.com/channel/CHANNEL_ID" class="wa-channel press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink" data-t="channel.cta">Seguir el canal</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MUSIC ============ -->
+<div data-page="musica" data-feature="music" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <h1 class="display reveal text-[clamp(4.5rem,15vw,13rem)]" data-t="nav.music">Música</h1>
+    <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms" data-t="music.lede">Singles, remixes, EPs y álbumes. Cada portada lleva a todas las plataformas.</p>
+    <div class="reveal mt-10 flex flex-wrap gap-2" style="--d:120ms" id="type-filters"></div>
+    <ul class="mt-8 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4" id="discography"></ul>
+  </section>
+</div>
+
+<!-- ============ SETS ============ -->
+<div data-page="sesiones" data-feature="sets" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <h1 class="display reveal text-[clamp(4.5rem,15vw,13rem)]" data-t="nav.sets">Sesiones</h1>
+    <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms" data-t="sets.lede">Sesiones completas grabadas en directo y el programa mensual de radio.</p>
+    <ul class="mt-12 grid gap-6 md:grid-cols-2" id="sets-grid"></ul>
+    <div class="glass-strong reveal mt-16 grid gap-6 rounded-3xl p-7 sm:p-10 lg:grid-cols-12 lg:items-center">
+      <h2 class="display text-[clamp(2.5rem,5vw,4.5rem)] lg:col-span-6" data-t="radio.title">Miño Radio</h2>
+      <div class="lg:col-span-6">
+        <p class="text-xl" data-t="radio.p">Una hora al mes con música nueva, inéditos y una mezcla invitada. Primer viernes de cada mes.</p>
+        <a href="#" class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink" data-t="radio.cta">Escuchar el último episodio</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============ BIO ============ -->
+<div data-page="bio" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <h1 class="display reveal text-[clamp(4.5rem,15vw,13rem)]">Bio</h1>
+    <div class="mt-12 grid gap-10 lg:grid-cols-12">
+      <div class="space-y-6 text-xl lg:col-span-7">
+        <p class="reveal" data-t="about.p1">GERP DJ pone la música y las luces en fiestas, bodas y celebraciones de Ourense y de toda Galicia, y anima la noche micrófono en mano.</p>
+        <p class="reveal" style="--d:70ms" data-t="bio.p2">Trabaja con su propio equipo: cabina con su nombre, altavoces, iluminación LED y una controladora Denon DJ. Lo monta igual en la plaza de una aldea, en una terraza o en un salón.</p>
+        <p class="reveal text-muted" style="--d:140ms" data-t="about.story">[Pendiente: la historia de GERP DJ, sus años de experiencia y cómo empezó]</p>
+      </div>
+      <aside class="glass-strong reveal h-fit rounded-3xl p-7 lg:col-span-4 lg:col-start-9" style="--d:120ms" aria-labelledby="press-h">
+        <h2 id="press-h" class="text-2xl font-bold" data-t="press.title">Prensa</h2>
+        <p class="mt-3 text-muted" data-t="press.placeholder">[Pendiente: citas de prensa reales con medio y fecha]</p>
+        <a href="press/dossier-gerp-dj-es.pdf" target="_blank" rel="noopener" data-pdf class="press mt-6 block rounded-full bg-acid px-6 py-3 text-center font-semibold text-ground hover:bg-ink" data-t="press.kit">Descargar dossier de prensa (PDF)</a>
+        <a href="#" class="press glass-subtle mt-3 block rounded-full px-6 py-3 text-center font-semibold hover:bg-ink hover:text-ground" data-t="press.photos">Fotos en alta resolución</a>
+      </aside>
+    </div>
+    <h2 class="display mt-28 text-[clamp(2.5rem,5vw,4.5rem)]" data-t="bio.gallery">Galería</h2>
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+      <div class="reveal lg:row-span-2"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-retrato-equipo-sonido-320.avif 320w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-640.avif 640w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-960.avif 960w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.avif 1024w" sizes="(min-width: 1024px) 25vw, 50vw"><img src="../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.webp" srcset="../public/images/gerp-dj-ourense-retrato-equipo-sonido-320.webp 320w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-640.webp 640w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-960.webp 960w, ../public/images/gerp-dj-ourense-retrato-equipo-sonido-1024.webp 1024w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Retrato de GERP DJ junto a su equipo de sonido" data-ta="about.alt" width="1200" height="1480" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-3xl object-cover object-top lg:aspect-auto lg:h-full"></picture></div>
+      <div class="reveal"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-controladora-denon-dj-320.avif 320w, ../public/images/gerp-dj-ourense-controladora-denon-dj-640.avif 640w, ../public/images/gerp-dj-ourense-controladora-denon-dj-960.avif 960w, ../public/images/gerp-dj-ourense-controladora-denon-dj-1024.avif 1024w" sizes="(min-width: 1024px) 25vw, 50vw"><img src="../public/images/gerp-dj-ourense-controladora-denon-dj-1024.webp" srcset="../public/images/gerp-dj-ourense-controladora-denon-dj-320.webp 320w, ../public/images/gerp-dj-ourense-controladora-denon-dj-640.webp 640w, ../public/images/gerp-dj-ourense-controladora-denon-dj-960.webp 960w, ../public/images/gerp-dj-ourense-controladora-denon-dj-1024.webp 1024w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Manos de GERP DJ sobre su controladora Denon DJ" data-ta="svc.alt" width="1500" height="2000" loading="lazy" decoding="async" class="aspect-square w-full rounded-3xl object-cover"></picture></div>
+      <div class="reveal"><picture><source type="image/avif" srcset="../public/images/gerp-dj-ourense-cabina-iluminacion-led-320.avif 320w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-640.avif 640w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-960.avif 960w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.avif 1024w" sizes="(min-width: 1024px) 25vw, 50vw"><img src="../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.webp" srcset="../public/images/gerp-dj-ourense-cabina-iluminacion-led-320.webp 320w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-640.webp 640w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-960.webp 960w, ../public/images/gerp-dj-ourense-cabina-iluminacion-led-1024.webp 1024w" sizes="(min-width: 1024px) 25vw, 50vw" alt="GERP DJ preparando su cabina con iluminación LED" data-ta="kit.alt" width="1500" height="2000" loading="lazy" decoding="async" class="aspect-square w-full rounded-3xl object-cover"></picture></div>
+      <div class="reveal"><picture><source type="image/avif" srcset="../public/images/gerp-dj-luces-fiesta-ourense-320.avif 320w, ../public/images/gerp-dj-luces-fiesta-ourense-640.avif 640w, ../public/images/gerp-dj-luces-fiesta-ourense-848.avif 848w" sizes="(min-width: 1024px) 25vw, 50vw"><img src="../public/images/gerp-dj-luces-fiesta-ourense-848.webp" srcset="../public/images/gerp-dj-luces-fiesta-ourense-320.webp 320w, ../public/images/gerp-dj-luces-fiesta-ourense-640.webp 640w, ../public/images/gerp-dj-luces-fiesta-ourense-848.webp 848w" sizes="(min-width: 1024px) 25vw, 50vw" alt="GERP DJ en su cabina entre luces de colores" data-ta="gal.alt" width="848" height="480" loading="lazy" decoding="async" class="aspect-square w-full rounded-3xl object-cover"></picture></div>
+      <div class="reveal"><picture><source type="image/avif" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.avif 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.avif 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.avif 848w" sizes="(min-width: 1024px) 25vw, 50vw"><img src="../public/images/gerp-dj-fiesta-aldea-ourense-848.webp" srcset="../public/images/gerp-dj-fiesta-aldea-ourense-320.webp 320w, ../public/images/gerp-dj-fiesta-aldea-ourense-640.webp 640w, ../public/images/gerp-dj-fiesta-aldea-ourense-848.webp 848w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Cabina de GERP DJ con altavoces y luces en una fiesta de aldea" data-ta="action.alt2" width="848" height="478" loading="lazy" decoding="async" class="aspect-square w-full rounded-3xl object-cover"></picture></div>
+      <div class="reveal col-span-2 lg:col-span-3"><picture><source type="image/avif" srcset="../public/images/gerp-dj-sesion-terraza-ourense-320.avif 320w, ../public/images/gerp-dj-sesion-terraza-ourense-640.avif 640w, ../public/images/gerp-dj-sesion-terraza-ourense-848.avif 848w" sizes="(min-width: 1024px) 75vw, 100vw"><img src="../public/images/gerp-dj-sesion-terraza-ourense-848.webp" srcset="../public/images/gerp-dj-sesion-terraza-ourense-320.webp 320w, ../public/images/gerp-dj-sesion-terraza-ourense-640.webp 640w, ../public/images/gerp-dj-sesion-terraza-ourense-848.webp 848w" sizes="(min-width: 1024px) 75vw, 100vw" alt="GERP DJ pinchando en una terraza" data-ta="gal.alt2" width="848" height="480" loading="lazy" decoding="async" class="aspect-[16/9] w-full rounded-3xl object-cover"></picture></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BOOKING ============ -->
+<div data-page="contratacion" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <h1 class="display reveal text-[clamp(3.5rem,11vw,10rem)]" data-t="book.title">Contratación</h1>
+    <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms" data-t="book.lede">Fiestas populares, bodas, fiestas privadas y eventos de empresa en Ourense y el resto de Galicia. Rellena los datos y se abrirá WhatsApp con tu solicitud lista para enviar.</p>
+    <div class="mt-12 grid gap-10 lg:grid-cols-12">
+      <!-- Builds the request and opens WhatsApp Business (wa.me click-to-chat). No backend, no email. -->
+      <form id="booking" action="https://wa.me/34613340500" method="get" target="_blank" class="glass-strong reveal grid gap-5 rounded-3xl p-7 sm:grid-cols-2 sm:p-10 lg:col-span-7" style="--d:120ms">
+        <label class="grid gap-2"><span class="font-medium" data-t="f.name">Nombre</span>
+          <input name="name" required autocomplete="name" class="glass-subtle rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-acid"></label>
+        <label class="grid gap-2"><span class="font-medium" data-t="f.date">Fecha del evento</span>
+          <input name="date" type="date" required class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:outline-none focus:ring-2 focus:ring-acid"></label>
+        <label class="grid gap-2 sm:col-span-2"><span class="font-medium" data-t="f.venue">Localidad y lugar</span>
+          <input name="venue" required class="glass-subtle rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-acid"></label>
+        <fieldset class="sm:col-span-2">
+          <legend class="font-medium" data-t="f.type">Tipo de evento</legend>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <label class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground"><input type="radio" name="type" value="popular" class="sr-only" checked><span data-t="f.popular">Fiesta popular</span></label>
+            <label class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground"><input type="radio" name="type" value="wedding" class="sr-only"><span data-t="f.wedding">Boda</span></label>
+            <label class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground"><input type="radio" name="type" value="private" class="sr-only"><span data-t="f.private">Fiesta privada</span></label>
+            <label class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground"><input type="radio" name="type" value="corporate" class="sr-only"><span data-t="f.corporate">Empresa</span></label>
+            <label class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground"><input type="radio" name="type" value="other" class="sr-only"><span data-t="f.other">Otro</span></label>
+          </div>
+        </fieldset>
+        <label class="grid gap-2 sm:col-span-2"><span class="font-medium" data-t="f.msg">Mensaje</span>
+          <textarea name="msg" rows="5" class="glass-subtle rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-acid"></textarea></label>
+        <button class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-ground hover:bg-ink sm:col-span-2" data-t="f.send">Enviar por WhatsApp</button>
+        <p class="form-ok hidden font-semibold text-acid sm:col-span-2" role="status" data-t="f.ok">Abriendo WhatsApp con tu solicitud. Solo tienes que pulsar enviar.</p>
+      </form>
+      <div class="grid h-fit gap-4 lg:col-span-4 lg:col-start-9">
+        <div class="glass reveal rounded-3xl p-6" style="--d:160ms">
+          <h2 class="font-semibold text-acid">WhatsApp Business</h2>
+          <a target="_blank" rel="noopener" href="https://wa.me/34613340500" class="wa-chat mt-1 block text-2xl font-bold hover:text-acid">+34 613 34 05 00</a>
+          <p class="mt-2 text-muted" data-t="c.hours">Lunes a viernes, de 10:00 a 19:00. Respuesta en 48 horas laborables.</p>
+        </div>
+        <a target="_blank" rel="noopener" href="https://wa.me/34613340500" data-wa-msg="c.pressMsg" class="wa-chat press glass reveal rounded-3xl p-6 hover:bg-ink/10" style="--d:200ms">
+          <span class="block font-semibold text-acid" data-t="press.title">Prensa</span>
+          <span class="mt-1 block text-lg" data-t="c.press">Entrevistas y acreditaciones por WhatsApp</span>
+        </a>
+        <a href="press/dossier-gerp-dj-es.pdf" target="_blank" rel="noopener" data-pdf class="press reveal rounded-full bg-ink px-6 py-4 text-center font-semibold text-ground hover:bg-acid" style="--d:320ms" data-t="press.kit">Descargar dossier de prensa (PDF)</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============ PRIVACY ============ -->
+<div data-page="privacidad" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h1 class="display text-[clamp(3rem,6vw,5.5rem)]" data-t="legal.privacy">Privacidad</h1>
+        <p class="mt-6 text-muted" data-t="legal.draft">[Texto de ejemplo: completar los datos entre corchetes y revisar con asesoría legal antes de publicar]</p>
+      </div>
+      <article class="legal glass-strong rounded-3xl p-7 sm:p-10 lg:col-span-8">
+        <div data-lang-block="es" lang="es">
+          <h2>Política de privacidad</h2>
+          <p>Última actualización: 14 de noviembre de 2026.</p>
+          <h2>Responsable del tratamiento</h2>
+          <p>[Nombre y apellidos o razón social] («GERP DJ»), NIF [NIF], con domicilio en [dirección], Ourense (España). Contacto: WhatsApp Business <a target="_blank" rel="noopener" class="wa-chat" href="https://wa.me/34613340500">+34 613 34 05 00</a>.</p>
+          <h2>Qué datos tratamos y para qué</h2>
+          <ul>
+            <li><strong>Solicitudes de contratación y presupuestos.</strong> Cuando nos escribes por WhatsApp (desde el formulario o los botones de esta web), tratamos tu nombre, tu número de teléfono y los datos del evento que nos envíes (fecha, lugar, tipo de evento y mensaje) para responderte, preparar el presupuesto y, si llegamos a un acuerdo, gestionar la actuación.</li>
+            <li><strong>Canal de WhatsApp.</strong> Si sigues el canal, WhatsApp no nos muestra tu número ni a nosotros ni a otros seguidores. Ese tratamiento lo realiza WhatsApp según su propia política.</li>
+            <li><strong>Navegación.</strong> El servicio que aloja la web (Cloudflare) registra datos técnicos, como la dirección IP y el navegador, para servir las páginas y protegerlas frente a ataques.</li>
+          </ul>
+          <p>El formulario de contratación no envía datos a ningún servidor nuestro: solo prepara el mensaje y abre WhatsApp. No se envía nada hasta que pulsas «enviar» en WhatsApp.</p>
+          <h2>Base legal</h2>
+          <p>Aplicación de medidas precontractuales a petición tuya y ejecución del contrato (art. 6.1.b RGPD) para las solicitudes; interés legítimo en la seguridad del sitio (art. 6.1.f RGPD) para los datos técnicos.</p>
+          <h2>Cuánto tiempo los conservamos</h2>
+          <p>Las conversaciones de solicitudes que no lleguen a contrato se eliminan en un plazo máximo de [12 meses]. Los datos de las actuaciones contratadas se conservan mientras dure la relación y, después, durante los plazos que exige la normativa fiscal y mercantil.</p>
+          <h2>Con quién se comparten</h2>
+          <p>No cedemos tus datos a terceros salvo obligación legal. Usamos estos proveedores: WhatsApp Ireland Limited (mensajería) y Cloudflare, Inc. (alojamiento y seguridad). Algunos pueden tratar datos fuera del Espacio Económico Europeo con las garantías previstas en el RGPD, como el Marco de Privacidad de Datos UE-EE. UU. o las cláusulas contractuales tipo.</p>
+          <h2>Tus derechos</h2>
+          <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiéndonos por WhatsApp o por correo postal a la dirección indicada arriba. Si consideras que no hemos atendido tu solicitud, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+        </div>
+        <div data-lang-block="gl" lang="gl" hidden>
+          <h2>Política de privacidade</h2>
+          <p>Última actualización: 14 de novembro de 2026.</p>
+          <h2>Responsable do tratamento</h2>
+          <p>[Nome e apelidos ou razón social] («GERP DJ»), NIF [NIF], con domicilio en [enderezo], Ourense (España). Contacto: WhatsApp Business <a target="_blank" rel="noopener" class="wa-chat" href="https://wa.me/34613340500">+34 613 34 05 00</a>.</p>
+          <h2>Que datos tratamos e para que</h2>
+          <ul>
+            <li><strong>Solicitudes de contratación e orzamentos.</strong> Cando nos escribes por WhatsApp (dende o formulario ou os botóns desta web), tratamos o teu nome, o teu número de teléfono e os datos do evento que nos envíes (data, lugar, tipo de evento e mensaxe) para responderche, preparar o orzamento e, se chegamos a un acordo, xestionar a actuación.</li>
+            <li><strong>Canle de WhatsApp.</strong> Se segues a canle, WhatsApp non nos amosa o teu número nin a nós nin a outras persoas seguidoras. Ese tratamento realízao WhatsApp segundo a súa propia política.</li>
+            <li><strong>Navegación.</strong> O servizo que aloxa a web (Cloudflare) rexistra datos técnicos, como o enderezo IP e o navegador, para servir as páxinas e protexelas fronte a ataques.</li>
+          </ul>
+          <p>O formulario de contratación non envía datos a ningún servidor noso: só prepara a mensaxe e abre WhatsApp. Non se envía nada ata que premes «enviar» en WhatsApp.</p>
+          <h2>Base legal</h2>
+          <p>Aplicación de medidas precontractuais por petición túa e execución do contrato (art. 6.1.b RXPD) para as solicitudes; interese lexítimo na seguridade do sitio (art. 6.1.f RXPD) para os datos técnicos.</p>
+          <h2>Canto tempo os conservamos</h2>
+          <p>As conversas de solicitudes que non cheguen a contrato elimínanse nun prazo máximo de [12 meses]. Os datos das actuacións contratadas consérvanse mentres dure a relación e, despois, durante os prazos que esixe a normativa fiscal e mercantil.</p>
+          <h2>Con quen se comparten</h2>
+          <p>Non cedemos os teus datos a terceiros salvo obriga legal. Usamos estes provedores: WhatsApp Ireland Limited (mensaxería) e Cloudflare, Inc. (aloxamento e seguridade). Algúns poden tratar datos fóra do Espazo Económico Europeo coas garantías previstas no RXPD, como o Marco de Privacidade de Datos UE-EUA ou as cláusulas contractuais tipo.</p>
+          <h2>Os teus dereitos</h2>
+          <p>Podes exercer os teus dereitos de acceso, rectificación, supresión, oposición, limitación do tratamento e portabilidade escribíndonos por WhatsApp ou por correo postal ao enderezo indicado arriba. Se consideras que non atendemos a túa solicitude, podes reclamar ante a Axencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- ============ COOKIES ============ -->
+<div data-page="cookies" hidden>
+  <section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h1 class="display text-[clamp(3rem,6vw,5.5rem)]" data-t="legal.cookies">Cookies</h1>
+        <p class="mt-6 text-muted" data-t="legal.draft">[Texto de ejemplo: completar los datos entre corchetes y revisar con asesoría legal antes de publicar]</p>
+      </div>
+      <article class="legal glass-strong rounded-3xl p-7 sm:p-10 lg:col-span-8">
+        <div data-lang-block="es" lang="es">
+          <h2>Política de cookies</h2>
+          <p>Última actualización: 14 de noviembre de 2026. Una cookie es un pequeño archivo que un sitio web guarda en tu navegador.</p>
+          <h2>Cookies que usa esta web</h2>
+          <p>Esta web no usa cookies propias de análisis, publicidad ni personalización, y no carga herramientas de seguimiento. Por eso no te mostramos un aviso de consentimiento.</p>
+          <h2>Cookies técnicas de nuestro proveedor</h2>
+          <p>Cloudflare, que aloja la web, puede instalar cookies técnicas para distinguir las visitas reales del tráfico automatizado (por ejemplo, <code>__cf_bm</code>). Son necesarias para el funcionamiento seguro del sitio y están exentas de consentimiento (art. 22.2 de la LSSI-CE).</p>
+          <h2>Contenido de terceros</h2>
+          <p>Los vídeos de esta web se sirven desde nuestro propio alojamiento y no instalan cookies. Si en el futuro añadimos reproductores de terceros (como YouTube o Spotify), solo se cargarán cuando pulses reproducir. Si añadimos analítica, te pediremos el consentimiento antes.</p>
+          <h2>Cómo gestionar o borrar las cookies</h2>
+          <p>Puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Para cualquier duda, escríbenos por <a target="_blank" rel="noopener" class="wa-chat" href="https://wa.me/34613340500">WhatsApp</a>.</p>
+        </div>
+        <div data-lang-block="gl" lang="gl" hidden>
+          <h2>Política de cookies</h2>
+          <p>Última actualización: 14 de novembro de 2026. Unha cookie é un pequeno ficheiro que un sitio web garda no teu navegador.</p>
+          <h2>Cookies que usa esta web</h2>
+          <p>Esta web non usa cookies propias de análise, publicidade nin personalización, e non carga ferramentas de seguimento. Por iso non che amosamos un aviso de consentimento.</p>
+          <h2>Cookies técnicas do noso provedor</h2>
+          <p>Cloudflare, que aloxa a web, pode instalar cookies técnicas para distinguir as visitas reais do tráfico automatizado (por exemplo, <code>__cf_bm</code>). Son necesarias para o funcionamento seguro do sitio e están exentas de consentimento (art. 22.2 da LSSI-CE).</p>
+          <h2>Contido de terceiros</h2>
+          <p>Os vídeos desta web sérvense dende o noso propio aloxamento e non instalan cookies. Se no futuro engadimos reprodutores de terceiros (como YouTube ou Spotify), só se cargarán cando premas reproducir. Se engadimos analítica, pedirémosche o consentimento antes.</p>
+          <h2>Como xestionar ou borrar as cookies</h2>
+          <p>Podes bloquear ou eliminar as cookies dende a configuración do teu navegador. Para calquera dúbida, escríbenos por <a target="_blank" rel="noopener" class="wa-chat" href="https://wa.me/34613340500">WhatsApp</a>.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+
+</main>
+
+<!-- Footer -->
+<footer class="mt-10 pb-10">
+  <div class="mx-auto max-w-[1440px] px-4 sm:px-8">
+    <div class="glass grid gap-10 rounded-3xl p-7 sm:p-10 lg:grid-cols-12">
+      <nav aria-label="Pie" class="grid gap-2 lg:col-span-3">
+        <a href="#/servicios" data-route="servicios" class="hover:text-acid" data-t="nav.services">Servicios</a>
+        <a href="#/en-accion" data-route="en-accion" class="hover:text-acid" data-t="nav.action">En acción</a>
+        <a href="#/equipo" data-route="equipo" class="hover:text-acid" data-t="nav.kit">Equipo</a>
+        <a href="#/gira" data-route="gira" data-feature="tour" hidden class="hover:text-acid" data-t="nav.tour">Gira</a>
+        <a href="#/musica" data-route="musica" data-feature="music" hidden class="hover:text-acid" data-t="nav.music">Música</a>
+        <a href="#/sesiones" data-route="sesiones" data-feature="sets" hidden class="hover:text-acid" data-t="nav.sets">Sesiones</a>
+        <a href="#/bio" data-route="bio" class="hover:text-acid" data-t="nav.bio">Bio</a>
+        <a href="#/contratacion" data-route="contratacion" class="hover:text-acid" data-t="cta.book">Contratar</a>
+      </nav>
+      <ul class="grid gap-2 lg:col-span-3" aria-label="Redes" data-feature="socials" hidden>
+        <li><a href="#" class="hover:text-acid">Instagram</a></li>
+        <li><a href="#" class="hover:text-acid">TikTok</a></li>
+        <li><a href="#" class="hover:text-acid">YouTube</a></li>
+        <li><a href="#" class="hover:text-acid">Spotify</a></li>
+        <li><a href="#" class="hover:text-acid">SoundCloud</a></li>
+      </ul>
+      <div class="grid h-fit gap-2 lg:col-span-5 lg:col-start-8">
+        <p class="text-lg font-semibold">WhatsApp Business</p>
+        <a href="https://wa.me/34613340500" target="_blank" rel="noopener" class="wa-chat display text-3xl text-acid hover:text-ink">+34 613 34 05 00</a>
+        <p class="text-muted" data-t="c.hours">Lunes a viernes, de 10:00 a 19:00. Respuesta en 48 horas laborables.</p>
+      </div>
+    </div>
+    <p class="display mt-10 text-center text-[min(calc((100vw-4rem)/5.9),14.5rem)] leading-[0.8]" aria-hidden="true">GERP DJ</p>
+    <div class="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted">
+      <span>© 2026 GERP DJ · DJ en Ourense, Galicia</span>
+      <span><a href="#/privacidad" data-route="privacidad" class="hover:text-ink" data-t="legal.privacy">Privacidad</a> · <a href="#/cookies" data-route="cookies" class="hover:text-ink" data-t="legal.cookies">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ---------- Feature flags: hidden, not deleted (becomes site.features in src/config/site.ts) ---------- */
+const FEATURES = { tour: false, music: false, sets: false, shop: false, socials: false };
+document.querySelectorAll('[data-feature]:not([data-page])').forEach(el => { el.hidden = !FEATURES[el.dataset.feature]; });
+
+/* ---------- Sample data (becomes content collections) ---------- */
+const SHOWS = [
+  { d: '2026-09-12T23:00', city: 'O Carballiño', prov: 'Ourense', region: 'ourense', venue: 'Carpa da Festa', event: { es: 'Fiestas patronales', gl: 'Festas patronais' }, status: 'onsale' },
+  { d: '2026-10-17T23:30', city: 'Santiago de Compostela', prov: 'A Coruña', region: 'galicia', venue: 'Sala Pedra', event: { es: 'Noche Néboa', gl: 'Noite Néboa' }, status: 'onsale' },
+  { d: '2026-10-31T23:30', city: 'Ourense', prov: 'Ourense', region: 'ourense', venue: 'Sala Burgas', event: { es: 'Samaín', gl: 'Samaín' }, status: 'soldout' },
+  { d: '2026-11-21T23:30', city: 'Ourense', prov: 'Ourense', region: 'ourense', venue: 'Sala Burgas', event: { es: 'GERP DJ toda la noche', gl: 'GERP DJ toda a noite' }, status: 'onsale' },
+  { d: '2026-11-28T23:00', city: 'Vigo', prov: 'Pontevedra', region: 'galicia', venue: 'Porto Club', event: { es: 'Presentación Afterglow', gl: 'Presentación Afterglow' }, status: 'soldout' },
+  { d: '2026-12-05T23:00', city: 'O Barco de Valdeorras', prov: 'Ourense', region: 'ourense', venue: 'Sala Sil', event: { es: 'Noche Ribeira Sacra', gl: 'Noite Ribeira Sacra' }, status: 'onsale' },
+  { d: '2026-12-19T22:00', city: 'Verín', prov: 'Ourense', region: 'ourense', venue: 'Carpa Monterrei', event: { es: 'Fiesta de Navidad', gl: 'Festa de Nadal' }, status: 'onsale' },
+  { d: '2026-12-31T23:59', city: 'Ourense', prov: 'Ourense', region: 'ourense', venue: 'Sala Burgas', event: { es: 'Nochevieja', gl: 'Noitevella' }, status: 'onsale' },
+  { d: '2027-01-23T23:00', city: 'A Coruña', prov: 'A Coruña', region: 'galicia', venue: 'Sala Faro', event: { es: 'Noche Néboa', gl: 'Noite Néboa' }, status: 'onsale' },
+  { d: '2027-02-06T22:00', city: 'Xinzo de Limia', prov: 'Ourense', region: 'ourense', venue: 'Praza Maior', event: { es: 'Entroido', gl: 'Entroido' }, status: 'free' },
+  { d: '2027-03-06T23:00', city: 'Madrid', prov: 'Madrid', region: 'espana', venue: 'Nave Norte', event: { es: 'Gira Afterglow', gl: 'Xira Afterglow' }, status: 'onsale' },
+];
+const RELEASES = [
+  { t: 'Afterglow', type: 'single', y: 2026, bg: '#dcff3c', fg: '#07070a' },
+  { t: 'Miño', type: 'single', y: 2026, bg: '#ff5a36', fg: '#07070a' },
+  { t: 'Pedra (GERP DJ Remix)', type: 'remix', y: 2026, bg: '#f3f2ee', fg: '#07070a' },
+  { t: 'Noite no Miño', type: 'ep', y: 2025, bg: '#1d4d4f', fg: '#f3f2ee' },
+  { t: 'Vapor', type: 'single', y: 2025, bg: '#2a2a33', fg: '#dcff3c' },
+  { t: 'Néboa', type: 'album', y: 2025, bg: '#c9c4b8', fg: '#07070a' },
+  { t: 'Lume (GERP DJ Remix)', type: 'remix', y: 2024, bg: '#ff5a36', fg: '#07070a' },
+  { t: 'Ribeira Sacra', type: 'ep', y: 2024, bg: '#07070a', fg: '#f3f2ee' },
+];
+const SETS = [
+  { t: { es: 'Entroido, Xinzo de Limia', gl: 'Entroido, Xinzo de Limia' }, dur: '2 h 04 min', img: '../public/images/gerp-dj-luces-fiesta-ourense-640.webp' },
+  { t: { es: 'Amanecer en la Ribeira Sacra', gl: 'Amencer na Ribeira Sacra' }, dur: '1 h 32 min', img: '../public/images/gerp-dj-fiesta-aldea-ourense-640.webp' },
+  { t: { es: 'Sesión en estudio, Ourense', gl: 'Sesión en estudo, Ourense' }, dur: '58 min', img: '../public/images/gerp-dj-ourense-controladora-denon-dj-640.webp' },
+  { t: { es: 'Sala Burgas, Ourense', gl: 'Sala Burgas, Ourense' }, dur: '3 h 10 min', img: '../public/images/gerp-dj-sesion-terraza-ourense-640.webp' },
+];
+const SERVICES = [
+  { t: { es: 'Fiestas populares', gl: 'Festas populares' }, d: { es: 'Verbenas y fiestas de aldea con cabina, sonido y luces propios.', gl: 'Verbenas e festas de aldea con cabina, son e luces propios.' },
+    msg: { es: 'Hola, quiero presupuesto para una fiesta popular.', gl: 'Ola, quero orzamento para unha festa popular.' } },
+  { t: { es: 'Bodas', gl: 'Vodas' }, d: { es: 'Del cóctel al último baile, con la música que elijáis juntos.', gl: 'Do cóctel ao último baile, coa música que escollades xuntos.' },
+    msg: { es: 'Hola, quiero presupuesto para una boda.', gl: 'Ola, quero orzamento para unha voda.' } },
+  { t: { es: 'Fiestas privadas', gl: 'Festas privadas' }, d: { es: 'Cumpleaños, aniversarios y celebraciones en casa, en terraza o en sala.', gl: 'Aniversarios e celebracións na casa, nunha terraza ou nunha sala.' },
+    msg: { es: 'Hola, quiero presupuesto para una fiesta privada.', gl: 'Ola, quero orzamento para unha festa privada.' } },
+  { t: { es: 'Eventos de empresa', gl: 'Eventos de empresa' }, d: { es: 'Cenas, presentaciones y fiestas de fin de año.', gl: 'Ceas, presentacións e festas de fin de ano.' },
+    msg: { es: 'Hola, quiero presupuesto para un evento de empresa.', gl: 'Ola, quero orzamento para un evento de empresa.' } },
+];
+
+/* ---------- i18n: Spanish lives in the HTML, Galician here ---------- */
+const GL = {
+  'skip': 'Saltar ao contido', 'menu': 'Menú', 'close': 'Pechar',
+  'nav.home': 'Inicio', 'nav.tour': 'Xira', 'nav.music': 'Música', 'nav.sets': 'Sesións', 'nav.bio': 'Bio', 'nav.shop': 'Tenda ↗',
+  'cta.book': 'Contratar', 'cta.bookFull': 'Contratar a GERP DJ', 'cta.dates': 'Ver datas',
+  'hero.lede': 'DJ para festas, vodas e eventos en Ourense, con equipo de son e iluminación propio.',
+  'svc.title': 'DJ en Ourense', 'svc.alt': 'Mans de GERP DJ sobre a súa controladora Denon DJ', 'svc.lede': 'Con base en Ourense e dispoñible en toda Galicia. Chega co seu propio equipo de son e iluminación e adapta a música a cada celebración.',
+  'hero.alt': 'Silueta no escenario fronte a miles de luces de móbiles',
+  'next.title': 'Próxima actuación', 'cd.d': 'días', 'cd.h': 'horas', 'cd.m': 'min', 'cd.s': 'seg', 'tickets': 'Entradas',
+  'rel.lede': 'Novo single. Sete minutos pensados para a última hora da noite, cando a pista xa non quere marchar.',
+  'rel.meta': 'Single · 2026 · Selo de exemplo', 'rel.listen': 'Escóitao en', 'play': 'Reproducir avance',
+  'shows.title': 'Próximas datas', 'shows.all': 'Todas as datas',
+  'music.all': 'Discografía completa', 'music.lede': 'Singles, remixes, EPs e álbums. Cada portada leva a todas as plataformas.',
+  'sets.title': 'En directo', 'sets.feat': 'Entroido, Xinzo de Limia', 'sets.featMeta': 'Sesión completa · 2 h 04 min',
+  'sets.lede': 'Sesións completas gravadas en directo e o programa mensual de radio.',
+  'radio.title': 'Miño Radio', 'radio.p': 'Unha hora ao mes con música nova, inéditos e unha mestura convidada. Primeiro venres de cada mes.', 'radio.cta': 'Escoitar o último episodio',
+  'about.title': 'Sobre GERP DJ', 'about.alt': 'Retrato de GERP DJ xunto ao seu equipo de son',
+  'about.p1': 'GERP DJ pon a música e as luces en festas, vodas e celebracións de Ourense e de toda Galicia, e anima a noite micrófono na man.',
+  'about.baseK': 'Base', 'about.genreK': 'Estilo', 'about.formatK': 'Formato', 'about.formatV': '2–6 horas', 'about.more': 'Ler a bio',
+  'bio.p2': 'Traballa co seu propio equipo: cabina co seu nome, altofalantes, iluminación LED e unha controladora Denon DJ. Móntao igual na praza dunha aldea, nunha terraza ou nun salón.',
+  'bio.p3': 'Ademais das súas sesións, dirixe Miño Radio, un programa mensual onde estrea música propia e de artistas emerxentes.',
+  'bio.gallery': 'Galería',
+  'press.title': 'Prensa', 'press.placeholder': '[Pendente: citas de prensa reais con medio e data]', 'press.kit': 'Descargar dossier de prensa (PDF)', 'press.photos': 'Fotos en alta resolución',
+  'band.title': 'GERP DJ na túa festa', 'band.p': 'Festas populares, vodas, celebracións privadas e empresas en Ourense e toda Galicia. Cóntanos data e lugar por WhatsApp e respondémosche en 48 horas.', 'band.cta': 'Solicitar data',
+  'news.title': 'Entérate antes', 'channel.p': 'Datas, novidades e fotos das festas, primeiro na canle de WhatsApp de GERP DJ.', 'channel.cta': 'Seguir a canle',
+  'tour.lede': 'Datas confirmadas en Ourense, Galicia e o resto de España. As entradas véndense na web de cada sala ou festa.',
+  'tour.past': 'Datas pasadas', 'tour.notify': 'Avísame', 'tour.notifyP': 'As datas novas anúncianse primeiro na canle de WhatsApp de GERP DJ.',
+  'book.title': 'Contratación', 'book.lede': 'Festas populares, vodas, festas privadas e eventos de empresa en Ourense e o resto de Galicia. Enche os datos e abrirase WhatsApp coa túa solicitude lista para enviar.',
+  'f.name': 'Nome', 'f.date': 'Data do evento', 'f.venue': 'Localidade e lugar',
+  'f.type': 'Tipo de evento', 'f.wedding': 'Voda', 'f.corporate': 'Empresa', 'f.club': 'Club ou festa', 'f.private': 'Festa privada', 'f.other': 'Outro', 'f.msg': 'Mensaxe', 'f.send': 'Enviar por WhatsApp', 'f.ok': 'Abrindo WhatsApp coa túa solicitude. Só tes que premer enviar.',
+  'c.hours': 'Luns a venres, de 10:00 a 19:00. Resposta en 48 horas laborables.', 'c.press': 'Entrevistas e acreditacións por WhatsApp',
+  'credits': 'Fotos de exemplo:', 'legal.privacy': 'Privacidade', 'legal.cookies': 'Cookies', 'legal.draft': '[Texto de exemplo: completar os datos entre corchetes e revisar cunha asesoría legal antes de publicar]',
+  'nav.services': 'Servizos',
+  'nav.action': 'En acción',
+  'nav.kit': 'Equipo',
+  'cta.wa': 'Escribir por WhatsApp',
+  'avail.title': 'Tes data?',
+  'avail.p': 'Dinos cando e onde e confirmámosche a dispoñibilidade por WhatsApp.',
+  'avail.cta': 'Consultar dispoñibilidade',
+  'f.when': 'Data',
+  'f.where': 'Localidade',
+  'f.popular': 'Festa popular',
+  'action.title': 'En acción',
+  'action.p': 'Música, luces e micrófono na man: así soa unha noite con GERP DJ.',
+  'action.cap': 'Sesión en terraza',
+  'action.capMeta': 'GERP DJ en directo, coa súa cabina e as súas luces',
+  'action.cap2': 'Festa de aldea',
+  'action.cap2Meta': 'Montaxe completa ao aire libre',
+  'action.alt2': 'Cabina de GERP DJ con altofalantes e luces nunha festa de aldea',
+  'kit.title': 'Equipo propio',
+  'kit.p': 'GERP DJ chega con todo o necesario para que a festa soe e se vexa ben.',
+  'kit.1': 'Cabina GERP DJ',
+  'kit.2': 'Equipo de son completo',
+  'kit.3': 'Iluminación LED e efectos de luz',
+  'kit.4': 'Micrófono para dedicatorias e anuncios',
+  'kit.5': 'Controladora Denon DJ',
+  'kit.alt': 'GERP DJ preparando a súa cabina con iluminación LED',
+  'about.story': '[Pendente: a historia de GERP DJ, os seus anos de experiencia e como comezou]',
+  'about.kitK': 'Equipo',
+  'about.kitV': 'Son e luces propios',
+  'about.zoneK': 'Zona',
+  'about.zoneV': 'Ourense e toda Galicia',
+  'gal.alt': 'GERP DJ na súa cabina entre luces de cores',
+  'gal.alt2': 'GERP DJ pinchando nunha terraza'
+};
+const UI = {
+  es: { all: 'Todas', ourense: 'Ourense', galicia: 'Resto de Galicia', espana: 'Resto de España', soldout: 'Agotado', onsale: 'Entradas', free: 'Entrada libre', quote: 'Pedir presupuesto', none: 'No hay fechas en esta zona todavía.',
+        single: 'Single', remix: 'Remix', ep: 'EP', album: 'Álbum', allTypes: 'Todo', watch: 'Ver sesión', title: 'GERP DJ — DJ en Ourense', pause: 'Pausar vídeo', play: 'Reproducir vídeo' },
+  gl: { all: 'Todas', ourense: 'Ourense', galicia: 'Resto de Galicia', espana: 'Resto de España', soldout: 'Esgotado', onsale: 'Entradas', free: 'Entrada libre', quote: 'Pedir orzamento', none: 'Aínda non hai datas nesta zona.',
+        single: 'Single', remix: 'Remix', ep: 'EP', album: 'Álbum', allTypes: 'Todo', watch: 'Ver sesión', title: 'GERP DJ — DJ en Ourense', pause: 'Pausar vídeo', play: 'Reproducir vídeo' },
+};
+let lang = 'es';
+const loc = v => (v && typeof v === 'object') ? v[lang] : v;
+const u = k => UI[lang][k];
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.title = u('title');
+  document.querySelectorAll('[data-t]').forEach(el => {
+    el.dataset.es ??= el.textContent;
+    el.textContent = lang === 'gl' && GL[el.dataset.t] ? GL[el.dataset.t] : el.dataset.es;
+  });
+  document.querySelectorAll('[data-ta]').forEach(el => {
+    const attr = el.hasAttribute('alt') ? 'alt' : 'aria-label';
+    el.dataset.es ??= el.getAttribute(attr);
+    el.setAttribute(attr, lang === 'gl' ? GL[el.dataset.ta] : el.dataset.es);
+  });
+  document.querySelectorAll('[data-tp]').forEach(el => {
+    el.dataset.es ??= el.placeholder;
+    el.placeholder = lang === 'gl' ? GL[el.dataset.tp] : el.dataset.es;
+  });
+  document.querySelectorAll('[data-pdf]').forEach(a => { a.href = `press/dossier-gerp-dj-${lang}.pdf`; });
+  document.querySelectorAll('[data-lang-block]').forEach(b => { b.hidden = b.dataset.langBlock !== lang; });
+  document.querySelectorAll('.lang').forEach(b => {
+    const on = b.dataset.lang === lang;
+    b.setAttribute('aria-pressed', on);
+    b.classList.toggle('bg-ink', on); b.classList.toggle('text-ground', on);
+  });
+  renderAll();
+  wireWhatsApp();
+  document.querySelectorAll('video').forEach(syncToggle);
+}
+
+/* ---------- Rendering ---------- */
+const NOW = Date.now();
+const fmt = (d, o) => new Intl.DateTimeFormat(lang === 'gl' ? 'gl-ES' : 'es-ES', o).format(new Date(d));
+const upcoming = SHOWS.filter(s => new Date(s.d) > NOW);
+const past = SHOWS.filter(s => new Date(s.d) <= NOW).reverse();
+const regionState = {};
+
+function showRow(s, isPast) {
+  const ticket = isPast ? '' : s.status === 'free'
+    ? `<span class="glass-subtle rounded-full px-5 py-2.5 font-semibold">${u('free')}</span>`
+    : s.status === 'soldout'
+    ? `<span class="rounded-full bg-signal/15 px-5 py-2.5 font-semibold text-signal">${u('soldout')}</span>`
+    : `<a href="#" class="press rounded-full bg-acid px-5 py-2.5 font-semibold text-ground hover:bg-ink">${u('onsale')}</a>`;
+  return `<li class="glass grid grid-cols-[4.5rem_1fr] items-center gap-x-4 gap-y-3 rounded-2xl p-5 transition-colors hover:bg-ink/10 sm:grid-cols-[6rem_1fr_auto] sm:p-6">
+    <time datetime="${s.d}" class="row-span-2 text-center sm:row-span-1">
+      <span class="block text-4xl font-bold leading-none tabular-nums">${fmt(s.d, { day: '2-digit' })}</span>
+      <span class="text-sm font-semibold uppercase text-muted">${fmt(s.d, { month: 'short' })} ${fmt(s.d, { year: '2-digit' })}</span>
+    </time>
+    <div><p class="text-xl font-bold leading-tight sm:text-2xl">${loc(s.city)}${s.prov !== loc(s.city) ? ` <span class="font-medium text-muted">· ${s.prov}</span>` : ''}</p>
+      <p class="text-muted">${s.venue} — ${loc(s.event)}</p></div>
+    <div class="sm:justify-self-end">${ticket}</div>
+  </li>`;
+}
+
+function renderShows(id) {
+  const el = document.getElementById(id); if (!el) return;
+  const r = regionState[id] || 'all';
+  let list = upcoming.filter(s => r === 'all' || s.region === r);
+  if (el.dataset.limit) list = list.slice(0, +el.dataset.limit);
+  el.innerHTML = list.length ? list.map(s => showRow(s)).join('') : `<li class="glass rounded-2xl p-6 text-muted">${u('none')}</li>`;
+}
+
+function renderFilters() {
+  document.querySelectorAll('.filters').forEach(box => {
+    const id = box.dataset.target, cur = regionState[id] || 'all';
+    box.innerHTML = ['all', 'ourense', 'galicia', 'espana'].map(r =>
+      `<button type="button" data-r="${r}" aria-pressed="${r === cur}" class="press rounded-full px-4 py-2 font-medium ${r === cur ? 'bg-acid text-ground' : 'glass-subtle hover:bg-ink/15'}">${u(r)}</button>`).join('');
+    box.onclick = e => { const b = e.target.closest('[data-r]'); if (!b) return; regionState[id] = b.dataset.r; renderFilters(); renderShows(id); };
+  });
+}
+
+function coverHTML(r, big) {
+  return `<div class="flex aspect-square w-full flex-col justify-between p-[7%]" style="background:${r.bg};color:${r.fg}">
+    <span class="display ${big ? 'text-3xl' : 'text-base'}">GERP DJ</span>
+    <span class="display ${big ? 'text-[clamp(2.5rem,7vw,6rem)]' : 'text-2xl sm:text-3xl'} [overflow-wrap:anywhere]">${r.t}</span></div>`;
+}
+
+let typeFilter = 'all';
+function renderMusic() {
+  document.querySelectorAll('[data-cover]').forEach(el => el.innerHTML = coverHTML(RELEASES[+el.dataset.cover], true));
+  document.getElementById('rail').innerHTML = RELEASES.slice(0, 4).map(r => `<li>
+    <a href="#" class="group block"><div class="overflow-hidden transition duration-500 group-hover:-translate-y-1">${coverHTML(r)}</div>
+    <p class="mt-3 text-lg font-semibold">${r.t}</p><p class="text-muted">${u(r.type)} · ${r.y}</p></a></li>`).join('');
+  const types = ['all', 'single', 'remix', 'ep', 'album'];
+  const tf = document.getElementById('type-filters');
+  tf.innerHTML = types.map(t => `<button type="button" data-ty="${t}" aria-pressed="${t === typeFilter}" class="press rounded-full px-4 py-2 font-medium ${t === typeFilter ? 'bg-acid text-ground' : 'glass-subtle hover:bg-ink/15'}">${t === 'all' ? u('allTypes') : u(t)}</button>`).join('');
+  tf.onclick = e => { const b = e.target.closest('[data-ty]'); if (!b) return; typeFilter = b.dataset.ty; renderMusic(); };
+  document.getElementById('discography').innerHTML = RELEASES.filter(r => typeFilter === 'all' || r.type === typeFilter).map(r => `<li>
+    <a href="#" class="group block">${coverHTML(r)}</a>
+    <p class="mt-3 text-lg font-semibold">${r.t}</p><p class="text-muted">${u(r.type)} · ${r.y}</p>
+    <p class="mt-2 flex flex-wrap gap-x-3 text-sm"><a href="#" class="underline hover:text-acid">Spotify</a><a href="#" class="underline hover:text-acid">Apple Music</a><a href="#" class="underline hover:text-acid">Beatport</a></p></li>`).join('');
+}
+
+function renderSets() {
+  document.getElementById('sets-list').innerHTML = SETS.slice(1).map(s => `<li><a href="#" class="press glass group flex items-center gap-4 rounded-3xl p-3 hover:bg-ink/10">
+    <img src="${s.img}" alt="" class="aspect-square w-24 rounded-2xl object-cover"><span><span class="block font-semibold">${loc(s.t)}</span><span class="text-muted">${s.dur}</span></span></a></li>`).join('');
+  document.getElementById('sets-grid').innerHTML = SETS.map(s => `<li><a href="#" class="group relative isolate block overflow-hidden rounded-3xl" aria-label="${u('watch')}: ${loc(s.t)}">
+    <img src="${s.img}" alt="" class="aspect-video w-full object-cover transition duration-700 group-hover:scale-105">
+    <span class="glass absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl p-4"><span><span class="block text-lg font-bold">${loc(s.t)}</span><span class="text-muted">${s.dur}</span></span>
+    <span class="grid size-12 shrink-0 place-items-center rounded-full bg-acid text-ground"><svg viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></a></li>`).join('');
+}
+
+function renderServices() {
+  document.getElementById('services').innerHTML = SERVICES.map(v => `<li class="glass grid gap-4 rounded-3xl p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
+    <div><h3 class="text-2xl font-bold">${loc(v.t)}</h3><p class="mt-1 text-muted">${loc(v.d)}</p></div>
+    <a href="${wa(loc(v.msg))}" target="_blank" rel="noopener" class="press justify-self-start rounded-full bg-acid px-6 py-3 font-semibold text-ground hover:bg-ink">${u('quote')}</a></li>`).join('');
+}
+
+function renderAll() {
+  renderServices();
+  renderFilters(); renderShows('home-shows'); renderShows('tour-shows');
+  document.getElementById('past-shows').innerHTML = past.map(s => showRow(s, true)).join('');
+  renderMusic(); renderSets();
+  const n = upcoming[0];
+  if (n) {
+    document.getElementById('next-where').textContent = `${loc(n.city)} · ${n.venue}`;
+    document.getElementById('next-when').textContent = fmt(n.d, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+  }
+  observe();
+}
+
+/* ---------- Live countdown ---------- */
+function tick() {
+  const n = upcoming[0]; if (!n) return;
+  let s = Math.max(0, Math.floor((new Date(n.d) - Date.now()) / 1000));
+  const parts = { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+  for (const k in parts) document.querySelector(`[data-cd="${k}"]`).textContent = String(parts[k]).padStart(2, '0');
+}
+setInterval(tick, 1000); tick();
+
+/* ---------- Hash router: #/gira, #/gl/gira ---------- */
+function route() {
+  const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+  const nextLang = parts[0] === 'gl' ? 'gl' : 'es';
+  if (nextLang === 'gl') parts.shift();
+  let page = parts[0] || '';
+  const target = document.querySelector(`[data-page="${page}"]`);
+  // Home sections (#/servicios) scroll on the home page; unknown or disabled pages fall back to home (Astro serves a real 404).
+  const section = !target && document.querySelector(`[data-page=""] section[id="${page}"]`) ? page : null;
+  if (!target || (target.dataset.feature && !FEATURES[target.dataset.feature])) page = '';
+  const changed = nextLang !== lang; lang = nextLang;
+  document.querySelectorAll('[data-page]').forEach(p => p.hidden = p.dataset.page !== page);
+  document.querySelectorAll('[data-route]').forEach(a => {
+    a.href = '#/' + (lang === 'gl' ? 'gl/' : '') + a.dataset.route;
+    if (a.classList.contains('nav-link')) {
+      const on = a.dataset.route === (section || page);
+      on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+      a.classList.toggle('bg-ink/10', on);
+    }
+  });
+  if (changed || !route.done) applyLang();
+  route.done = true;
+  document.getElementById('menu').close();
+  if (page !== '') heroVideo.pause(); else if (!reduceMotion && !heroVideo.dataset.userPaused) heroVideo.play().catch(() => {});
+  section ? document.getElementById(section).scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' }) : window.scrollTo({ top: 0, behavior: 'instant' });
+}
+document.querySelectorAll('.lang').forEach(b => b.addEventListener('click', () => {
+  const page = location.hash.replace(/^#\/?(gl\/?)?/, '');
+  location.hash = '/' + (b.dataset.lang === 'gl' ? 'gl/' : '') + page;
+}));
+addEventListener('hashchange', route);
+
+/* ---------- Menu & forms (prototype only) ---------- */
+const menu = document.getElementById('menu');
+document.getElementById('menu-open').onclick = () => menu.showModal();
+document.getElementById('menu-close').onclick = () => menu.close();
+/* ---------- WhatsApp Business: the only contact channel ---------- */
+const WA_NUMBER = '34613340500'; // full international format, digits only
+const WA_CHANNEL = 'https://whatsapp.com/channel/CHANNEL_ID'; // placeholder
+const wa = text => `https://wa.me/${WA_NUMBER}` + (text ? `?text=${encodeURIComponent(text)}` : '');
+const WA_MSG = {
+  es: { hello: 'Hola, quiero contratar a GERP DJ.', avail: 'Hola, ¿tiene GERP DJ disponible esta fecha?', name: 'Nombre', date: 'Fecha', venue: 'Localidad y lugar', place: 'Localidad', type: 'Tipo de evento',
+        popular: 'Fiesta popular', wedding: 'Boda', private: 'Fiesta privada', corporate: 'Empresa', club: 'Club o festa', other: 'Otro', 'c.pressMsg': 'Hola, escribo por un tema de prensa sobre GERP DJ.' },
+  gl: { hello: 'Ola, quero contratar a GERP DJ.', avail: 'Ola, ten GERP DJ dispoñible esta data?', name: 'Nome', date: 'Data', venue: 'Localidade e lugar', place: 'Localidade', type: 'Tipo de evento',
+        popular: 'Festa popular', wedding: 'Voda', private: 'Festa privada', corporate: 'Empresa', club: 'Club ou festa', other: 'Outro', 'c.pressMsg': 'Ola, escribo por un tema de prensa sobre GERP DJ.' },
+};
+function wireWhatsApp() {
+  document.querySelectorAll('.wa-chat').forEach(a => { a.href = wa(a.dataset.waMsg && WA_MSG[lang][a.dataset.waMsg]); });
+  document.querySelectorAll('.wa-channel').forEach(a => { a.href = WA_CHANNEL; });
+}
+document.getElementById('booking').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target), m = WA_MSG[lang];
+  const text = [m.hello, `${m.name}: ${f.get('name')}`, `${m.date}: ${f.get('date')}`, `${m.venue}: ${f.get('venue')}`,
+    `${m.type}: ${m[f.get('type')]}`, f.get('msg') && `\n${f.get('msg')}`].filter(Boolean).join('\n');
+  window.open(wa(text), '_blank', 'noopener');
+  e.target.querySelector('.form-ok').classList.remove('hidden');
+});
+document.getElementById('avail').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target), m = WA_MSG[lang];
+  // dd/mm/yyyy built by hand: Intl may lack Galician locale data and fall back to English.
+  const day = f.get('date').split('-').reverse().join('/');
+  window.open(wa([m.avail, `${m.date}: ${day}`, `${m.place}: ${f.get('place')}`, `${m.type}: ${m[f.get('type')]}`].join('\n')), '_blank', 'noopener');
+});
+
+/* ---------- Videos: pause control (WCAG 2.2.2), reduced motion, play only when visible ---------- */
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function syncToggle(v) {
+  const b = document.querySelector(`[data-video="${v.id}"]`); if (!b) return;
+  const on = !v.paused;
+  b.querySelector('.i-pause').classList.toggle('hidden', !on);
+  b.querySelector('.i-play').classList.toggle('hidden', on);
+  b.setAttribute('aria-label', u(on ? 'pause' : 'play'));
+}
+document.querySelectorAll('video').forEach(v => ['play', 'pause'].forEach(ev => v.addEventListener(ev, () => syncToggle(v))));
+document.querySelectorAll('.vid-toggle').forEach(b => b.addEventListener('click', () => {
+  const v = document.getElementById(b.dataset.video);
+  v.dataset.userPaused = v.paused ? '' : '1';
+  v.paused ? v.play().catch(() => {}) : v.pause();
+}));
+const heroVideo = document.getElementById('hero-video');
+heroVideo.addEventListener('playing', () => heroVideo.classList.add('ready'), { once: true });
+if (reduceMotion) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
+const vio = new IntersectionObserver(es => es.forEach(({ target: v, isIntersecting }) => {
+  if (isIntersecting && !reduceMotion && !v.dataset.userPaused) v.play().catch(() => {});
+  else if (!isIntersecting) v.pause();
+}), { threshold: 0.35 });
+document.querySelectorAll('[data-autoplay-visible]').forEach(v => vio.observe(v));
+
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+function observe() { document.querySelectorAll('.reveal:not(.in), #rail > li, #discography > li, #sets-grid > li').forEach(el => { el.classList.add('reveal'); io.observe(el); }); }
+
+route();
+</script>
+</body>
+</html>
