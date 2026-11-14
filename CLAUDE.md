@@ -43,7 +43,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 - Site languages: Spanish (default, unprefixed `/`) and Galician (`/gl/`) via Astro `i18n` routing. Every UI string comes from `src/i18n/{es,gl}.ts`; never hardcode copy in components. Each page emits `hreflang` alternates; a missing Galician string is a bug, not a fallback to Spanish.
 - Code, identifiers, comments and commits in English; only user-facing copy is es/gl.
 - Never invent press quotes, stats, partner logos or biography facts about GERP DJ — only what the client's media shows; leave a visible `[Pendiente: …]` placeholder otherwise.
-- Tour (`/gira`, home dates, next-show countdown), music (`/musica`, releases), sessions (`/sesiones`), shop link and social profiles are **hidden, not deleted**: `site.features.{tour,music,sets,shop,socials} = false`. While `tour` is off, the hero shows the availability check instead of the countdown. Never remove their code; a disabled page must not be built or linked.
+- Tour (`/gira`, home dates, next-show countdown), music (`/musica`, releases), sessions (`/sesiones`) and the shop link are **hidden, not deleted**: `site.features.{tour,music,sets,shop} = false`. `socials` is on: the official YouTube and TikTok profiles in `site.socials` feed the footer and the JSON-LD `sameAs`. While `tour` is off, the hero shows the availability check instead of the countdown. Never remove their code; a disabled page must not be built or linked.
 - Verify Astro APIs with the `astro-docs` MCP and Svelte APIs with the `svelte` MCP before writing; training data is outdated for Astro 7.
 
 ## Gotchas

@@ -57,6 +57,7 @@ export function buildGraph({ base = site.url, locale, path, title, description }
         },
         areaServed: places,
         knowsLanguage: [...site.languages],
+        ...(site.features.socials && { sameAs: site.socials.map((s) => s.url) }),
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'reservations',

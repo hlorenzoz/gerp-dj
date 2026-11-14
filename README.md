@@ -84,12 +84,13 @@ legal facts (retention, last update), media, press PDF paths, the page registry,
 **Pages**: every public page is listed once in `site.pages` (path, title and description keys, schema.org type).
 Navigation, `sitemap.xml` and `llms.txt` read this registry, so a new page must be added there.
 
-**Feature flags**: `site.features` holds `tour`, `music`, `sets`, `shop` and `socials`. All are `false`; their code
+**Feature flags**: `site.features` holds `tour`, `music`, `sets`, `shop` and `socials`. Only `socials` is on (YouTube and
+TikTok in the footer and JSON-LD `sameAs`); the rest are `false`: their code
 is kept but a disabled page is neither built nor linked. While `tour` is off, the hero shows the availability check
 instead of the next-show countdown. To enable one:
 
-1. Replace the sample data first: `src/content/{tour,releases,sets}.yaml`, `site.shopUrl`, `site.socials`
-   (all placeholders today). Never publish invented dates, releases or profiles.
+1. Replace the sample data first: `src/content/{tour,releases,sets}.yaml`, `site.shopUrl`
+   (placeholders today). Never publish invented dates, releases or profiles.
 2. Set the flag to `true` in `site.features`.
 3. `just quality`, then check the page in both languages.
 
