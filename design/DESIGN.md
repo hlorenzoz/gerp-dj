@@ -35,9 +35,9 @@ No email anywhere, no form backend, no newsletter provider. The site is therefor
 
 ## Press kit (dossier de prensa)
 
-Source: `design/press/dossier.html` — A4 landscape, 6 pages: cover (portrait photo) · bio + facts · services + own equipment · "En acción" photos + press placeholder · what's included / what we need on site · booking (WhatsApp number, QR to `wa.me`). One template, two languages via `?lang=es|gl`. Images: JPEG copies in `design/press/img/` (made by `npm run media`), which keeps each PDF under 1 MB.
-Output: `design/press/dossier-gerp-dj-{es,gl}.pdf` (production: `public/press/`). The site's "Descargar dossier de prensa (PDF)" buttons link to the file of the current language and open in a new tab.
-Regenerate after changing bio, services, dates or contact: open `dossier.html?lang=es` (then `gl`) in Chrome → Print → Save as PDF, margins *None*, *Background graphics* on.
+Source: `src/pages/dossier/[locale].astro` (noindex, unlinked) — A4 landscape, 6 pages: cover · bio + facts · services + own equipment · "En acción" photos + press placeholder · what's included / what we need · booking (WhatsApp, QR to `wa.me`). All data from `src/config/site.ts` + dictionaries; images are the JPEG copies in `design/press/img/`.
+Output: `public/press/dossier-gerp-dj-{es,gl}.pdf`. The site's "Descargar dossier de prensa (PDF)" buttons link to the file of the current language and open in a new tab.
+Regenerate with `just press` (builds, serves `dist/`, prints both PDFs with headless Chrome) after any change to `site.ts`, the dictionaries or the photos.
 Sample content to confirm: "what we need on site" items, press quotes, the GERP DJ story, channel URL, domain.
 
 ## Client media

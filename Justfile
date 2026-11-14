@@ -1,4 +1,4 @@
-# GERP DJ — project commands (requires: just, Node >= 22.23.4, npm, pre-commit)
+# GERP DJ — project commands (requires: just, Node >= 22.23.4, npm, pre-commit; media/og: ImageMagick; press/og: Google Chrome, python3)
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 # List the available recipes
@@ -54,3 +54,37 @@ deploy-dry: quality
 [confirm("Deploy GERP DJ to Cloudflare Workers?")]
 deploy: quality
     npx wrangler deploy
+
+# Headless Chrome used by `press` and `og` (override with CHROME=/path/to/chrome)
+chrome := env("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+
+# Press kit PDFs from the site data: builds, serves dist/ and prints /dossier/{es,gl}/ to public/press/
+press: build
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # Plain static server: `astro preview` detaches from the shell when it detects an agent.
+    python3 -m http.server 4329 --bind 127.0.0.1 --directory dist >/dev/null 2>&1 & server=$!
+    trap 'kill $server' EXIT
+    until curl -sf http://127.0.0.1:4329/dossier/es/ >/dev/null; do sleep 0.3; done
+    for l in es gl; do
+      "{{ chrome }}" --headless --disable-gpu --no-pdf-header-footer --virtual-time-budget=10000 \
+        --print-to-pdf="public/press/dossier-gerp-dj-$l.pdf" "http://127.0.0.1:4329/dossier/$l/" 2>/dev/null
+      cp "public/press/dossier-gerp-dj-$l.pdf" dist/press/
+    done
+    ls -l public/press
+
+# OpenGraph image (1200×630 JPEG): builds, serves dist/ and screenshots /og/card/ into public/og/gerp-dj.jpg
+og: build
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # Plain static server: `astro preview` detaches from the shell when it detects an agent.
+    python3 -m http.server 4329 --bind 127.0.0.1 --directory dist >/dev/null 2>&1 & server=$!
+    tmp=$(mktemp -d)
+    trap 'kill $server; rm -rf "$tmp"' EXIT
+    until curl -sf http://127.0.0.1:4329/og/card/ >/dev/null; do sleep 0.3; done
+    "{{ chrome }}" --headless --disable-gpu --hide-scrollbars --window-size=1200,630 --virtual-time-budget=10000 \
+      --screenshot="$tmp/og.png" http://127.0.0.1:4329/og/card/ 2>/dev/null
+    mkdir -p public/og dist/og
+    magick "$tmp/og.png" -strip -quality 82 -sampling-factor 4:2:0 -interlace JPEG public/og/gerp-dj.jpg
+    cp public/og/gerp-dj.jpg dist/og/
+    magick identify public/og/gerp-dj.jpg
