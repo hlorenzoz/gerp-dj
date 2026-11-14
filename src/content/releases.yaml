@@ -1,0 +1,12 @@
+# SAMPLE DATA from the prototype (design/index.html RELEASES). GERP DJ has no releases yet:
+# these titles must not be published under the real brand. Replace them before setting site.features.music = true.
+# Sorted by release date (newest first): the newest is the home "latest release". Covers are drawn in CSS from bg/fg.
+# Optional links: { spotify, apple, beatport, soundcloud, youtube } with full URLs.
+- { id: afterglow, title: Afterglow, type: single, date: '2026-10-02', bg: '#dcff3c', fg: '#07070a' }
+- { id: mino, title: Miño, type: single, date: '2026-06-05', bg: '#ff5a36', fg: '#07070a' }
+- { id: pedra-remix, title: Pedra (GERP DJ Remix), type: remix, date: '2026-03-13', bg: '#f3f2ee', fg: '#07070a' }
+- { id: noite-no-mino, title: Noite no Miño, type: ep, date: '2025-11-07', bg: '#1d4d4f', fg: '#f3f2ee' }
+- { id: vapor, title: Vapor, type: single, date: '2025-07-04', bg: '#2a2a33', fg: '#dcff3c' }
+- { id: neboa, title: Néboa, type: album, date: '2025-03-14', bg: '#c9c4b8', fg: '#07070a' }
+- { id: lume-remix, title: Lume (GERP DJ Remix), type: remix, date: '2024-10-04', bg: '#ff5a36', fg: '#07070a' }
+- { id: ribeira-sacra, title: Ribeira Sacra, type: ep, date: '2024-04-12', bg: '#07070a', fg: '#f3f2ee' }

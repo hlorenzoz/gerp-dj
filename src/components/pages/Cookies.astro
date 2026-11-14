@@ -1,0 +1,46 @@
+---
+import type { Locale } from '../../config/site';
+import { waLink } from '../../lib/whatsapp';
+import Legal from './Legal.astro';
+
+const { locale } = Astro.props as { locale: Locale };
+const wa = waLink();
+---
+
+<Legal {locale} title="legal.cookies">
+  {
+    locale === 'es' ? (
+      <>
+        <h2>Política de cookies</h2>
+        <p>Última actualización: 14 de noviembre de 2026. Una cookie es un pequeño archivo que un sitio web guarda en tu navegador.</p>
+        <h2>Cookies que usa esta web</h2>
+        <p>Esta web no usa cookies propias de análisis, publicidad ni personalización, y no carga herramientas de seguimiento. Por eso no te mostramos un aviso de consentimiento.</p>
+        <h2>Cookies técnicas de nuestro proveedor</h2>
+        <p>Cloudflare, que aloja la web, puede instalar cookies técnicas para distinguir las visitas reales del tráfico automatizado (por ejemplo, <code>__cf_bm</code>). Son necesarias para el funcionamiento seguro del sitio y están exentas de consentimiento (art. 22.2 de la LSSI-CE).</p>
+        <h2>Contenido de terceros</h2>
+        <p>Los vídeos de esta web se sirven desde nuestro propio alojamiento y no instalan cookies. Si en el futuro añadimos reproductores de terceros (como YouTube o Spotify), solo se cargarán cuando pulses reproducir. Si añadimos analítica, te pediremos el consentimiento antes.</p>
+        <h2>Cómo gestionar o borrar las cookies</h2>
+        <p>
+          Puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Para cualquier duda, escríbenos por{' '}
+          <a target="_blank" rel="noopener" href={wa}>WhatsApp</a>.
+        </p>
+      </>
+    ) : (
+      <>
+        <h2>Política de cookies</h2>
+        <p>Última actualización: 14 de novembro de 2026. Unha cookie é un pequeno ficheiro que un sitio web garda no teu navegador.</p>
+        <h2>Cookies que usa esta web</h2>
+        <p>Esta web non usa cookies propias de análise, publicidade nin personalización, e non carga ferramentas de seguimento. Por iso non che amosamos un aviso de consentimento.</p>
+        <h2>Cookies técnicas do noso provedor</h2>
+        <p>Cloudflare, que aloxa a web, pode instalar cookies técnicas para distinguir as visitas reais do tráfico automatizado (por exemplo, <code>__cf_bm</code>). Son necesarias para o funcionamento seguro do sitio e están exentas de consentimento (art. 22.2 da LSSI-CE).</p>
+        <h2>Contido de terceiros</h2>
+        <p>Os vídeos desta web sérvense dende o noso propio aloxamento e non instalan cookies. Se no futuro engadimos reprodutores de terceiros (como YouTube ou Spotify), só se cargarán cando premas reproducir. Se engadimos analítica, pedirémosche o consentimento antes.</p>
+        <h2>Como xestionar ou borrar as cookies</h2>
+        <p>
+          Podes bloquear ou eliminar as cookies dende a configuración do teu navegador. Para calquera dúbida, escríbenos por{' '}
+          <a target="_blank" rel="noopener" href={wa}>WhatsApp</a>.
+        </p>
+      </>
+    )
+  }
+</Legal>

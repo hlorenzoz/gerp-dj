@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Fully static site: no Worker script, Cloudflare serves the built assets.
+  "name": "gerp-dj",
+  "compatibility_date": "2026-11-14",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

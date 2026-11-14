@@ -1,0 +1,148 @@
+---
+// Home sections of the hidden features. Each one is rendered only when its flag is on: no hidden markup.
+import { type Locale, site } from '../../config/site';
+import { localizePath, useT } from '../../i18n';
+import Picture from '../Picture.astro';
+import Cover from './Cover.svelte';
+import { getReleases, getSets, getShows, releaseLinks } from './data';
+import TourList from './TourList.svelte';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useT(locale);
+const { tour, music, sets: setsOn } = site.features;
+const shows = tour ? (await getShows(locale)).upcoming : [];
+const releases = music ? await getReleases() : [];
+const latest = releases[0];
+const links = latest ? releaseLinks(latest) : [];
+const [featured, ...moreSets] = setsOn ? await getSets(locale) : [];
+const watch = (s: { url?: string; title: string }) =>
+  s.url ? { href: s.url, target: '_blank', rel: 'noopener', 'aria-label': `${t('ui.watch')}: ${s.title}` } : {};
+---
+
+{
+  latest && (
+    <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="rel-h">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div class="reveal lg:col-span-6">
+          <Cover title={latest.title} bg={latest.bg} fg={latest.fg} big />
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8">
+          <h2 id="rel-h" class="display reveal text-[clamp(3rem,5.6vw,5.25rem)]">{latest.title}</h2>
+          <p class="reveal mt-6 text-xl" style="--d:70ms">{t('rel.lede')}</p>
+          <p class="reveal mt-2 text-muted" style="--d:100ms">{t(`ui.${latest.type}`)} · {latest.year}</p>
+          {links.length > 0 && (
+            <>
+              <h3 class="reveal mt-8 font-semibold" style="--d:180ms">{t('rel.listen')}</h3>
+              <ul class="reveal mt-3 flex flex-wrap gap-2" style="--d:200ms">
+                {links.map((l) => (
+                  <li>
+                    <a href={l.href} target="_blank" rel="noopener" class="press glass-subtle inline-block rounded-full px-4 py-2 hover:bg-ink hover:text-ground">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  tour && (
+    <section class="relative isolate py-28 lg:py-40" aria-labelledby="shows-h">
+      <div class="absolute inset-0 -z-10">
+        <Picture name="gerp-dj-luces-fiesta-ourense" alt="" sizes="100vw" class="size-full object-cover" />
+      </div>
+      <div class="absolute inset-0 -z-10 bg-ground/45" />
+      <div class="mx-auto max-w-[1440px] px-4 sm:px-8">
+        <div class="reveal">
+          <TourList client:visible shows={shows} locale={locale} limit={5}>
+            <h2 id="shows-h" class="display text-[clamp(3rem,8vw,7.5rem)]">{t('shows.title')}</h2>
+          </TourList>
+        </div>
+        <a
+          href={localizePath('/gira', locale)}
+          class="press reveal mt-8 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid"
+        >
+          {t('shows.all')}
+        </a>
+      </div>
+    </section>
+  )
+}
+
+{
+  music && (
+    <section class="py-28 lg:py-40" aria-labelledby="music-h">
+      <div class="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-6 px-4 sm:px-8">
+        <h2 id="music-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]">{t('nav.music')}</h2>
+        <a
+          href={localizePath('/musica', locale)}
+          class="press reveal glass-subtle rounded-full px-6 py-3 font-semibold hover:bg-ink hover:text-ground"
+        >
+          {t('music.all')}
+        </a>
+      </div>
+      <ul class="mx-auto mt-10 grid max-w-[1440px] grid-cols-2 gap-4 px-4 sm:gap-6 sm:px-8 lg:grid-cols-4">
+        {releases.slice(0, 4).map((r) => (
+          <li>
+            <a href={localizePath('/musica', locale)} class="group block">
+              <div class="overflow-hidden transition duration-500 group-hover:-translate-y-1">
+                <Cover title={r.title} bg={r.bg} fg={r.fg} />
+              </div>
+              <p class="mt-3 text-lg font-semibold">{r.title}</p>
+              <p class="text-muted">{t(`ui.${r.type}`)} · {r.year}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+{
+  featured && (
+    <section class="mx-auto max-w-[1440px] px-4 py-28 sm:px-8 lg:py-40" aria-labelledby="sets-h">
+      <h2 id="sets-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]">{t('sets.title')}</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-12">
+        <div class="reveal lg:col-span-8">
+          <a {...watch(featured)} class="group relative isolate block overflow-hidden rounded-3xl">
+            <Picture
+              name={featured.image}
+              alt=""
+              sizes="(min-width: 1024px) 66vw, 100vw"
+              class="aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
+            />
+            <span class="glass-strong absolute top-1/2 left-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition group-hover:bg-acid group-hover:text-ground">
+              <svg viewBox="0 0 24 24" class="size-9" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+            <span class="glass absolute inset-x-4 bottom-4 rounded-2xl p-4 sm:inset-x-6 sm:bottom-6">
+              <span class="block text-xl font-bold">{featured.title}</span>
+              <span class="text-muted">{featured.duration}</span>
+            </span>
+          </a>
+        </div>
+        <ul class="flex flex-col gap-4 lg:col-span-4">
+          {moreSets.map((s) => (
+            <li>
+              <a {...watch(s)} class="press glass group flex items-center gap-4 rounded-3xl p-3 hover:bg-ink/10">
+                <Picture name={s.image} alt="" sizes="6rem" class="aspect-square w-24 rounded-2xl object-cover" />
+                <span>
+                  <span class="block font-semibold">{s.title}</span>
+                  <span class="text-muted">{s.duration}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

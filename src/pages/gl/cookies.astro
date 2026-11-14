@@ -1,0 +1,11 @@
+---
+import Cookies from '../../components/pages/Cookies.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useT } from '../../i18n';
+
+const t = useT('gl');
+---
+
+<BaseLayout title={`${t('legal.cookies')} — ${t('ui.titleSuffix')}`} description={t('meta.cookies')}>
+  <Cookies locale="gl" />
+</BaseLayout>

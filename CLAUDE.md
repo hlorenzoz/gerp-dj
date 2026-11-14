@@ -6,12 +6,15 @@ Visual reference: `design/index.html` (static prototype) and `design/DESIGN.md` 
 
 ## Commands
 
-- `npm run dev` — Astro 7 detaches when it detects an agent; health check at `/_astro/status`
-- `npm run build` then `npx astro check` — must pass before any change is done
-- `npx wrangler dev` — preview the built Worker locally
-- `npm run deploy` — `astro build && wrangler deploy` (only when the user asks)
-- `npm run media` — raw client media in `.agents/context/` → SEO-named WebP masters in `public/images/`, muted MP4 loops in `public/videos/`, context frames and press-kit JPEGs
-- `npm run images` — masters → AVIF + WebP at 320/640/960/1024 + `src/lib/images/manifest.json` (same pattern as masajesorisha.com; `-- --force` to rebuild)
+Use the Justfile (`just --list`); it wraps the npm scripts.
+
+- `just setup` — `npm ci` + git hooks (pre-commit and pre-push)
+- `just dev` — Astro 7 detaches when it detects an agent; health check at `/_astro/status`
+- `just quality` — lint (pre-commit hooks), `vitest`, `astro check`, build: must pass before any change is done
+- `just test` / `just check` / `just build` — single gates; one test file: `npx vitest run src/lib/shows.test.ts`
+- `just preview` — serve `dist/` with the Workers runtime; `just deploy-dry` validates the deploy without publishing
+- `just deploy` — quality gates + `wrangler deploy` (only when the user asks)
+- `just media` — raw client media in `.agents/context/` → SEO-named WebP masters in `public/images/`, muted MP4 loops in `public/videos/`, context frames and press-kit JPEGs; then AVIF + WebP variants and `src/lib/images/manifest.json`
 
 ## Stack decisions
 
@@ -40,6 +43,9 @@ Visual reference: `design/index.html` (static prototype) and `design/DESIGN.md` 
 
 - Glass needs a picture or colour behind it; on flat black it is invisible. Always keep a solid fallback under `@supports not (backdrop-filter: blur(1px))`.
 - No `backdrop-filter` on large animated or scrolling areas (mobile GPU cost).
+- Never put `reveal` (or any opacity-0 entrance) on above-the-fold hero content: the wordmark is the LCP element and the fade delayed it by ~2.4 s (Lighthouse 79 → 96 once removed). The hero video has no `poster`; the still `<Picture>` underneath is the poster.
+- `getCollection()` with the `file()` loader returns entries sorted by id, not file order: sort explicitly (by `date`).
+- pre-commit.ci skips `astro-check`, `unit-tests`, `astro-build` (it cannot `npm ci`); they run locally on `git push`. In zsh pass file lists to `pre-commit run --files` as arrays (`"${F[@]}"`), or every hook silently skips.
 - Privacy/cookie pages promise: no analytics, no tracking cookies, third parties limited to WhatsApp and Cloudflare. So self-host fonts (no Google Fonts CDN — the prototype uses it only for speed), load embeds only after a click, and add a consent banner (LSSI-CE art. 22.2) plus a policy update before adding any analytics.
 - `wa.me` numbers are digits only in full international format (`34613340500`: no `+`, spaces or leading `0`); the prefilled text goes through `encodeURIComponent` and is written in the visitor's current language. Every WhatsApp link (chat, quote, channel, booking form) opens in a new tab: `target="_blank" rel="noopener"`.
 - Press kit PDFs (`public/press/dossier-gerp-dj-{es,gl}.pdf`) are generated from `design/press/dossier.html?lang=es|gl` (Chrome → Save as PDF, no margins, background graphics on). It uses the JPEG copies in `design/press/img/`: WebP sources make Chrome's PDF ~10× bigger. Regenerate both whenever bio, services, photos or contact change.

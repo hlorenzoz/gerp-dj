@@ -1,0 +1,72 @@
+---
+import { Font } from 'astro:assets';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { alternatePath, getLocale, useT } from '../i18n';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const locale = getLocale(Astro.currentLocale);
+const t = useT(locale);
+const { title = t('ui.title'), description = t('meta.description') } = Astro.props;
+const site = Astro.site;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {
+      site && (
+        <>
+          <link rel="canonical" href={new URL(path, site)} />
+          <link rel="alternate" hreflang="es" href={new URL(alternatePath(path, 'es'), site)} />
+          <link rel="alternate" hreflang="gl" href={new URL(alternatePath(path, 'gl'), site)} />
+          <link rel="alternate" hreflang="x-default" href={new URL(alternatePath(path, 'es'), site)} />
+        </>
+      )
+    }
+    <Font cssVariable="--font-archivo" />
+  </head>
+  <body class="min-h-dvh overflow-x-clip">
+    <!-- Ambient layer: gives every glass surface something to blur. -->
+    <div aria-hidden="true" class="fixed inset-0 -z-10">
+      <img src="/images/gerp-dj-luces-fiesta-ourense-848.webp" alt="" class="size-full scale-110 object-cover opacity-35 blur-sm" />
+      <div class="absolute inset-0 bg-ground/70"></div>
+    </div>
+
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-ground"
+      >{t('skip')}</a
+    >
+
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+
+    <script>
+      document.documentElement.classList.add('js');
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          }),
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal:not(.in)').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

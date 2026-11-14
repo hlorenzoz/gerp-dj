@@ -7,10 +7,11 @@
  *
  * Run: `npm run images` (add `-- --force` to regenerate existing variants).
  */
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import { readdir, mkdir, writeFile, stat } from 'node:fs/promises';
+
 import { existsSync } from 'node:fs';
+import { mkdir, readdir, stat, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -80,7 +81,7 @@ async function run() {
 
   console.log(
     `✅ ${files.length} masters · ${created} new variants · ${skipped} skipped · ` +
-      `${(bytes / 1024).toFixed(0)} KB generated\n   manifest → ${path.relative(ROOT, MANIFEST_PATH)}`
+      `${(bytes / 1024).toFixed(0)} KB generated\n   manifest → ${path.relative(ROOT, MANIFEST_PATH)}`,
   );
 }
 

@@ -1,0 +1,11 @@
+---
+import NotFound from '../components/pages/NotFound.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useT } from '../i18n';
+
+const t = useT('es');
+---
+
+<BaseLayout title={`${t('404.title')} — ${t('ui.titleSuffix')}`} description={t('404.p')}>
+  <NotFound />
+</BaseLayout>

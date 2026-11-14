@@ -1,0 +1,94 @@
+---
+// Muted loop video + its pause/play toggle (WCAG 2.2.2). Rendered server-side; the script below wires every instance.
+// mode "hero": autoplays and fades in on its first `playing`; mode "visible": plays only while ≥35% visible.
+// Neither ever plays under prefers-reduced-motion.
+interface Props {
+  id: string;
+  src: string;
+  /** Omit for the hero: the still <Picture> underneath already paints the frame (avoids a second download). */
+  poster?: string;
+  mode: 'hero' | 'visible';
+  labels: { pause: string; play: string };
+  class?: string;
+  /** Position classes for the toggle button. */
+  buttonClass: string;
+}
+
+const { id, src, poster, mode, labels, class: className, buttonClass } = Astro.props;
+const hero = mode === 'hero';
+---
+
+<video
+  id={id}
+  class={className}
+  autoplay={hero}
+  muted
+  loop
+  playsinline
+  preload={hero ? 'auto' : 'none'}
+  poster={poster}
+  aria-hidden={hero ? 'true' : undefined}
+  data-loop-video={mode}
+>
+  <source src={src} type="video/mp4" />
+</video>
+<button
+  type="button"
+  class:list={['press glass-strong absolute z-10 grid size-11 place-items-center rounded-full', buttonClass]}
+  aria-label={hero ? labels.pause : labels.play}
+  aria-controls={id}
+  data-video-toggle={id}
+  data-label-pause={labels.pause}
+  data-label-play={labels.play}
+>
+  <span class:list={['i-pause', !hero && 'hidden']} aria-hidden="true"
+    ><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg></span
+  >
+  <span class:list={['i-play', hero && 'hidden']} aria-hidden="true"
+    ><svg viewBox="0 0 24 24" class="size-5" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></span
+  >
+</button>
+
+<script>
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const visibility = new IntersectionObserver(
+    (entries) =>
+      entries.forEach(({ target, isIntersecting }) => {
+        const v = target as HTMLVideoElement;
+        if (isIntersecting && !reduceMotion && !v.dataset.userPaused) v.play().catch(() => {});
+        else if (!isIntersecting) v.pause();
+      }),
+    { threshold: 0.35 },
+  );
+
+  document.querySelectorAll<HTMLButtonElement>('[data-video-toggle]').forEach((button) => {
+    const video = document.getElementById(button.dataset.videoToggle!) as HTMLVideoElement;
+    const sync = () => {
+      const playing = !video.paused;
+      button.querySelector('.i-pause')!.classList.toggle('hidden', !playing);
+      button.querySelector('.i-play')!.classList.toggle('hidden', playing);
+      button.setAttribute('aria-label', (playing ? button.dataset.labelPause : button.dataset.labelPlay)!);
+    };
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    button.addEventListener('click', () => {
+      video.dataset.userPaused = video.paused ? '' : '1';
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    });
+
+    if (video.dataset.loopVideo === 'hero') {
+      if (reduceMotion) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      } else if (!video.paused && video.currentTime > 0) {
+        video.classList.add('ready'); // already playing before this module ran
+      } else {
+        video.addEventListener('playing', () => video.classList.add('ready'), { once: true });
+      }
+    } else {
+      visibility.observe(video);
+    }
+    sync();
+  });
+</script>

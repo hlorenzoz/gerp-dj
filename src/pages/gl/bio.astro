@@ -1,0 +1,11 @@
+---
+import Bio from '../../components/pages/Bio.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useT } from '../../i18n';
+
+const t = useT('gl');
+---
+
+<BaseLayout title={`${t('nav.bio')} — ${t('ui.titleSuffix')}`} description={t('meta.bio')}>
+  <Bio locale="gl" />
+</BaseLayout>

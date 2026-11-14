@@ -1,0 +1,35 @@
+---
+import manifest from '../lib/images/manifest.json';
+
+interface Props {
+  /** Master basename in public/images, e.g. `gerp-dj-fiesta-aldea-ourense`. */
+  name: string;
+  alt: string;
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const { name, alt, sizes, class: className, loading = 'lazy', fetchpriority } = Astro.props;
+const entry = (manifest as Record<string, (typeof manifest)[keyof typeof manifest]>)[`/images/${name}.webp`];
+if (!entry) throw new Error(`Picture: "${name}" is not in src/lib/images/manifest.json (run npm run images)`);
+
+const srcset = (list: { w: number; src: string }[]) => list.map(({ w, src }) => `${src} ${w}w`).join(', ');
+---
+
+<picture>
+  <source type="image/avif" srcset={srcset(entry.avif)} sizes={sizes} />
+  <img
+    src={entry.webp.at(-1)!.src}
+    srcset={srcset(entry.webp)}
+    sizes={sizes}
+    alt={alt}
+    width={entry.width}
+    height={entry.height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+    class={className}
+  />
+</picture>

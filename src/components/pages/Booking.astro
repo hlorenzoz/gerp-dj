@@ -1,0 +1,39 @@
+---
+import { site, type Locale } from '../../config/site';
+import { useT } from '../../i18n';
+import { pressMessage, waLink } from '../../lib/whatsapp';
+import BookingForm from './BookingForm.svelte';
+
+const { locale } = Astro.props as { locale: Locale };
+const t = useT(locale);
+---
+
+<section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+  <!-- shortcut: size fitted to "Contratación" (~7.9em in Archivo 125/850); refit if the title changes -->
+  <h1 class="display text-[min(calc((100vw-4rem)/8.2),10rem)]">{t('book.title')}</h1>
+  <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms">{t('book.lede')}</p>
+  <div class="mt-12 grid gap-10 lg:grid-cols-12">
+    <!-- Builds the request and opens WhatsApp Business (wa.me click-to-chat). No backend, no email. -->
+    <div class="reveal lg:col-span-7" style="--d:120ms">
+      <BookingForm client:visible {locale} />
+    </div>
+    <div class="grid h-fit gap-4 lg:col-span-4 lg:col-start-9">
+      <div class="glass reveal rounded-3xl p-6" style="--d:160ms">
+        <h2 class="font-semibold text-acid">WhatsApp Business</h2>
+        <a target="_blank" rel="noopener" href={waLink()} class="mt-1 block text-2xl font-bold hover:text-acid">{site.whatsapp.display}</a>
+        <p class="mt-2 text-muted">{t('c.hours')}</p>
+      </div>
+      <a target="_blank" rel="noopener" href={waLink(pressMessage(locale))} class="press glass reveal rounded-3xl p-6 hover:bg-ink/10" style="--d:200ms">
+        <span class="block font-semibold text-acid">{t('press.title')}</span>
+        <span class="mt-1 block text-lg">{t('c.press')}</span>
+      </a>
+      <a
+        href={site.pressPdf(locale)}
+        target="_blank"
+        rel="noopener"
+        class="press reveal rounded-full bg-ink px-6 py-4 text-center font-semibold text-ground hover:bg-acid"
+        style="--d:320ms">{t('press.kit')}</a
+      >
+    </div>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+---
+import Booking from '../../components/pages/Booking.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useT } from '../../i18n';
+
+const t = useT('gl');
+---
+
+<BaseLayout title={`${t('book.title')} — ${t('ui.titleSuffix')}`} description={t('meta.book')}>
+  <Booking locale="gl" />
+</BaseLayout>

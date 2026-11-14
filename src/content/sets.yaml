@@ -1,0 +1,24 @@
+# SAMPLE DATA from the prototype (design/index.html SETS). No recorded sets are published yet:
+# replace these entries before setting site.features.sets = true.
+# image = master basename in public/images (rendered through src/lib/images/manifest.json).
+# Optional url: where the full set can be watched (opens in a new tab). Sorted by date (newest first); the newest is featured on the home page.
+- id: entroido-xinzo
+  date: '2026-02-14'
+  title: { es: 'Entroido, Xinzo de Limia', gl: 'Entroido, Xinzo de Limia' }
+  duration: 2 h 04 min
+  image: gerp-dj-luces-fiesta-ourense
+- id: amanecer-ribeira-sacra
+  date: '2025-09-20'
+  title: { es: Amanecer en la Ribeira Sacra, gl: Amencer na Ribeira Sacra }
+  duration: 1 h 32 min
+  image: gerp-dj-fiesta-aldea-ourense
+- id: estudio-ourense
+  date: '2025-06-06'
+  title: { es: 'Sesión en estudio, Ourense', gl: 'Sesión en estudo, Ourense' }
+  duration: 58 min
+  image: gerp-dj-ourense-controladora-denon-dj
+- id: sala-burgas
+  date: '2025-03-29'
+  title: { es: 'Sala Burgas, Ourense', gl: 'Sala Burgas, Ourense' }
+  duration: 3 h 10 min
+  image: gerp-dj-sesion-terraza-ourense

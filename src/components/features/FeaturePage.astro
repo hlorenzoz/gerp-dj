@@ -1,0 +1,27 @@
+---
+import type { Locale } from '../../config/site';
+import { useT } from '../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { FeatureName } from './data';
+import Music from './Music.astro';
+import Sets from './Sets.astro';
+import Tour from './Tour.astro';
+
+interface Props {
+  name: FeatureName;
+  locale: Locale;
+}
+
+const { name, locale } = Astro.props;
+const t = useT(locale);
+const page = {
+  tour: { Component: Tour, title: t('nav.tour'), description: t('meta.tour') },
+  music: { Component: Music, title: t('nav.music'), description: t('meta.music') },
+  sets: { Component: Sets, title: t('nav.sets'), description: t('meta.sets') },
+}[name];
+const { Component } = page;
+---
+
+<BaseLayout title={`${page.title} — ${t('ui.titleSuffix')}`} description={page.description}>
+  <Component locale={locale} />
+</BaseLayout>
