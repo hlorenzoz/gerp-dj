@@ -3,13 +3,14 @@
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
+import { site } from './src/config/site.ts';
 
 /** @param {string} subset */
 const archivo = (subset) => `./node_modules/@fontsource-variable/archivo/files/archivo-${subset}-wdth-normal.woff2`;
 
 export default defineConfig({
-  // Domain not decided yet: canonical and hreflang links are emitted only when SITE_URL is set.
-  site: process.env.SITE_URL || undefined,
+  // Production domain from src/config/site.ts (SITE_URL overrides it for previews).
+  site: site.url,
   integrations: [svelte()],
   i18n: {
     locales: ['es', 'gl'],

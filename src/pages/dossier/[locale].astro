@@ -1,0 +1,402 @@
+---
+// Press kit source: six A4 landscape pages rendered from src/config/site.ts + the dictionaries.
+// `just press` prints /dossier/es/ and /dossier/gl/ to public/press/dossier-gerp-dj-{es,gl}.pdf. Not linked, noindex.
+import { Font } from 'astro:assets';
+import { type Locale, site } from '../../config/site';
+import { locales, useT } from '../../i18n';
+import { pressImage } from '../../lib/press-images';
+import { waLink } from '../../lib/whatsapp';
+
+export const getStaticPaths = () => locales.map((locale) => ({ params: { locale } }));
+
+const locale = Astro.params.locale as Locale;
+const t = useT(locale);
+const waUrl = waLink(t('wa.hello'));
+const total = 6;
+const foot = (n: number) => ({ left: `${site.brand} · ${t('dossier.tag')}`, right: `${t('dossier.page')} ${n} / ${total}` });
+const bio = [t('about.p1'), t('bio.p2'), t('about.story')];
+const facts = [
+  [t('about.baseK'), site.location.locality],
+  [t('about.kitK'), t('about.kitV')],
+  [t('about.zoneK'), t('about.zoneV')],
+];
+const services = site.services.map((id) => [t(`svc.${id}.t`), t(`svc.${id}.d`)]);
+const kit = site.kit.map((id) => t(`kit.${id}`));
+const needs = [
+  [t('dossier.bringsH'), ([1, 2, 3, 4] as const).map((n) => t(`dossier.brings.${n}`))],
+  [t('dossier.venueH'), ([1, 2, 3, 4] as const).map((n) => t(`dossier.venue.${n}`))],
+] as const;
+const img = {
+  cover: pressImage('gerp-dj-ourense-cabina-iluminacion-led'),
+  portrait: pressImage('gerp-dj-ourense-retrato-equipo-sonido'),
+  controller: pressImage('gerp-dj-ourense-controladora-denon-dj'),
+  village: pressImage('gerp-dj-fiesta-aldea-ourense'),
+  terrace: pressImage('gerp-dj-sesion-terraza-ourense'),
+  lights: pressImage('gerp-dj-luces-fiesta-ourense'),
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{t('dossier.title')}</title>
+    <Font cssVariable="--font-archivo" preload />
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style is:global>
+      :root {
+        --ground: #07070a;
+        --surface: #131318;
+        --ink: #f3f2ee;
+        --muted: #a9a8a3;
+        --acid: #dcff3c;
+        --pad: 14mm;
+      }
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        background: var(--ground);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        font-family: var(--font-archivo), system-ui, sans-serif;
+        color: var(--ink);
+        font-size: 11.5pt;
+        line-height: 1.5;
+      }
+      .page {
+        position: relative;
+        width: 297mm;
+        height: 210mm;
+        overflow: hidden;
+        background: var(--ground);
+        break-after: page;
+        padding: var(--pad);
+      }
+      .display {
+        font-stretch: 125%;
+        font-weight: 850;
+        letter-spacing: -0.035em;
+        line-height: 0.9;
+      }
+      h2.display {
+        font-size: 21mm;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .acid {
+        color: var(--acid);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 8mm;
+        height: 100%;
+        padding-bottom: 8mm;
+      }
+      .photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6mm;
+        display: block;
+      }
+      .panel {
+        background: var(--surface);
+        border-radius: 6mm;
+        padding: 7mm;
+      }
+      .foot {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        bottom: 7mm;
+        display: flex;
+        justify-content: space-between;
+        font-size: 8.5pt;
+        color: var(--muted);
+      }
+      .lede {
+        font-size: 14pt;
+        line-height: 1.45;
+      }
+      p + p {
+        margin-top: 3.5mm;
+      }
+      ul.rows {
+        list-style: none;
+        display: grid;
+        gap: 3mm;
+        margin-top: 9mm;
+      }
+      ul.rows li {
+        background: var(--surface);
+        border-radius: 4mm;
+        padding: 4.5mm 5.5mm;
+      }
+      ul.rows b {
+        display: block;
+        font-size: 13pt;
+      }
+      .cover {
+        padding: 0;
+        display: grid;
+        grid-template-columns: 58% 42%;
+      }
+      .cover .left {
+        padding: var(--pad);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .cover h1 {
+        font-size: 30mm;
+      }
+      .cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 20%;
+        display: block;
+      }
+      .tag {
+        display: inline-block;
+        background: var(--acid);
+        color: var(--ground);
+        font-weight: 700;
+        border-radius: 99px;
+        padding: 2mm 5mm;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3mm;
+        margin-top: 8mm;
+      }
+      .facts div {
+        background: var(--surface);
+        border-radius: 4mm;
+        padding: 4mm;
+      }
+      .facts dt {
+        color: var(--muted);
+        font-size: 9.5pt;
+      }
+      .facts dd {
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.25;
+        margin-top: 1mm;
+      }
+      .kit {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3mm;
+        margin-top: 9mm;
+      }
+      .kit li {
+        background: var(--surface);
+        border-radius: 4mm;
+        padding: 4.5mm 5mm;
+        font-weight: 700;
+      }
+      .action {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 5mm;
+        height: 128mm;
+        margin-top: 8mm;
+      }
+      .action figure {
+        position: relative;
+      }
+      .action figure:first-child {
+        grid-row: span 2;
+      }
+      .action figcaption {
+        position: absolute;
+        left: 4mm;
+        bottom: 4mm;
+        background: rgb(7 7 10 / 0.72);
+        border-radius: 3mm;
+        padding: 2mm 3.5mm;
+        font-weight: 700;
+        font-size: 10pt;
+      }
+      .needs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6mm;
+        margin-top: 9mm;
+      }
+      .needs h3 {
+        font-size: 14pt;
+        margin-bottom: 3mm;
+        color: var(--acid);
+      }
+      .needs ul {
+        padding-left: 4.5mm;
+      }
+      .needs li + li {
+        margin-top: 2.2mm;
+      }
+      .wa {
+        font-size: 15mm;
+      }
+      .qr {
+        background: var(--ink);
+        border-radius: 6mm;
+        padding: 7mm;
+        width: 78mm;
+      }
+      .qr svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page cover">
+      <div class="left">
+        <div><span class="tag">{t('dossier.tag')}</span></div>
+        <div>
+          <h1 class="display">{site.brand}</h1>
+          <p class="lede" style="margin-top:7mm;font-size:16pt;max-width:140mm">{t('dossier.role')}</p>
+        </div>
+      </div>
+      <img src={img.cover} alt="" />
+    </section>
+
+    <section class="page">
+      <div class="grid">
+        <div style="grid-column:span 7">
+          <h2 class="display">{t('nav.bio')}</h2>
+          <div style="margin-top:9mm">
+            {bio.map((p, i) => <p class:list={[{ lede: i === 0, muted: i === 2 }]}>{p}</p>)}
+          </div>
+          <dl class="facts">
+            {
+              facts.map(([k, v]) => (
+                <div>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div style="grid-column:8 / span 5"><img class="photo" style="object-position:50% 15%" src={img.portrait} alt="" /></div>
+      </div>
+      <div class="foot"><span>{foot(2).left}</span><span>{foot(2).right}</span></div>
+    </section>
+
+    <section class="page">
+      <div class="grid">
+        <div style="grid-column:span 6">
+          <h2 class="display">{t('nav.services')}</h2>
+          <ul class="rows">
+            {
+              services.map(([title, text]) => (
+                <li>
+                  <b>{title}</b>
+                  <span class="muted">{text}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div style="grid-column:7 / span 6;display:flex;flex-direction:column;min-height:0">
+          <h2 class="display">{t('kit.title')}</h2>
+          <ul class="kit">{kit.map((k) => <li>{k}</li>)}</ul>
+          <img
+            class="photo"
+            style="margin-top:5mm;height:auto;min-height:0;flex:1 1 0;object-position:50% 45%"
+            src={img.controller}
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="foot"><span>{foot(3).left}</span><span>{foot(3).right}</span></div>
+    </section>
+
+    <section class="page">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10mm">
+        <h2 class="display">{t('action.title')}</h2>
+        <p class="lede" style="max-width:110mm">{t('action.p')}</p>
+      </div>
+      <div class="action">
+        <figure><img class="photo" src={img.village} alt="" /><figcaption>{t('action.cap2')}</figcaption></figure>
+        <figure><img class="photo" src={img.terrace} alt="" /><figcaption>{t('action.cap')}</figcaption></figure>
+        <figure><img class="photo" src={img.lights} alt="" /><figcaption>{t('dossier.cap3')}</figcaption></figure>
+      </div>
+      <p class="muted" style="margin-top:4mm"><b style="color:var(--ink)">{t('press.title')}:</b> {t('press.placeholder')}</p>
+      <div class="foot"><span>{foot(4).left}</span><span>{foot(4).right}</span></div>
+    </section>
+
+    <section class="page">
+      <h2 class="display">{t('dossier.needsH')}</h2>
+      <div class="needs">
+        {
+          needs.map(([heading, items]) => (
+            <div class="panel">
+              <h3>{heading}</h3>
+              <ul>{items.map((i) => <li>{i}</li>)}</ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="muted" style="margin-top:6mm">{t('dossier.needsNote')}</p>
+      <img
+        src={img.village}
+        alt=""
+        style="position:absolute;left:var(--pad);right:var(--pad);bottom:16mm;height:62mm;width:calc(100% - 2 * var(--pad));object-fit:cover;object-position:50% 70%;border-radius:6mm"
+      />
+      <div class="foot"><span>{foot(5).left}</span><span>{foot(5).right}</span></div>
+    </section>
+
+    <section class="page">
+      <div class="grid">
+        <div style="grid-column:span 7;display:flex;flex-direction:column">
+          <h2 class="display">{t('book.title')}</h2>
+          <p class="lede" style="margin-top:7mm;max-width:150mm">{t('dossier.contactP')}</p>
+          <p style="margin-top:9mm;font-weight:700">WhatsApp Business</p>
+          <a href={waUrl} class="display acid wa" style="margin-top:2mm">{site.contact.display}</a>
+          <p style="margin-top:8mm">{t('dossier.channel')}</p>
+          <p>{t('dossier.web')}</p>
+        </div>
+        <div style="grid-column:9 / span 4;display:flex;flex-direction:column;justify-content:center;align-items:flex-end">
+          <a href={waUrl} class="qr" id="qr" data-url={waUrl}></a>
+          <p class="muted" style="margin-top:4mm;width:78mm;text-align:center">{t('dossier.qrNote')}</p>
+        </div>
+      </div>
+      <div class="foot"><span>{foot(6).left}</span><span>{foot(6).right}</span></div>
+    </section>
+
+    <script is:inline>
+      // QR to the same wa.me chat as the number above (qrcode-generator 1.4.4 from cdnjs).
+      const el = document.getElementById('qr');
+      const qr = qrcode(0, 'M');
+      qr.addData(el.dataset.url);
+      qr.make();
+      el.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+    </script>
+  </body>
+</html>

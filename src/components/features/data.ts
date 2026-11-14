@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { type Locale, site } from '../../config/site';
+import { enabledPages, type Locale, type Page } from '../../config/site';
 import { localizePath } from '../../i18n';
 import { splitShows, type Zone } from '../../lib/shows';
 
@@ -82,11 +82,11 @@ export const releaseLinks = (r: Release) =>
 export const getSets = async (locale: Locale) =>
   (await getCollection('sets')).map((e) => ({ ...e.data, id: e.id, title: e.data.title[locale] })).sort(newestFirst);
 
-/** Spanish slug → feature flag. Only enabled features get a page (see src/pages/[feature].astro). */
-export const featureRoutes = { gira: 'tour', musica: 'music', sesiones: 'sets' } as const;
-export type FeatureName = (typeof featureRoutes)[keyof typeof featureRoutes];
+type FeaturePage = Extract<Page, { feature: string }>;
+export type FeatureName = FeaturePage['feature'];
 
+/** Enabled feature pages from the route registry in site.ts (see src/pages/[feature].astro): `/gira` → tour. */
 export const featurePaths = () =>
-  Object.entries(featureRoutes)
-    .filter(([, name]) => site.features[name])
-    .map(([feature, name]) => ({ params: { feature }, props: { name } }));
+  enabledPages()
+    .filter((p): p is FeaturePage => 'feature' in p)
+    .map((p) => ({ params: { feature: p.path.slice(1) }, props: { name: p.feature } }));

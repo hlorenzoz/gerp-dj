@@ -21,7 +21,7 @@
     <button
       type="button"
       aria-pressed={ty === type}
-      class={['press rounded-full px-4 py-2 font-medium', ty === type ? 'bg-acid text-ground' : 'glass-subtle hover:bg-ink/15']}
+      class={['press rounded-full px-4 py-2 font-medium', ty === type ? 'bg-acid text-on-acid' : 'glass-subtle hover:bg-ink/15']}
       onclick={() => (type = ty)}>{ty === 'all' ? t('ui.allTypes') : t(`ui.${ty}`)}</button
     >
   {/each}
@@ -35,7 +35,7 @@
       {#if r.links.length}
         <p class="mt-2 flex flex-wrap gap-x-3 text-sm">
           {#each r.links as l (l.href)}
-            <a href={l.href} target="_blank" rel="noopener" class="underline hover:text-acid">{l.label}</a>
+            <a href={l.href} target="_blank" rel="noopener" class="underline hover:text-acid-ink">{l.label}</a>
           {/each}
         </p>
       {/if}

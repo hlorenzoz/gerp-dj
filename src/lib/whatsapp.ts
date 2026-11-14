@@ -18,7 +18,7 @@ export interface AvailabilityInput {
 }
 
 export const waLink = (text?: string) =>
-  `https://wa.me/${site.whatsapp.number}` + (text ? `?text=${encodeURIComponent(text)}` : '');
+  `https://wa.me/${site.contact.waNumber}` + (text ? `?text=${encodeURIComponent(text)}` : '');
 
 /** dd/mm/yyyy built by hand: Intl may lack Galician locale data and silently fall back to English. */
 export const formatDate = (isoDate: string) => isoDate.split('-').reverse().join('/');
@@ -53,11 +53,7 @@ export function availabilityMessage(locale: Locale, { date, place, type }: Avail
   ].join('\n');
 }
 
-const serviceKeys = ['svc.1.msg', 'svc.2.msg', 'svc.3.msg', 'svc.4.msg'] as const;
-/** Quote requests in service order: popular fiesta, wedding, private party, corporate event. */
-export const serviceMessages = {
-  es: serviceKeys.map(useT('es')),
-  gl: serviceKeys.map(useT('gl')),
-} satisfies Record<Locale, string[]>;
+/** Quote request for a service (site.services order: popular fiesta, wedding, private party, corporate event). */
+export const serviceMessage = (locale: Locale, id: (typeof site.services)[number]) => useT(locale)(`svc.${id}.msg`);
 
 export const pressMessage = (locale: Locale) => useT(locale)('c.pressMsg');

@@ -2,19 +2,27 @@
 import { Font } from 'astro:assets';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { alternatePath, getLocale, useT } from '../i18n';
+import { site } from '../config/site';
+import { alternatePath, getLocale, locales, useT } from '../i18n';
+import { buildGraph } from '../lib/seo';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  /** The 404 page: no canonical, hreflang, og:url or JSON-LD (it is not a real URL of the site). */
+  notFound?: boolean;
 }
 
 const locale = getLocale(Astro.currentLocale);
 const t = useT(locale);
-const { title = t('ui.title'), description = t('meta.description') } = Astro.props;
-const site = Astro.site;
+const { title = t('ui.title'), description = t('meta.description'), notFound = false } = Astro.props;
 const path = Astro.url.pathname;
+const canonical = site.url + alternatePath(path, locale);
+const ogLocale = (l: string) => `${l}_ES`;
+const image = site.media.og;
+// `<` escaped so the JSON can never close the script element.
+const jsonLd = JSON.stringify(buildGraph({ locale, path, title, description })).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -22,19 +30,64 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#07070a" media="(prefers-color-scheme: dark)" />
+    <!-- Theme before first paint: the stored choice (ThemeToggle), else the system preference, followed live. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const system = matchMedia('(prefers-color-scheme: light)');
+        const stored = () => {
+          try {
+            const t = localStorage.getItem('theme');
+            return t === 'light' || t === 'dark' ? t : null;
+          } catch {
+            return null;
+          }
+        };
+        const paint = () => {
+          for (const m of document.querySelectorAll('meta[name="theme-color"]'))
+            m.content = root.dataset.theme === 'light' ? '#f3f2ee' : '#07070a';
+        };
+        root.dataset.theme = stored() ?? (system.matches ? 'light' : 'dark');
+        paint();
+        new MutationObserver(paint).observe(root, { attributeFilter: ['data-theme'] });
+        system.addEventListener('change', (e) => {
+          if (!stored()) root.dataset.theme = e.matches ? 'light' : 'dark';
+        });
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {
-      site && (
+      !notFound && (
         <>
-          <link rel="canonical" href={new URL(path, site)} />
-          <link rel="alternate" hreflang="es" href={new URL(alternatePath(path, 'es'), site)} />
-          <link rel="alternate" hreflang="gl" href={new URL(alternatePath(path, 'gl'), site)} />
-          <link rel="alternate" hreflang="x-default" href={new URL(alternatePath(path, 'es'), site)} />
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="es" href={site.url + alternatePath(path, 'es')} />
+          <link rel="alternate" hreflang="gl" href={site.url + alternatePath(path, 'gl')} />
+          <link rel="alternate" hreflang="x-default" href={site.url + alternatePath(path, 'es')} />
+          <meta property="og:url" content={canonical} />
         </>
       )
     }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={site.url + image.src} />
+    <meta property="og:image:type" content={image.type} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={t(image.alt)} />
+    <meta property="og:locale" content={ogLocale(locale)} />
+    {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocale(l)} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={site.url + image.src} />
+    <meta name="twitter:image:alt" content={t(image.alt)} />
+    {!notFound && <script type="application/ld+json" set:html={jsonLd} />}
     <Font cssVariable="--font-archivo" />
   </head>
   <body class="min-h-dvh overflow-x-clip">
@@ -46,7 +99,7 @@ const path = Astro.url.pathname;
 
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-ground"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-on-acid"
       >{t('skip')}</a
     >
 

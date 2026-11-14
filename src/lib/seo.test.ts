@@ -1,0 +1,160 @@
+import { describe, expect, it } from 'vitest';
+import { enabledPages, site } from '../config/site';
+import { buildGraph, buildLlmsTxt, buildRobots, buildSitemap, pageUrl } from './seo';
+
+const base = 'https://example.org';
+type Node = Record<string, unknown> & { '@type': string; '@id': string };
+const nodes = (graph: ReturnType<typeof buildGraph>) => graph['@graph'] as Node[];
+const byType = (graph: ReturnType<typeof buildGraph>, type: string) =>
+  nodes(graph).find((n) => n['@type'] === type) as Node;
+
+describe('pageUrl', () => {
+  it('builds absolute, localized, trailing-slash URLs', () => {
+    expect(pageUrl('/', 'es', base)).toBe('https://example.org/');
+    expect(pageUrl('/bio', 'gl', base)).toBe('https://example.org/gl/bio/');
+  });
+});
+
+describe('buildGraph', () => {
+  const graph = buildGraph({ base, locale: 'gl', path: '/gl/contratacion/', title: 'T', description: 'D' });
+
+  it('links WebSite, the business and the page by stable @ids', () => {
+    expect(graph['@context']).toBe('https://schema.org');
+    expect(nodes(graph).map((n) => [n['@type'], n['@id']])).toEqual([
+      ['WebSite', 'https://example.org/#website'],
+      ['EntertainmentBusiness', 'https://example.org/#business'],
+      ['ContactPage', 'https://example.org/gl/contratacion/#webpage'],
+    ]);
+    const page = byType(graph, 'ContactPage');
+    expect(page).toMatchObject({
+      url: 'https://example.org/gl/contratacion/',
+      name: 'T',
+      description: 'D',
+      inLanguage: 'gl',
+      isPartOf: { '@id': 'https://example.org/#website' },
+      about: { '@id': 'https://example.org/#business' },
+    });
+    expect(byType(graph, 'WebSite')).toMatchObject({
+      name: 'GERP DJ',
+      url: 'https://example.org/',
+      inLanguage: ['es', 'gl'],
+    });
+  });
+
+  it('describes the business from site.ts only (no street, no ratings, no prices)', () => {
+    const business = byType(graph, 'EntertainmentBusiness');
+    expect(business).toMatchObject({
+      name: 'GERP DJ',
+      url: 'https://example.org/',
+      image: 'https://example.org/og/gerp-dj.jpg',
+      telephone: '+34613340500',
+      address: { '@type': 'PostalAddress', addressLocality: 'Ourense', addressRegion: 'Galicia', addressCountry: 'ES' },
+      areaServed: [
+        { '@type': 'City', name: 'Ourense' },
+        { '@type': 'AdministrativeArea', name: 'Galicia' },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'reservations',
+        telephone: '+34613340500',
+        availableLanguage: ['es', 'gl'],
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '10:00',
+          closes: '19:00',
+        },
+      },
+    });
+    const offers = (business.hasOfferCatalog as { itemListElement: { itemOffered: { name: string } }[] })
+      .itemListElement;
+    expect(offers.map((o) => o.itemOffered.name)).toEqual([
+      'Festas populares',
+      'Vodas',
+      'Festas privadas',
+      'Eventos de empresa',
+    ]);
+    const json = JSON.stringify(graph);
+    expect(json).not.toMatch(/streetAddress|aggregateRating|review|price|\{\w+\}/);
+  });
+
+  it('legal pages are plain WebPages that are not about the business', () => {
+    const page = byType(
+      buildGraph({ base, locale: 'es', path: '/privacidad/', title: 'P', description: 'D' }),
+      'WebPage',
+    );
+    expect(page['@id']).toBe('https://example.org/privacidad/#webpage');
+    expect(page.about).toBeUndefined();
+  });
+});
+
+describe('buildSitemap', () => {
+  const xml = buildSitemap({ base });
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+
+  it('lists every enabled page in both locales with alternates', () => {
+    expect(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>\n<urlset')).toBe(true);
+    expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"');
+    expect(locs).toHaveLength(enabledPages().length * 2);
+    expect(locs).toContain('https://example.org/');
+    expect(locs).toContain('https://example.org/gl/bio/');
+    expect(xml.match(/<xhtml:link /g)).toHaveLength(locs.length * 3);
+    expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://example.org/bio/"/>');
+    expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(locs.length);
+    expect(xml.split('<url>').length).toBe(xml.split('</url>').length);
+  });
+
+  it('leaves out disabled features, 404 and the noindex routes', () => {
+    expect(xml).not.toMatch(/gira|musica|sesiones|404|dossier|\/og\//);
+    expect(buildSitemap({ base, pages: enabledPages({ ...site.features, tour: true }) })).toContain(
+      '<loc>https://example.org/gl/gira/</loc>',
+    );
+  });
+});
+
+describe('buildRobots', () => {
+  const txt = buildRobots({ base });
+
+  it('allows every crawler (AI search included) in one group and points to the sitemap', () => {
+    for (const bot of [
+      '*',
+      'Googlebot',
+      'Bingbot',
+      'GPTBot',
+      'ChatGPT-User',
+      'OAI-SearchBot',
+      'PerplexityBot',
+      'ClaudeBot',
+      'Claude-SearchBot',
+      'Google-Extended',
+    ])
+      expect(txt).toContain(`User-agent: ${bot}\n`);
+    expect(txt).toContain('Allow: /\nDisallow: /dossier/\nDisallow: /og/card/\n');
+    // One group: a bot with its own group would otherwise ignore the Disallow lines of `*`.
+    expect(txt.match(/Allow: \//g)).toHaveLength(1);
+    expect(txt.trimEnd().endsWith('Sitemap: https://example.org/sitemap.xml')).toBe(true);
+  });
+});
+
+describe('buildLlmsTxt', () => {
+  const txt = buildLlmsTxt({ base });
+
+  it('follows the llmstxt.org layout with absolute links', () => {
+    expect(txt.startsWith('# GERP DJ\n\n> ')).toBe(true);
+    expect(txt).toContain('\n## Servicios\n');
+    expect(txt).toContain('\n## Galego\n');
+    expect(txt).toContain('\n## Optional\n');
+    expect(txt).toContain('- [Fiestas populares](https://example.org/#servicios): ');
+    expect(txt).toContain('(https://example.org/contratacion/)');
+    expect(txt).toContain('(https://example.org/gl/bio/)');
+    expect(txt).toContain('(https://example.org/press/dossier-gerp-dj-es.pdf)');
+    expect(txt).toContain('(https://example.org/press/dossier-gerp-dj-gl.pdf)');
+    expect(txt).toContain('+34 613 34 05 00');
+    for (const [, url] of txt.matchAll(/\]\(([^)]+)\)/g)) expect(url.startsWith('https://')).toBe(true);
+  });
+
+  it('has no placeholders and no disabled features', () => {
+    expect(txt).not.toMatch(/\{\w+\}/);
+    expect(txt).not.toMatch(/gira|musica|sesiones|dossier\/|\/og\//);
+  });
+});
