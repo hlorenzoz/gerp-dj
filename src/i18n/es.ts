@@ -178,7 +178,7 @@ const es = {
   'og.alt': '{brand}, DJ en {city}, en su cabina con iluminación LED',
   'dossier.title': '{brand} — Dossier de prensa',
   'dossier.doc': 'Dossier de prensa',
-  'dossier.tag': 'Dossier de prensa 2026',
+  'dossier.tag': 'Dossier de prensa {year}',
   'dossier.role': 'DJ para fiestas, bodas y eventos · {city}, {region}',
   'dossier.cap3': 'Luces en directo',
   'dossier.needsH': 'Qué incluye',

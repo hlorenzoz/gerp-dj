@@ -91,6 +91,7 @@ export const siteVars = (locale: Locale) => ({
   hoursTo: site.hours.closes,
   retentionMonths: String(site.legal.retentionMonths),
   updated: formatLongDate(site.legal.updated, locale),
+  year: site.legal.updated.slice(0, 4),
   web: site.url.replace(/^https?:\/\//, ''),
   channel: site.channelUrl.replace(/^https?:\/\//, ''),
 });
