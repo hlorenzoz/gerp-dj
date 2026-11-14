@@ -43,6 +43,8 @@ export const site = {
   /** Video host (Cloudflare R2 on the brand's own domain). Every video URL is derived from it. */
   cdn,
   video: (name: string) => `${cdn}/videos/${name}.mp4`,
+  /** Manifest path (`/images/<file>`) → CDN URL. Every image variant is mirrored there by `just cdn-images`. */
+  image: (path: string) => `${cdn}${path}`,
   /** Client videos on the CDN in gallery order (strongest first). `name` is the file name and the poster master in
    * public/images; `title` and `caption` are i18n keys. */
   videos: [

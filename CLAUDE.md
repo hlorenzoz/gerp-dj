@@ -30,7 +30,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 - Tailwind v4 through the Vite plugin: `@import "tailwindcss"` in `src/styles/global.css`, tokens in `@theme`. No `tailwind.config.*`, no `@astrojs/tailwind`.
 - Cloudflare Workers as a **fully static** site: no `@astrojs/cloudflare` adapter, `wrangler.jsonc` with `assets.directory: "./dist"`. There is no backend; add the adapter only if the user asks for on-demand rendering.
 - **Contact and booking ONLY via WhatsApp Business**: `wa.me` click-to-chat links with prefilled text, plus the WhatsApp Channel for announcements. Never add email, `mailto:`, form endpoints, Astro Actions for contact, or newsletter providers. Number and channel URL live in one place (`src/config/site.ts`).
-- Images: never reference a master or a raw file; render `<picture>` (AVIF then WebP) from `src/lib/images/manifest.json`. File names are `gerp-dj-<keywords>-ourense…` in Spanish; new media goes through `npm run media` + `npm run images`.
+- Images: never reference a master or a raw file; render `<picture>` (AVIF then WebP) from `src/lib/images/manifest.json`. Every image URL goes through `site.image(manifestPath)` → `https://cdn.gerp-dj.com/images/…` (never a local `/images/` path); after `npm run images`, run `just cdn-images` and have the client upload `.agents/cdn/gerp-dj/images/` before release, then verify each URL answers 200. File names are `gerp-dj-<keywords>-ourense…` in Spanish; new media goes through `npm run media` + `npm run images`.
 - Content (tour dates, releases, sets) lives in content collections (`src/content.config.ts`), not hardcoded in components.
 
 ## Conventions

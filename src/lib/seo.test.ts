@@ -171,6 +171,14 @@ describe('buildLlmsTxt', () => {
   });
 });
 
+describe('site images (CDN)', () => {
+  it('serves every manifest path from the CDN base', () => {
+    expect(site.image('/images/gerp-dj-fiesta-aldea-ourense-640.avif')).toBe(
+      'https://cdn.gerp-dj.com/images/gerp-dj-fiesta-aldea-ourense-640.avif',
+    );
+  });
+});
+
 describe('site videos (CDN)', () => {
   const cdn = 'https://cdn.gerp-dj.com';
 

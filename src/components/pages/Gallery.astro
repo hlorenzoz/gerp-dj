@@ -10,7 +10,7 @@ type Entry = { webp: { w: number; src: string }[] };
 /** Poster: the 640-wide WebP variant, or the widest one when the master is narrower (portrait clips). */
 const poster = (name: string) => {
   const { webp } = (manifest as Record<string, Entry>)[`/images/${name}.webp`];
-  return (webp.find((v) => v.w >= 640) ?? webp.at(-1)!).src;
+  return site.image((webp.find((v) => v.w >= 640) ?? webp.at(-1)!).src);
 };
 const sizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw';
 ---
