@@ -87,10 +87,11 @@ describe('buildGraph', () => {
     expect(json).not.toMatch(/aggregateRating|review|\{\w+\}/);
   });
 
-  it('links the official social profiles from site.ts as sameAs', () => {
+  it('links the official social profiles and the WhatsApp Channel from site.ts as sameAs', () => {
     expect(byType(graph, 'EntertainmentBusiness').sameAs).toEqual([
       'https://www.youtube.com/@youtGERPDJ',
       'https://www.tiktok.com/@gerpdj',
+      'https://whatsapp.com/channel/0029VbDytKl0rGiQqtirGx0W',
     ]);
   });
 

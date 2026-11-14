@@ -59,7 +59,7 @@ export function buildGraph({ base = site.url, locale, path, title, description }
         priceRange: site.priceRange,
         areaServed: places,
         knowsLanguage: [...site.languages],
-        ...(site.features.socials && { sameAs: site.socials.map((s) => s.url) }),
+        sameAs: [...(site.features.socials ? site.socials.map((s) => s.url) : []), site.channelUrl],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'reservations',

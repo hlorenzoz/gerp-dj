@@ -19,7 +19,7 @@ export const site = {
     waNumber: whatsappE164.replace(/\D/g, ''),
     display: '+34 613 34 05 00',
   },
-  channelUrl: 'https://whatsapp.com/channel/CHANNEL_ID', // placeholder until the client creates the channel
+  channelUrl: 'https://whatsapp.com/channel/0029VbDytKl0rGiQqtirGx0W',
   /** Reply time promised for WhatsApp requests, in working hours. */
   responseHours: 48,
   /** When WhatsApp requests are answered (schema.org day names). */
