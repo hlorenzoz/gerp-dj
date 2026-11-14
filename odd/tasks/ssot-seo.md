@@ -20,8 +20,8 @@ Branch: `feat/ssot-seo` from `main` `2ed9382`. Test runner: Vitest + `astro chec
 
 | ID | Specs | Route | Status | Commit / evidence |
 | --- | --- | --- | --- | --- |
-| T1 SSoT refactor + dossier from SSoT + OG + JSON-LD + OG image | S1–S4 | delegated (context backstop) | done | `f6e7eb6`, `09a91c0`, `0eebb93`, `cd`; tests 25→41; visible text identical to `2ed9382`; verifier MERGE: ready (mutation probe: every fact changes everywhere) |
-| T2 Parent checks, CLAUDE.md rule, verifier (Risk item 3: shared helpers and copy used by every page), merge | S1–S4 | inline + verifier | pending | |
+| T1 SSoT refactor + dossier from SSoT + OG + JSON-LD + OG image | S1–S4 | delegated (context backstop) | done | `f6e7eb6`, `09a91c0`, `0eebb93`, `13dc882`; tests 25→41; visible text identical to `2ed9382`; verifier MERGE: ready (mutation probe: every fact changes everywhere) |
+| T2 Parent checks, CLAUDE.md rule, verifier (Risk item 3: shared helpers and copy used by every page), merge | S1–S4 | inline + verifier | done | verifier MERGE: ready; theme merged (`d35c269` via merge commit); e2e 11/11; Lighthouse a11y 100 dark+light |
 
 ## Log
 
@@ -30,3 +30,4 @@ Branch: `feat/ssot-seo` from `main` `2ed9382`. Test runner: Vitest + `astro chec
 - **L3 (2026-11-14):** `feat/astro-site` merged into `main` (`2ed9382`) and pushed; the first Cloudflare build failed because it built the previous `main` (no `build` script). Domain still unknown → `SITE_URL` must be set as a Cloudflare build variable.
 
 - **L4 (2026-11-14):** T1 done (S1–S5, S7, S8); README written by a parallel agent (`fbb4390`); independent verifier: MERGE ready, advisories applied (shipped HTML comments, `{year}`, `{country}` documented). Theme (S9) running in an isolated worktree.
+- **L5 (2026-11-14):** S9 theme delegated to an isolated worktree in parallel (user: "Y usa múltiples agentes porfa"); merged with 7 one-hunk conflicts (data refs from SSoT, classes from theme). Post-merge: vitest 41/41, build 14 pages, e2e 11/11, theme probe PASS, Lighthouse a11y 100 in both themes.

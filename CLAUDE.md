@@ -50,6 +50,7 @@ Use the Justfile (`just --list`); it wraps the npm scripts.
 
 - Glass needs a picture or colour behind it; on flat black it is invisible. Always keep a solid fallback under `@supports not (backdrop-filter: blur(1px))`.
 - No `backdrop-filter` on large animated or scrolling areas (mobile GPU cost).
+- Light/dark theme: tokens switch with `light-dark()`; `ThemeToggle.astro` + an `is:inline` head script set `data-theme` before paint (system default, choice in `localStorage.theme`). Acid as TEXT/icon/ring → `text-acid-ink` (acid fails contrast on light); text ON acid fills → `text-on-acid`; anything over photos/video → `theme-dark` so it stays dark in both themes. Check Lighthouse accessibility in both themes (`--blink-settings=preferredColorScheme=1` forces light).
 - Never put `reveal` (or any opacity-0 entrance) on above-the-fold hero content: the wordmark is the LCP element and the fade delayed it by ~2.4 s (Lighthouse 79 → 96 once removed). The hero video has no `poster`; the still `<Picture>` underneath is the poster.
 - `getCollection()` with the `file()` loader returns entries sorted by id, not file order: sort explicitly (by `date`).
 - pre-commit.ci skips `astro-check`, `unit-tests`, `astro-build` (it cannot `npm ci`); they run locally on `git push`. In zsh pass file lists to `pre-commit run --files` as arrays (`"${F[@]}"`), or every hook silently skips.
