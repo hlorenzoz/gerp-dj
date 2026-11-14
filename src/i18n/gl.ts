@@ -106,8 +106,6 @@ const gl = {
   'c.hours': 'Luns a venres, de 10:00 a 19:00. Resposta en 48 horas laborables.',
   'c.press': 'Entrevistas e acreditacións por WhatsApp',
   'legal.privacy': 'Privacidade',
-  'legal.draft':
-    '[Texto de exemplo: completar os datos entre corchetes e revisar cunha asesoría legal antes de publicar]',
   'legal.cookies': 'Cookies',
   'svc.alt': 'Mans de GERP DJ sobre a súa controladora Denon DJ',
   'action.alt2': 'Cabina de GERP DJ con altofalantes e luces nunha festa de aldea',
