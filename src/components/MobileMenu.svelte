@@ -1,13 +1,16 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import type { NavLink } from './nav';
 
   interface Props {
     links: NavLink[];
     bookHref: string;
     labels: { menu: string; close: string; nav: string; book: string };
+    /** Static markup from Astro (the theme toggle). */
+    children?: Snippet;
   }
 
-  let { links, bookHref, labels }: Props = $props();
+  let { links, bookHref, labels, children }: Props = $props();
   let dialog: HTMLDialogElement;
 </script>
 
@@ -24,9 +27,12 @@
   aria-label={labels.menu}
 >
   <div class="flex h-full flex-col p-6">
-    <button type="button" class="press glass-subtle self-end rounded-full px-4 py-2 font-medium" onclick={() => dialog.close()}
-      >{labels.close}</button
-    >
+    <div class="flex items-center justify-between gap-4">
+      {@render children?.()}
+      <button type="button" class="press glass-subtle ml-auto rounded-full px-4 py-2 font-medium" onclick={() => dialog.close()}
+        >{labels.close}</button
+      >
+    </div>
     <!-- Closing on click matters for same-page hash links (#servicios), which do not navigate away. -->
     <nav aria-label={labels.nav} class="mt-10 flex flex-col gap-2">
       {#each links as link (link.href)}
@@ -39,7 +45,7 @@
         >
       {/each}
     </nav>
-    <a href={bookHref} class="press mt-auto rounded-full bg-acid px-6 py-4 text-center text-lg font-semibold text-ground"
+    <a href={bookHref} class="press mt-auto rounded-full bg-acid px-6 py-4 text-center text-lg font-semibold text-on-acid"
       >{labels.book}</a
     >
   </div>

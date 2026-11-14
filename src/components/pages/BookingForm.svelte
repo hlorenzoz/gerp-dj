@@ -34,7 +34,7 @@
 >
   <label class="grid gap-2"
     ><span class="font-medium">{t('f.name')}</span>
-    <input name="name" required autocomplete="name" class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid focus:outline-none" /></label
+    <input name="name" required autocomplete="name" class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid-ink focus:outline-none" /></label
   >
   <label class="grid gap-2"
     ><span class="font-medium">{t('f.date')}</span>
@@ -42,19 +42,19 @@
       name="date"
       type="date"
       required
-      class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:ring-2 focus:ring-acid focus:outline-none"
+      class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid-ink focus:outline-none"
     /></label
   >
   <label class="grid gap-2 sm:col-span-2"
     ><span class="font-medium">{t('f.venue')}</span>
-    <input name="venue" required class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid focus:outline-none" /></label
+    <input name="venue" required class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid-ink focus:outline-none" /></label
   >
   <fieldset class="sm:col-span-2">
     <legend class="font-medium">{t('f.type')}</legend>
     <div class="mt-3 flex flex-wrap gap-2">
       {#each types as { value, label } (value)}
         <label
-          class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-ground has-focus-visible:outline-2 has-focus-visible:outline-acid"
+          class="glass-subtle cursor-pointer rounded-full px-4 py-2 has-checked:bg-acid has-checked:text-on-acid has-focus-visible:outline-2 has-focus-visible:outline-acid-ink"
           ><input type="radio" name="type" {value} class="sr-only" checked={value === 'popular'} /><span>{label}</span></label
         >
       {/each}
@@ -62,8 +62,8 @@
   </fieldset>
   <label class="grid gap-2 sm:col-span-2"
     ><span class="font-medium">{t('f.msg')}</span>
-    <textarea name="msg" rows="5" class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid focus:outline-none"></textarea></label
+    <textarea name="msg" rows="5" class="glass-subtle rounded-2xl px-4 py-3 focus:ring-2 focus:ring-acid-ink focus:outline-none"></textarea></label
   >
-  <button class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-ground hover:bg-ink sm:col-span-2">{t('f.send')}</button>
-  <p class={['font-semibold text-acid sm:col-span-2', { hidden: !sent }]} role="status">{t('f.ok')}</p>
+  <button class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-on-acid hover:bg-ink hover:text-ground sm:col-span-2">{t('f.send')}</button>
+  <p class={['font-semibold text-acid-ink sm:col-span-2', { hidden: !sent }]} role="status">{t('f.ok')}</p>
 </form>

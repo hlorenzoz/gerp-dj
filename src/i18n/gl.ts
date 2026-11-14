@@ -204,6 +204,7 @@ const gl = {
   'llms.pages': 'Páxinas',
   'llms.lang': 'Galego',
   'llms.press': 'Dossier de prensa en PDF (A4, 6 páxinas): bio, servizos, equipo e contacto.',
+  'ui.theme': 'Tema escuro',
 } satisfies Record<keyof typeof es, string>;
 
 export default gl;

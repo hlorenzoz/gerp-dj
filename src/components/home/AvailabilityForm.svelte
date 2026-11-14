@@ -41,7 +41,7 @@
         name="date"
         type="date"
         required
-        class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:ring-2 focus:ring-acid focus:outline-none"
+        class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:ring-2 focus:ring-acid-ink focus:outline-none"
       /></label
     >
     <label class="grid gap-1.5"
@@ -51,14 +51,14 @@
         required
         autocomplete="address-level2"
         placeholder={site.location.locality}
-        class="glass-subtle rounded-2xl px-4 py-3 placeholder:text-muted focus:ring-2 focus:ring-acid focus:outline-none"
+        class="glass-subtle rounded-2xl px-4 py-3 placeholder:text-muted focus:ring-2 focus:ring-acid-ink focus:outline-none"
       /></label
     >
     <label class="grid gap-1.5 sm:col-span-2"
       ><span class="text-sm font-medium">{t('f.type')}</span>
       <select
         name="type"
-        class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:ring-2 focus:ring-acid focus:outline-none"
+        class="glass-subtle rounded-2xl px-4 py-3 [color-scheme:dark] focus:ring-2 focus:ring-acid-ink focus:outline-none"
       >
         {#each types as type (type.value)}
           <option value={type.value}>{type.label}</option>
@@ -66,7 +66,7 @@
       </select></label
     >
   </div>
-  <button class="press mt-5 w-full rounded-full bg-ink px-6 py-3 font-semibold text-ground hover:bg-acid"
+  <button class="press mt-5 w-full rounded-full bg-ink px-6 py-3 font-semibold text-ground hover:bg-acid hover:text-on-acid"
     >{t('avail.cta')}</button
   >
 </form>

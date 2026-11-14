@@ -29,7 +29,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
 ---
 
 <!-- Hero: the client's own footage (village fiesta) as a muted loop -->
-<section class="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-24 pb-10 sm:pb-14">
+<section class="theme-dark relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-24 pb-10 sm:pb-14">
   <!-- Still frame first: paints immediately, the video fades in over it once it is actually playing. -->
   <div class="absolute inset-0 -z-10">
     <Picture
@@ -58,7 +58,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
     <div class="min-w-0 lg:col-span-7">
       <p class="max-w-xl text-xl text-ink sm:text-2xl">{t('hero.lede')}</p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href={bookHref} class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-ground hover:bg-ink"
+        <a href={bookHref} class="press rounded-full bg-acid px-7 py-4 text-lg font-semibold text-on-acid hover:bg-ink hover:text-ground"
           >{t('cta.bookFull')}</a
         >
         <a
@@ -109,7 +109,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
               href={s.href}
               target="_blank"
               rel="noopener"
-              class="press justify-self-start rounded-full bg-acid px-6 py-3 font-semibold text-ground hover:bg-ink"
+              class="press justify-self-start rounded-full bg-acid px-6 py-3 font-semibold text-on-acid hover:bg-ink hover:text-ground"
             >
               {t('ui.quote')}
             </a>
@@ -127,7 +127,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
     <p class="reveal text-xl lg:col-span-5" style="--d:70ms">{t('action.p')}</p>
   </div>
   <div class="mt-10 grid gap-6 lg:grid-cols-12">
-    <figure class="reveal relative isolate overflow-hidden rounded-3xl lg:col-span-8">
+    <figure class="theme-dark reveal relative isolate overflow-hidden rounded-3xl lg:col-span-8">
       <LoopVideo
         id="action-video"
         mode="visible"
@@ -142,7 +142,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
         <span class="text-muted">{t('action.capMeta')}</span>
       </figcaption>
     </figure>
-    <figure class="reveal relative isolate overflow-hidden rounded-3xl lg:col-span-4" style="--d:90ms">
+    <figure class="theme-dark reveal relative isolate overflow-hidden rounded-3xl lg:col-span-4" style="--d:90ms">
       <Picture
         name="gerp-dj-fiesta-aldea-ourense"
         alt={t('action.alt2')}
@@ -213,7 +213,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
       </dl>
       <a
         href={localizePath('/bio', locale)}
-        class="press reveal mt-10 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid"
+        class="press reveal mt-10 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid hover:text-on-acid"
         style="--d:200ms">{t('about.more')}</a
       >
     </div>
@@ -221,7 +221,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
 </section>
 
 <!-- Booking band -->
-<section class="relative isolate py-28 lg:py-40" aria-labelledby="band-h">
+<section class="theme-dark relative isolate py-28 lg:py-40" aria-labelledby="band-h">
   <div class="absolute inset-0 -z-10">
     <Picture name="gerp-dj-sesion-terraza-ourense" alt="" sizes="100vw" class="size-full object-cover" />
   </div>
@@ -232,7 +232,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
       <p class="text-xl">{t('band.p')}</p>
       <a
         href={bookHref}
-        class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink">{t('band.cta')}</a
+        class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-on-acid hover:bg-ink hover:text-ground">{t('band.cta')}</a
       >
     </div>
   </div>
@@ -248,7 +248,7 @@ const kit = site.kit.map((id) => t(`kit.${id}`));
         target="_blank"
         rel="noopener"
         href={site.channelUrl}
-        class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink"
+        class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-on-acid hover:bg-ink hover:text-ground"
         >{t('channel.cta')}</a
       >
     </div>

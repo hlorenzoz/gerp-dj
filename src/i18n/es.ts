@@ -202,6 +202,7 @@ const es = {
   'llms.pages': 'Páginas',
   'llms.lang': 'Español',
   'llms.press': 'Dossier de prensa en PDF (A4, 6 páginas): bio, servicios, equipo y contacto.',
+  'ui.theme': 'Tema oscuro',
 } as const;
 
 export default es;

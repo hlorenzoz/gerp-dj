@@ -37,7 +37,7 @@ const radioUrl: string | undefined = undefined;
                   <span class="block text-lg font-bold">{s.title}</span>
                   <span class="text-muted">{s.duration}</span>
                 </span>
-                <span class="grid size-12 shrink-0 place-items-center rounded-full bg-acid text-ground">
+                <span class="grid size-12 shrink-0 place-items-center rounded-full bg-acid text-on-acid">
                   <svg viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
                 </span>
               </span>
@@ -56,7 +56,7 @@ const radioUrl: string | undefined = undefined;
             href={radioUrl}
             target="_blank"
             rel="noopener"
-            class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink"
+            class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-on-acid hover:bg-ink hover:text-ground"
           >
             {t('radio.cta')}
           </a>

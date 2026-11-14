@@ -56,7 +56,7 @@ const watch = (s: { url?: string; title: string }) =>
 
 {
   tour && (
-    <section class="relative isolate py-28 lg:py-40" aria-labelledby="shows-h">
+    <section class="theme-dark relative isolate py-28 lg:py-40" aria-labelledby="shows-h">
       <div class="absolute inset-0 -z-10">
         <Picture name="gerp-dj-luces-fiesta-ourense" alt="" sizes="100vw" class="size-full object-cover" />
       </div>
@@ -69,7 +69,7 @@ const watch = (s: { url?: string; title: string }) =>
         </div>
         <a
           href={localizePath('/gira', locale)}
-          class="press reveal mt-8 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid"
+          class="press reveal mt-8 inline-block rounded-full bg-ink px-7 py-4 font-semibold text-ground hover:bg-acid hover:text-on-acid"
         >
           {t('shows.all')}
         </a>
@@ -113,14 +113,14 @@ const watch = (s: { url?: string; title: string }) =>
       <h2 id="sets-h" class="display reveal text-[clamp(3rem,8vw,7.5rem)]">{t('sets.title')}</h2>
       <div class="mt-10 grid gap-6 lg:grid-cols-12">
         <div class="reveal lg:col-span-8">
-          <a {...watch(featured)} class="group relative isolate block overflow-hidden rounded-3xl">
+          <a {...watch(featured)} class="theme-dark group relative isolate block overflow-hidden rounded-3xl">
             <Picture
               name={featured.image}
               alt=""
               sizes="(min-width: 1024px) 66vw, 100vw"
               class="aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
             />
-            <span class="glass-strong absolute top-1/2 left-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition group-hover:bg-acid group-hover:text-ground">
+            <span class="glass-strong absolute top-1/2 left-1/2 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition group-hover:bg-acid group-hover:text-on-acid">
               <svg viewBox="0 0 24 24" class="size-9" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
             </span>
             <span class="glass absolute inset-x-4 bottom-4 rounded-2xl p-4 sm:inset-x-6 sm:bottom-6">
