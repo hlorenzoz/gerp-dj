@@ -5,7 +5,8 @@
 interface Props {
   id: string;
   src: string;
-  poster: string;
+  /** Omit for the hero: the still <Picture> underneath already paints the frame (avoids a second download). */
+  poster?: string;
   mode: 'hero' | 'visible';
   labels: { pause: string; play: string };
   class?: string;
