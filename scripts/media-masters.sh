@@ -49,10 +49,17 @@ done
 echo "press  design/press/img ($(ls design/press/img | wc -l | tr -d ' ') jpg)"
 
 # --- CDN uploads (Cloudflare R2, https://cdn.hlorenzoz.com/gerp-dj/videos/): SEO-named, lossless remux with faststart ---
-# Held back on purpose: 19.15.02 (family photos on the wall) and 19.42.07 (close-up of a guest); 19.42.05 duplicates 09.31.46 2.
+# Skipped duplicates: 19.42.05 = 09.31.46 2 (byte-identical); 09.31.46 = 09.31.46 3 (same clip, lower bitrate).
+# Privacy before publishing: home-setup clips show family photos on the wall; 19.42.07 is a close-up of a guest.
 CDN="$SRC/../cdn/gerp-dj/videos"
 mkdir -p "$CDN"
-cdn() { ffmpeg -v error -y -i "$SRC/$1" -map 0 -c copy -movflags +faststart "$CDN/$2.mp4"; echo "cdn    $CDN/$2.mp4"; }
-cdn "WhatsApp Video 2026-11-14 at 19.12.38.mp4" gerp-dj-fiesta-sala-ourense-vertical
-cdn "WhatsApp Video 2026-11-14 at 19.12.43.mp4" gerp-dj-sesion-pub-ourense-vertical
-cdn "WhatsApp Video 2026-11-14 at 19.14.55.mp4" gerp-dj-mezcla-controladora-ourense-vertical
+cdn() { ffmpeg -v error -y -i "$SRC/WhatsApp Video 2026-11-14 at $1.mp4" -map 0 -c copy -movflags +faststart "$CDN/$2.mp4"; echo "cdn    $CDN/$2.mp4"; }
+cdn "09.31.39 1" gerp-dj-fiesta-aldea-ourense
+cdn "09.31.39"   gerp-dj-montaje-luces-casa-ourense
+cdn "09.31.46 2" gerp-dj-sesion-terraza-microfono-ourense
+cdn "09.31.46 3" gerp-dj-sesion-terraza-ourense
+cdn "19.12.38"   gerp-dj-fiesta-sala-ourense-vertical
+cdn "19.12.43"   gerp-dj-sesion-pub-ourense-vertical
+cdn "19.14.55"   gerp-dj-mezcla-controladora-ourense-vertical
+cdn "19.15.02"   gerp-dj-sesion-luces-casa-ourense
+cdn "19.42.07"   gerp-dj-fiesta-terraza-invitados-ourense
