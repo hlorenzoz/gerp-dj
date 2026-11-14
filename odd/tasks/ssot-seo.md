@@ -20,7 +20,7 @@ Branch: `feat/ssot-seo` from `main` `2ed9382`. Test runner: Vitest + `astro chec
 
 | ID | Specs | Route | Status | Commit / evidence |
 | --- | --- | --- | --- | --- |
-| T1 SSoT refactor + dossier from SSoT + OG + JSON-LD + OG image | S1–S4 | delegated (context backstop) | pending | |
+| T1 SSoT refactor + dossier from SSoT + OG + JSON-LD + OG image | S1–S4 | delegated (context backstop) | done | `f6e7eb6`, `09a91c0`, `0eebb93`, `cd`; tests 25→41; visible text identical to `2ed9382`; verifier MERGE: ready (mutation probe: every fact changes everywhere) |
 | T2 Parent checks, CLAUDE.md rule, verifier (Risk item 3: shared helpers and copy used by every page), merge | S1–S4 | inline + verifier | pending | |
 
 ## Log
@@ -28,3 +28,5 @@ Branch: `feat/ssot-seo` from `main` `2ed9382`. Test runner: Vitest + `astro chec
 - **L1 (2026-11-14, user, verbatim):** "Actualiza también el OpenGraph y los datos estructurados por favor. Asegúrate de que estén bien y listos para producción"
 - **L2 (2026-11-14, user, verbatim):** "Implementa un single source of truth para todo el sitio (que la data sea misma en todos los sitios) y actualiza el @CLAUDE.md para que siempre haga uso de esa fuente de información"
 - **L3 (2026-11-14):** `feat/astro-site` merged into `main` (`2ed9382`) and pushed; the first Cloudflare build failed because it built the previous `main` (no `build` script). Domain still unknown → `SITE_URL` must be set as a Cloudflare build variable.
+
+- **L4 (2026-11-14):** T1 done (S1–S5, S7, S8); README written by a parallel agent (`fbb4390`); independent verifier: MERGE ready, advisories applied (shipped HTML comments, `{year}`, `{country}` documented). Theme (S9) running in an isolated worktree.
