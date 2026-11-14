@@ -1,0 +1,67 @@
+---
+import type { Locale } from '../../config/site';
+import { useT } from '../../i18n';
+import Picture from '../Picture.astro';
+import { getSets } from './data';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useT(locale);
+const sets = await getSets(locale);
+// Placeholder until the client has a radio show: the CTA is left out while this is undefined.
+const radioUrl: string | undefined = undefined;
+---
+
+<section class="mx-auto max-w-[1440px] px-4 pt-36 pb-28 sm:px-8 lg:pt-44">
+  <h1 class="display reveal text-[clamp(4.5rem,15vw,13rem)]">{t('nav.sets')}</h1>
+  <p class="reveal mt-6 max-w-2xl text-xl" style="--d:80ms">{t('sets.lede')}</p>
+  <ul class="mt-12 grid gap-6 md:grid-cols-2">
+    {
+      sets.map((s) => (
+          <li>
+            <a
+              {...(s.url && { href: s.url, target: '_blank', rel: 'noopener', 'aria-label': `${t('ui.watch')}: ${s.title}` })}
+              class="group relative isolate block overflow-hidden rounded-3xl"
+            >
+              <Picture
+                name={s.image}
+                alt=""
+                sizes="(min-width: 768px) 50vw, 100vw"
+                class="aspect-video w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <span class="glass absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl p-4">
+                <span>
+                  <span class="block text-lg font-bold">{s.title}</span>
+                  <span class="text-muted">{s.duration}</span>
+                </span>
+                <span class="grid size-12 shrink-0 place-items-center rounded-full bg-acid text-ground">
+                  <svg viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+    }
+  </ul>
+  <div class="glass-strong reveal mt-16 grid gap-6 rounded-3xl p-7 sm:p-10 lg:grid-cols-12 lg:items-center">
+    <h2 class="display text-[clamp(2.5rem,5vw,4.5rem)] lg:col-span-6">{t('radio.title')}</h2>
+    <div class="lg:col-span-6">
+      <p class="text-xl">{t('radio.p')}</p>
+      {
+        radioUrl && (
+          <a
+            href={radioUrl}
+            target="_blank"
+            rel="noopener"
+            class="press mt-6 inline-block rounded-full bg-acid px-7 py-4 font-semibold text-ground hover:bg-ink"
+          >
+            {t('radio.cta')}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

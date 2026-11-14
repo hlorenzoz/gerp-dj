@@ -1,0 +1,91 @@
+# SAMPLE DATA from the prototype (design/index.html SHOWS). The client has no tour planned:
+# replace every entry with real dates before setting site.features.tour = true.
+# Dates carry the Spain offset (+02:00 summer, +01:00 winter) so build and browser agree.
+- id: o-carballino-2026-09-12
+  date: '2026-09-12T23:00:00+02:00'
+  city: { es: O Carballiño, gl: O Carballiño }
+  province: Ourense
+  zone: ourense
+  venue: Carpa da Festa
+  event: { es: Fiestas patronales, gl: Festas patronais }
+  status: onsale
+- id: santiago-2026-10-17
+  date: '2026-10-17T23:30:00+02:00'
+  city: { es: Santiago de Compostela, gl: Santiago de Compostela }
+  province: A Coruña
+  zone: galicia
+  venue: Sala Pedra
+  event: { es: Noche Néboa, gl: Noite Néboa }
+  status: onsale
+- id: ourense-2026-10-31
+  date: '2026-10-31T23:30:00+01:00'
+  city: { es: Ourense, gl: Ourense }
+  province: Ourense
+  zone: ourense
+  venue: Sala Burgas
+  event: { es: Samaín, gl: Samaín }
+  status: soldout
+- id: ourense-2026-11-21
+  date: '2026-11-21T23:30:00+01:00'
+  city: { es: Ourense, gl: Ourense }
+  province: Ourense
+  zone: ourense
+  venue: Sala Burgas
+  event: { es: GERP DJ toda la noche, gl: GERP DJ toda a noite }
+  status: onsale
+- id: vigo-2026-11-28
+  date: '2026-11-28T23:00:00+01:00'
+  city: { es: Vigo, gl: Vigo }
+  province: Pontevedra
+  zone: galicia
+  venue: Porto Club
+  event: { es: Presentación Afterglow, gl: Presentación Afterglow }
+  status: soldout
+- id: o-barco-2026-12-05
+  date: '2026-12-05T23:00:00+01:00'
+  city: { es: O Barco de Valdeorras, gl: O Barco de Valdeorras }
+  province: Ourense
+  zone: ourense
+  venue: Sala Sil
+  event: { es: Noche Ribeira Sacra, gl: Noite Ribeira Sacra }
+  status: onsale
+- id: verin-2026-12-19
+  date: '2026-12-19T22:00:00+01:00'
+  city: { es: Verín, gl: Verín }
+  province: Ourense
+  zone: ourense
+  venue: Carpa Monterrei
+  event: { es: Fiesta de Navidad, gl: Festa de Nadal }
+  status: onsale
+- id: ourense-2026-12-31
+  date: '2026-12-31T23:59:00+01:00'
+  city: { es: Ourense, gl: Ourense }
+  province: Ourense
+  zone: ourense
+  venue: Sala Burgas
+  event: { es: Nochevieja, gl: Noitevella }
+  status: onsale
+- id: a-coruna-2027-01-23
+  date: '2027-01-23T23:00:00+01:00'
+  city: { es: A Coruña, gl: A Coruña }
+  province: A Coruña
+  zone: galicia
+  venue: Sala Faro
+  event: { es: Noche Néboa, gl: Noite Néboa }
+  status: onsale
+- id: xinzo-2027-02-06
+  date: '2027-02-06T22:00:00+01:00'
+  city: { es: Xinzo de Limia, gl: Xinzo de Limia }
+  province: Ourense
+  zone: ourense
+  venue: Praza Maior
+  event: { es: Entroido, gl: Entroido }
+  status: free
+- id: madrid-2027-03-06
+  date: '2027-03-06T23:00:00+01:00'
+  city: { es: Madrid, gl: Madrid }
+  province: Madrid
+  zone: espana
+  venue: Nave Norte
+  event: { es: Gira Afterglow, gl: Xira Afterglow }
+  status: onsale

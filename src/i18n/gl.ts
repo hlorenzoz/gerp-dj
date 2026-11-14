@@ -171,6 +171,11 @@ const gl = {
     'Política de privacidade de GERP DJ, DJ en Ourense: que datos tratamos cando nos escribes por WhatsApp e como exercer os teus dereitos.',
   'meta.cookies':
     'Política de cookies de GERP DJ, DJ en Ourense: esta web non usa cookies de análise nin de publicidade.',
+  'meta.tour': 'Datas de GERP DJ, DJ en Ourense: actuacións en Ourense, o resto de Galicia e España.',
+  'meta.music': 'Música de GERP DJ, DJ en Ourense: singles, remixes, EPs e álbums.',
+  'meta.sets': 'Sesións de GERP DJ, DJ en Ourense, gravadas en directo, e o seu programa de radio.',
+  'aria.zoneFilter': 'Filtrar por zona',
+  'aria.typeFilter': 'Filtrar por tipo',
   '404.title': 'Páxina non atopada',
   '404.p': 'A páxina que buscas non existe ou cambiou de enderezo.',
   '404.home': 'Volver ao inicio',

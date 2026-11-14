@@ -1,0 +1,15 @@
+---
+// Hidden features (site.features): only enabled ones are built; with every flag off this route builds nothing.
+import FeaturePage from '../../components/features/FeaturePage.astro';
+import { type FeatureName, featurePaths } from '../../components/features/data';
+
+export const getStaticPaths = featurePaths;
+
+interface Props {
+  name: FeatureName;
+}
+
+const { name } = Astro.props;
+---
+
+<FeaturePage name={name} locale="gl" />
