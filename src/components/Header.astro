@@ -1,0 +1,60 @@
+---
+import { alternatePath, getLocale, localizePath, locales, useT } from '../i18n';
+import MobileMenu from './MobileMenu.svelte';
+import { navLinks } from './nav';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useT(locale);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => !href.includes('#') && href.replace(/\/$/, '') === path;
+const bookHref = localizePath('/contratacion', locale);
+---
+
+<header class="glass fixed inset-x-0 top-0 z-50 border-x-0 border-t-0">
+  <div class="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-4 sm:px-8">
+    <a href={localizePath('/', locale)} class="display text-2xl tracking-tight">GERP DJ</a>
+    <nav aria-label={t('aria.nav')} class="ml-auto hidden items-center gap-1 lg:flex">
+      {
+        navLinks(locale, 'header').map((link) => (
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener' : undefined}
+            aria-current={isCurrent(link.href) ? 'page' : undefined}
+            class:list={['nav-link press rounded-full px-4 py-2 text-[15px] font-medium hover:bg-ink/10', { 'bg-ink/10': isCurrent(link.href) }]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="ml-auto flex items-center gap-2 lg:ml-0">
+      <div class="glass-subtle flex rounded-full p-1 text-sm font-semibold" role="group" aria-label={t('aria.lang')}>
+        {
+          locales.map((l) => (
+            <a
+              href={alternatePath(Astro.url.pathname, l)}
+              hreflang={l}
+              lang={l}
+              aria-current={l === locale ? 'page' : undefined}
+              class:list={['lang press rounded-full px-3 py-1', { 'bg-ink text-ground': l === locale }]}
+            >
+              {l.toUpperCase()}
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href={bookHref}
+        aria-current={isCurrent(bookHref) ? 'page' : undefined}
+        class="press hidden rounded-full bg-acid px-5 py-2 text-[15px] font-semibold text-ground hover:bg-ink sm:inline-block">{t('cta.book')}</a
+      >
+      <MobileMenu
+        client:load
+        links={navLinks(locale, 'mobile')}
+        bookHref={bookHref}
+        labels={{ menu: t('menu'), close: t('close'), nav: t('aria.navMobile'), book: t('cta.book') }}
+      />
+    </div>
+  </div>
+</header>

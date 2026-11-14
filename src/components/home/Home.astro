@@ -1,0 +1,14 @@
+---
+// Stub: T2 replaces this with the home sections (hero, services, en acción, equipo, about, band, channel).
+import type { Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-end px-4 pt-24 pb-10 sm:px-8" data-locale={locale}>
+  <h1 class="display reveal text-[min(calc((100vw-4rem)/5.9),14.5rem)]">GERP DJ</h1>
+</section>

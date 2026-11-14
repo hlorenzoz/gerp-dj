@@ -4,9 +4,28 @@
   "type": "module",
   "scripts": {
     "media": "bash scripts/media-masters.sh",
-    "images": "node scripts/images.mjs"
+    "images": "node scripts/images.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "deploy": "astro build && wrangler deploy"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "@astrojs/check": "^0.9.12",
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@types/node": "^24.19.2",
+    "sharp": "^0.34.5",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.162.0"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^9.1.6",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.12",
+    "svelte": "^5.57.3",
+    "tailwindcss": "^4.3.5"
   }
 }

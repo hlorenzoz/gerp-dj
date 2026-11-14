@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ground: #07070a;
+  --color-surface: #121217;
+  --color-ink: #f3f2ee;
+  --color-muted: #a9a8a3;
+  --color-acid: #dcff3c;
+  --color-signal: #ff5a36;
+  /* --font-archivo comes from the Astro Fonts API (<Font> in BaseLayout). */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility glass-subtle {
+  background-color: rgb(243 242 238 / 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(243 242 238 / 0.08);
+}
+@utility glass {
+  background-color: rgb(7 7 10 / 0.35);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgb(243 242 238 / 0.12);
+}
+@utility glass-strong {
+  background-color: rgb(7 7 10 / 0.6);
+  backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid rgb(243 242 238 / 0.16);
+}
+@utility display {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+}
+
+@layer base {
+  html { background: var(--color-ground); color: var(--color-ink); scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.55; }
+  :focus-visible { outline: 2px solid var(--color-acid); outline-offset: 3px; }
+  ::selection { background: var(--color-acid); color: var(--color-ground); }
+  .legal h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.2; margin-top: 2.5rem; }
+  .legal h2:first-child { margin-top: 0; }
+  .legal p, .legal ul { margin-top: .75rem; }
+  .legal ul { list-style: disc; padding-left: 1.5rem; }
+  .legal li + li { margin-top: .5rem; }
+  .legal a { text-decoration: underline; }
+  [hidden] { display: none !important; }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass, .glass-strong, .glass-subtle { background-color: rgb(18 18 23 / 0.92); }
+}
+
+/* motion */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+.js .reveal.in { opacity: 1; transform: none; }
+.drift { animation: drift 30s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: scale(1.04) translate3d(0,0,0); } to { transform: scale(1.14) translate3d(-2%,-1%,0); } }
+.js #hero-video:not(.ready) { opacity: 0; }
+.press { transition: transform .15s ease, background-color .2s ease, color .2s ease; }
+.press:active { transform: scale(.97); }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .drift { animation: none; }
+  html { scroll-behavior: auto; }
+}
