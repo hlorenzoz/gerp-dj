@@ -1,0 +1,64 @@
+# Quality pipeline for GERP DJ.
+# - pre-commit.ci (https://pre-commit.ci) runs the self-contained hooks on every pull request and autofixes them.
+# - The hooks that need the project's `npm ci` (types, unit tests, build) run locally on `git push`
+#   (stage pre-push) and are skipped on pre-commit.ci, which cannot install the project's dependencies.
+# Install both hook types once with `just setup` (or `pre-commit install`).
+default_install_hook_types: [pre-commit, pre-push]
+default_stages: [pre-commit]
+
+ci:
+  autofix_prs: true
+  autofix_commit_msg: "style: apply pre-commit.ci auto fixes"
+  autoupdate_schedule: weekly
+  autoupdate_commit_msg: "chore: update pre-commit hooks"
+  skip: [astro-check, unit-tests, astro-build]
+
+exclude: ^(src/lib/images/manifest\.json|package-lock\.json)$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.pdf$
+      - id: end-of-file-fixer
+        exclude: \.pdf$
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=3500] # muted MP4 loops in public/videos are ~2–3 MB
+      - id: detect-private-key
+
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.6.7
+    hooks:
+      - id: biome-check
+        additional_dependencies: ["@biomejs/biome@2.6.7"]
+        files: \.(m?js|ts|json)$
+
+  - repo: local
+    hooks:
+      - id: astro-check
+        name: astro check (types, templates, i18n completeness)
+        entry: npx astro check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: unit-tests
+        name: vitest
+        entry: npx vitest run
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: astro-build
+        name: astro build
+        entry: npm run build
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

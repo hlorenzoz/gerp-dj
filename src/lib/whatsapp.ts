@@ -1,11 +1,21 @@
-import { site, type Locale } from '../config/site';
+import { type Locale, site } from '../config/site';
 import { useT } from '../i18n';
 
 export const EVENT_TYPES = ['popular', 'wedding', 'private', 'corporate', 'other'] as const;
 export type EventType = (typeof EVENT_TYPES)[number];
 
-export interface BookingInput { name: string; date: string; venue: string; type: EventType; msg?: string }
-export interface AvailabilityInput { date: string; place: string; type: EventType }
+export interface BookingInput {
+  name: string;
+  date: string;
+  venue: string;
+  type: EventType;
+  msg?: string;
+}
+export interface AvailabilityInput {
+  date: string;
+  place: string;
+  type: EventType;
+}
 
 export const waLink = (text?: string) =>
   `https://wa.me/${site.whatsapp.number}` + (text ? `?text=${encodeURIComponent(text)}` : '');
@@ -21,13 +31,26 @@ export const eventTypes = (locale: Locale) => {
 // Booking keeps the raw yyyy-mm-dd date, exactly as the prototype does.
 export function bookingMessage(locale: Locale, { name, date, venue, type, msg }: BookingInput) {
   const t = useT(locale);
-  return [t('wa.hello'), `${t('wa.name')}: ${name}`, `${t('wa.date')}: ${date}`, `${t('wa.venue')}: ${venue}`,
-    `${t('wa.type')}: ${t(`f.${type}`)}`, msg && `\n${msg}`].filter(Boolean).join('\n');
+  return [
+    t('wa.hello'),
+    `${t('wa.name')}: ${name}`,
+    `${t('wa.date')}: ${date}`,
+    `${t('wa.venue')}: ${venue}`,
+    `${t('wa.type')}: ${t(`f.${type}`)}`,
+    msg && `\n${msg}`,
+  ]
+    .filter(Boolean)
+    .join('\n');
 }
 
 export function availabilityMessage(locale: Locale, { date, place, type }: AvailabilityInput) {
   const t = useT(locale);
-  return [t('wa.avail'), `${t('wa.date')}: ${formatDate(date)}`, `${t('wa.place')}: ${place}`, `${t('wa.type')}: ${t(`f.${type}`)}`].join('\n');
+  return [
+    t('wa.avail'),
+    `${t('wa.date')}: ${formatDate(date)}`,
+    `${t('wa.place')}: ${place}`,
+    `${t('wa.type')}: ${t(`f.${type}`)}`,
+  ].join('\n');
 }
 
 const serviceKeys = ['svc.1.msg', 'svc.2.msg', 'svc.3.msg', 'svc.4.msg'] as const;
