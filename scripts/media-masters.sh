@@ -2,7 +2,7 @@
 # Builds SEO-named masters from the raw client media in .agents/context:
 #   - photos  -> public/images/<seo-name>.webp   (masters; variants come from scripts/images.mjs)
 #   - videos  -> public/videos/<seo-name>.mp4    (muted H.264 loops) + a poster master in public/images
-#   - frames  -> .agents/context/frames/          (8 frames + contact sheet per video, for context only)
+#   - frames  -> .agents/context/frames/          (scripts/video-frames.sh: frames + contact sheet per video, context only)
 # Requires ffmpeg and ImageMagick 7 (`magick`). Run from the project root: bash scripts/media-masters.sh
 set -euo pipefail
 
@@ -36,20 +36,8 @@ ffmpeg -v error -y -ss 30 -i "$SRC/WhatsApp Video 2026-11-14 at 09.31.46 3.mp4" 
 magick "$IMG/tmp.png" -strip -quality 90 "$IMG/gerp-dj-luces-fiesta-ourense.webp" && rm "$IMG/tmp.png"
 echo "image  $IMG/gerp-dj-luces-fiesta-ourense.webp"
 
-# --- Context frames (8 per video, evenly spaced, plus a contact sheet) ---
-: > "$SRC/frames/INDEX.txt"
-i=0
-for f in "$SRC"/*.mp4; do
-  i=$((i + 1)); d="$SRC/frames/video-$i"; mkdir -p "$d"
-  dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")
-  for k in 0 1 2 3 4 5 6 7; do
-    t=$(awk -v d="$dur" -v k="$k" 'BEGIN { printf "%.3f", d * (k + 0.5) / 8 }')
-    ffmpeg -v error -y -ss "$t" -i "$f" -frames:v 1 -q:v 3 "$d/frame-$k.jpg"
-  done
-  magick montage "$d"/frame-*.jpg -tile 4x2 -geometry 424x240+4+4 -background '#111' "$d/contact-sheet.jpg"
-  echo "video-$i <- $(basename "$f") (${dur}s)" >> "$SRC/frames/INDEX.txt"
-done
-echo "frames $SRC/frames ($(wc -l < "$SRC/frames/INDEX.txt" | tr -d ' ') videos)"
+# --- Context frames (see scripts/video-frames.sh) ---
+bash scripts/video-frames.sh
 
 # --- Press kit images: JPEG keeps the PDF small (Chrome embeds WebP decoded, JPEG as-is) ---
 mkdir -p design/press/img
@@ -59,3 +47,12 @@ for m in "$IMG"/*.webp; do
   magick "$m" -resize '1400x1400>' -strip -quality 78 "design/press/img/$n.jpg"
 done
 echo "press  design/press/img ($(ls design/press/img | wc -l | tr -d ' ') jpg)"
+
+# --- CDN uploads (Cloudflare R2, https://cdn.hlorenzoz.com/gerp-dj/videos/): SEO-named, lossless remux with faststart ---
+# Held back on purpose: 19.15.02 (family photos on the wall) and 19.42.07 (close-up of a guest); 19.42.05 duplicates 09.31.46 2.
+CDN="$SRC/../cdn/gerp-dj/videos"
+mkdir -p "$CDN"
+cdn() { ffmpeg -v error -y -i "$SRC/$1" -map 0 -c copy -movflags +faststart "$CDN/$2.mp4"; echo "cdn    $CDN/$2.mp4"; }
+cdn "WhatsApp Video 2026-11-14 at 19.12.38.mp4" gerp-dj-fiesta-sala-ourense-vertical
+cdn "WhatsApp Video 2026-11-14 at 19.12.43.mp4" gerp-dj-sesion-pub-ourense-vertical
+cdn "WhatsApp Video 2026-11-14 at 19.14.55.mp4" gerp-dj-mezcla-controladora-ourense-vertical
