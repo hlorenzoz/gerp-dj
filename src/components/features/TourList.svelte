@@ -30,7 +30,7 @@
         <button
           type="button"
           aria-pressed={z === zone}
-          class={['press rounded-full px-4 py-2 font-medium', z === zone ? 'bg-acid text-ground' : 'glass-subtle hover:bg-ink/15']}
+          class={['press rounded-full px-4 py-2 font-medium', z === zone ? 'bg-acid text-on-acid' : 'glass-subtle hover:bg-ink/15']}
           onclick={() => (zone = z)}>{t(`ui.${z}`)}</button
         >
       {/each}
@@ -63,10 +63,10 @@
               href={s.ticketUrl}
               target="_blank"
               rel="noopener"
-              class="press rounded-full bg-acid px-5 py-2.5 font-semibold text-ground hover:bg-ink">{t('ui.onsale')}</a
+              class="press rounded-full bg-acid px-5 py-2.5 font-semibold text-on-acid hover:bg-ink hover:text-ground">{t('ui.onsale')}</a
             >
           {:else}
-            <span class="rounded-full bg-acid px-5 py-2.5 font-semibold text-ground">{t('ui.onsale')}</span>
+            <span class="rounded-full bg-acid px-5 py-2.5 font-semibold text-on-acid">{t('ui.onsale')}</span>
           {/if}
         </div>
       {/if}

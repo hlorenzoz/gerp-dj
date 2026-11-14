@@ -177,6 +177,7 @@ const gl = {
   '404.title': 'Páxina non atopada',
   '404.p': 'A páxina que buscas non existe ou cambiou de enderezo.',
   '404.home': 'Volver ao inicio',
+  'ui.theme': 'Tema escuro',
 } satisfies Record<keyof typeof es, string>;
 
 export default gl;

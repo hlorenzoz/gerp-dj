@@ -12,14 +12,14 @@ const t = useT(locale);
   <div class="mx-auto max-w-[1440px] px-4 sm:px-8">
     <div class="glass grid gap-10 rounded-3xl p-7 sm:p-10 lg:grid-cols-12">
       <nav aria-label={t('aria.navFooter')} class="grid gap-2 lg:col-span-3">
-        {navLinks(locale, 'footer').map((link) => <a href={link.href} class="hover:text-acid">{link.label}</a>)}
+        {navLinks(locale, 'footer').map((link) => <a href={link.href} class="hover:text-acid-ink">{link.label}</a>)}
       </nav>
       {
         site.features.socials && (
           <ul class="grid gap-2 lg:col-span-3" aria-label={t('aria.socials')}>
             {site.socials.map((s) => (
               <li>
-                <a href={s.url} target="_blank" rel="noopener" class="hover:text-acid">{s.name}</a>
+                <a href={s.url} target="_blank" rel="noopener" class="hover:text-acid-ink">{s.name}</a>
               </li>
             ))}
           </ul>
@@ -27,7 +27,7 @@ const t = useT(locale);
       }
       <div class="grid h-fit gap-2 lg:col-span-5 lg:col-start-8">
         <p class="text-lg font-semibold">WhatsApp Business</p>
-        <a href={waLink()} target="_blank" rel="noopener" class="display text-3xl text-acid hover:text-ink">{site.whatsapp.display}</a>
+        <a href={waLink()} target="_blank" rel="noopener" class="display text-3xl text-acid-ink hover:text-ink">{site.whatsapp.display}</a>
         <p class="text-muted">{t('c.hours')}</p>
       </div>
     </div>

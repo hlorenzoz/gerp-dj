@@ -22,6 +22,33 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#07070a" media="(prefers-color-scheme: dark)" />
+    <!-- Theme before first paint: the stored choice (ThemeToggle), else the system preference, followed live. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const system = matchMedia('(prefers-color-scheme: light)');
+        const stored = () => {
+          try {
+            const t = localStorage.getItem('theme');
+            return t === 'light' || t === 'dark' ? t : null;
+          } catch {
+            return null;
+          }
+        };
+        const paint = () => {
+          for (const m of document.querySelectorAll('meta[name="theme-color"]'))
+            m.content = root.dataset.theme === 'light' ? '#f3f2ee' : '#07070a';
+        };
+        root.dataset.theme = stored() ?? (system.matches ? 'light' : 'dark');
+        paint();
+        new MutationObserver(paint).observe(root, { attributeFilter: ['data-theme'] });
+        system.addEventListener('change', (e) => {
+          if (!stored()) root.dataset.theme = e.matches ? 'light' : 'dark';
+        });
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -46,7 +73,7 @@ const path = Astro.url.pathname;
 
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-ground"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acid focus:px-4 focus:py-2 focus:text-on-acid"
       >{t('skip')}</a
     >
 

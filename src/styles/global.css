@@ -7,25 +7,35 @@
   --color-muted: #a9a8a3;
   --color-acid: #dcff3c;
   --color-signal: #ff5a36;
+  /* Acid used as text, icon or focus ring on the page background or glass (acid itself fails contrast on light). */
+  --color-acid-ink: #dcff3c;
+  /* Text on an acid fill: always dark, in both themes. */
+  --color-on-acid: #07070a;
   /* --font-archivo comes from the Astro Fonts API (<Font> in BaseLayout). */
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Glass follows the theme tokens; the var() fallbacks are the dark values for browsers without light-dark(). */
 @utility glass-subtle {
-  background-color: rgb(243 242 238 / 0.05);
+  background-color: var(--glass-subtle-bg, rgb(243 242 238 / 0.05));
   backdrop-filter: blur(8px);
-  border: 1px solid rgb(243 242 238 / 0.08);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
 @utility glass {
-  background-color: rgb(7 7 10 / 0.35);
+  background-color: var(--glass-bg, rgb(7 7 10 / 0.35));
   backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgb(243 242 238 / 0.12);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
 }
 @utility glass-strong {
-  background-color: rgb(7 7 10 / 0.6);
+  background-color: var(--glass-strong-bg, rgb(7 7 10 / 0.6));
   backdrop-filter: blur(28px) saturate(140%);
-  border: 1px solid rgb(243 242 238 / 0.16);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
+}
+/* Text over photos and video stays on dark tokens in both themes. */
+@utility theme-dark {
+  color-scheme: dark;
+  color: var(--color-ink);
 }
 @utility display {
   font-family: var(--font-display);
@@ -38,8 +48,8 @@
 @layer base {
   html { background: var(--color-ground); color: var(--color-ink); scroll-behavior: smooth; }
   body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.55; }
-  :focus-visible { outline: 2px solid var(--color-acid); outline-offset: 3px; }
-  ::selection { background: var(--color-acid); color: var(--color-ground); }
+  :focus-visible { outline: 2px solid var(--color-acid-ink); outline-offset: 3px; }
+  ::selection { background: var(--color-acid); color: var(--color-on-acid); }
   .legal h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.2; margin-top: 2.5rem; }
   .legal h2:first-child { margin-top: 0; }
   .legal p, .legal ul { margin-top: .75rem; }
@@ -50,7 +60,29 @@
 }
 
 @supports not (backdrop-filter: blur(1px)) {
-  .glass, .glass-strong, .glass-subtle { background-color: rgb(18 18 23 / 0.92); }
+  .glass, .glass-strong, .glass-subtle { background-color: color-mix(in srgb, var(--color-surface) 92%, transparent); }
+}
+
+/* Theme: dark by default (the @theme values). With light-dark() support, tokens follow `color-scheme`:
+   the system preference without JS, `data-theme` once the head script sets it, dark inside `.theme-dark`. */
+:root { color-scheme: dark; }
+@supports (color: light-dark(#000, #fff)) {
+  :root {
+    color-scheme: light dark;
+    --color-ground: light-dark(#f3f2ee, #07070a);
+    --color-surface: light-dark(#ffffff, #121217);
+    --color-ink: light-dark(#07070a, #f3f2ee);
+    --color-muted: light-dark(#575651, #a9a8a3);
+    --color-acid-ink: light-dark(#4b5e00, #dcff3c);
+    --glass-subtle-bg: light-dark(rgb(255 255 255 / 0.5), rgb(243 242 238 / 0.05));
+    --glass-bg: light-dark(rgb(255 255 255 / 0.55), rgb(7 7 10 / 0.35));
+    --glass-strong-bg: light-dark(rgb(255 255 255 / 0.75), rgb(7 7 10 / 0.6));
+  }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
+}
+@supports not (color: light-dark(#000, #fff)) {
+  .theme-toggle { display: none; }
 }
 
 /* motion */

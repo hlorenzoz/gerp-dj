@@ -2,6 +2,7 @@
 import { alternatePath, getLocale, localizePath, locales, useT } from '../i18n';
 import MobileMenu from './MobileMenu.svelte';
 import { navLinks } from './nav';
+import ThemeToggle from './ThemeToggle.astro';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useT(locale);
@@ -29,6 +30,8 @@ const bookHref = localizePath('/contratacion', locale);
       }
     </nav>
     <div class="ml-auto flex items-center gap-2 lg:ml-0">
+      <!-- Below sm the header is full: the switch lives in the mobile menu dialog. -->
+      <div class="hidden sm:contents"><ThemeToggle /></div>
       <div class="glass-subtle flex rounded-full p-1 text-sm font-semibold" role="group" aria-label={t('aria.lang')}>
         {
           locales.map((l) => (
@@ -47,14 +50,16 @@ const bookHref = localizePath('/contratacion', locale);
       <a
         href={bookHref}
         aria-current={isCurrent(bookHref) ? 'page' : undefined}
-        class="press hidden rounded-full bg-acid px-5 py-2 text-[15px] font-semibold text-ground hover:bg-ink sm:inline-block">{t('cta.book')}</a
+        class="press hidden rounded-full bg-acid px-5 py-2 text-[15px] font-semibold text-on-acid hover:bg-ink hover:text-ground sm:inline-block">{t('cta.book')}</a
       >
       <MobileMenu
         client:load
         links={navLinks(locale, 'mobile')}
         bookHref={bookHref}
         labels={{ menu: t('menu'), close: t('close'), nav: t('aria.navMobile'), book: t('cta.book') }}
-      />
+      >
+        <ThemeToggle />
+      </MobileMenu>
     </div>
   </div>
 </header>

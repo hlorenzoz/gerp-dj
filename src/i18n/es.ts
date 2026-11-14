@@ -176,6 +176,7 @@ const es = {
   '404.title': 'Página no encontrada',
   '404.p': 'La página que buscas no existe o ha cambiado de dirección.',
   '404.home': 'Volver al inicio',
+  'ui.theme': 'Tema oscuro',
 } as const;
 
 export default es;
