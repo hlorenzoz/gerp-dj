@@ -21,7 +21,7 @@ Branch: `feat/astro-site` (baseline `fa9d00a` on `main`). Delivery: `ask-on-risk
 
 | ID | Specs | Route | Status | Commit / evidence |
 | --- | --- | --- | --- | --- |
-| T1 Foundation: scaffold, config, i18n, layout, header/menu/footer, Picture, WhatsApp lib + tests, fonts, tokens | S1–S5, S9, S11 | delegated (context backstop: parent session is long) | pending | |
+| T1 Foundation: scaffold, config, i18n, layout, header/menu/footer, Picture, WhatsApp lib + tests, fonts, tokens | S1–S5, S9, S11 | delegated (context backstop: parent session is long) | done, verifier running | `dbad37d`; vitest RED (module missing) → GREEN 11/11; astro check 0 errors; build 2 pages |
 | T2 Home page (hero video + still + availability, services, en acción, equipo, about, band, channel) | S4, S5, S9, S10, S11 | delegated (context backstop) | pending | |
 | T3 Inner pages: contratación (booking island), bio, privacidad, cookies, 404, press PDFs | S3, S4, S7, S8, S11 | delegated (context backstop) | pending | |
 | T4 Hidden features behind flags: tour (collection, list, countdown), music, sets, shop, socials | S6 | delegated (context backstop) | pending | |
@@ -33,4 +33,5 @@ Branch: `feat/astro-site` (baseline `fa9d00a` on `main`). Delivery: `ask-on-risk
 - **L2 (2026-11-14, user, verbatim):** "Mantén oculta la sección Música por ahora"
 - **L3 (2026-11-14, decision):** SvelteKit cannot run inside Astro; the stack is Astro + `@astrojs/svelte` islands (recorded in CLAUDE.md since the first session).
 - **L4 (2026-11-14, setup):** git initialised; baseline `fa9d00a` on `main`; work on `feat/astro-site`. Raw client media in `.agents/context/` is git-ignored (30 MB, inputs of `npm run media`). RDD review mode is off globally. No `.atl/skill-registry.md`; Svelte skills passed by path.
-- **Next:** delegate T1.
+- **L5 (2026-11-14, T1):** writer delivered foundation (Astro 7.4.12, Svelte 5, Tailwind 4.3, Fonts API local provider with Fontsource Archivo wdth+wght, typed es/gl dictionaries, WhatsApp lib with tests). Parent re-ran vitest/check/build: pass. Risk: item 5 (new dependencies, deploy config) → independent verifier launched. RDD off, so no native review. Deviations accepted: extra i18n keys (`ui.*`, `wa.*`, `meta.description`, aria labels — Galician aria labels need native review); 8 unused prototype GL keys dropped; shop link gets `target="_blank"`.
+- **Next:** verifier verdict for T1, then delegate T2 + T3.
