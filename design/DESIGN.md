@@ -57,7 +57,7 @@ Raw files: `.agents/context/` (4 photos, 5 WhatsApp videos; videos 4 and 5 are t
 
 ## Hidden for now (code kept)
 
-`site.features` flags, all `false` until the client asks: `tour` (`/gira`, home dates, next-show countdown — no tour is planned), `music` (`/musica`, latest release, releases rail — the releases were sample data and must not be published under a real brand), `sets` (`/sesiones` page, home "En directo" block), `shop` (external store link), `socials` (footer profiles). A disabled page is neither built nor linked.
+`site.features` flags, all `false` until the client asks: `tour` (`/gira`, home dates, next-show countdown — no tour is planned), `music` (`/musica`, latest release, releases rail — the releases were sample data and must not be published under a real brand), `sets` (`/sesiones` page, home "En directo" block), `shop` (external store link). `socials` is on: YouTube and TikTok in the footer and JSON-LD `sameAs`. A disabled page is neither built nor linked.
 
 ## Languages
 

@@ -64,15 +64,13 @@ export const site = {
   /** Print and image routes that are built but must never be indexed or listed. */
   noindexPaths: ['/dossier/', '/og/card/'],
   // Hidden, not deleted: a disabled feature is neither built nor linked.
-  features: { tour: false, music: false, sets: false, shop: false, socials: false },
+  features: { tour: false, music: false, sets: false, shop: false, socials: true },
   shopUrl: 'https://shop.example.com', // placeholder
+  /** Official profiles: footer links and JSON-LD `sameAs`. */
   socials: [
-    { name: 'Instagram', url: '#' },
-    { name: 'TikTok', url: '#' },
-    { name: 'YouTube', url: '#' },
-    { name: 'Spotify', url: '#' },
-    { name: 'SoundCloud', url: '#' },
-  ], // placeholders
+    { name: 'YouTube', url: 'https://www.youtube.com/@youtGERPDJ' },
+    { name: 'TikTok', url: 'https://www.tiktok.com/@gerpdj' },
+  ],
 } as const;
 
 export type Site = typeof site;

@@ -78,6 +78,13 @@ describe('buildGraph', () => {
     expect(json).not.toMatch(/streetAddress|aggregateRating|review|price|\{\w+\}/);
   });
 
+  it('links the official social profiles from site.ts as sameAs', () => {
+    expect(byType(graph, 'EntertainmentBusiness').sameAs).toEqual([
+      'https://www.youtube.com/@youtGERPDJ',
+      'https://www.tiktok.com/@gerpdj',
+    ]);
+  });
+
   it('legal pages are plain WebPages that are not about the business', () => {
     const page = byType(
       buildGraph({ base, locale: 'es', path: '/privacidad/', title: 'P', description: 'D' }),
