@@ -182,6 +182,8 @@ const gl = {
   'aria.navFooter': 'Pé',
   'aria.socials': 'Redes',
   'footer.copy': '© 2026 {brand} · DJ en {city}, {region}',
+  'footer.creditBy': 'Desenvolvido por',
+  'footer.creditTitle': 'axencia de desenvolvemento web e solucións para negocios',
   'c.pressMsg': 'Ola, escribo por un tema de prensa sobre {brand}.',
   'ui.titleSuffix': '{brand}, DJ en {city}',
   'meta.book':
