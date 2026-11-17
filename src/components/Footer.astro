@@ -36,7 +36,16 @@ const t = useT(locale);
     </div>
     <p class="display mt-10 text-center text-[min(calc((100vw-4rem)/5.9),14.5rem)] leading-[0.8]" aria-hidden="true">{site.brand}</p>
     <div class="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted">
-      <span>{t('footer.copy')}</span>
+      <span
+        >{t('footer.copy')} · {t('footer.creditBy')}{' '}
+        <a
+          href={site.credit.url}
+          target="_blank"
+          rel="noopener"
+          title={`${site.credit.name}: ${t('footer.creditTitle')}`}
+          class="underline underline-offset-2 hover:text-ink">{site.credit.name}</a
+        ></span
+      >
       <span
         ><a href={localizePath('/privacidad', locale)} class="hover:text-ink">{t('legal.privacy')}</a> · <a
           href={localizePath('/cookies', locale)}

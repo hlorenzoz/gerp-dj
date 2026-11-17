@@ -181,6 +181,8 @@ const es = {
   'aria.navFooter': 'Pie',
   'aria.socials': 'Redes',
   'footer.copy': '© 2026 {brand} · DJ en {city}, {region}',
+  'footer.creditBy': 'Desarrollado por',
+  'footer.creditTitle': 'agencia de desarrollo web y soluciones para negocios',
   'c.pressMsg': 'Hola, escribo por un tema de prensa sobre {brand}.',
   'ui.titleSuffix': '{brand}, DJ en {city}',
   'meta.book':

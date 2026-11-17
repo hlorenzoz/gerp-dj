@@ -138,6 +138,8 @@ export const site = {
   features: { tour: false, music: false, sets: false, shop: false, socials: true },
   shopUrl: 'https://shop.example.com', // placeholder
   /** Official profiles: footer links and JSON-LD `sameAs`. */
+  /** Footer credit: a followed link (no `nofollow`), opens in a new tab. */
+  credit: { name: 'Lorenzoz Agency', url: 'https://hlorenzoz.com/' },
   socials: [
     { name: 'YouTube', url: 'https://www.youtube.com/@youtGERPDJ' },
     { name: 'TikTok', url: 'https://www.tiktok.com/@gerpdj' },
