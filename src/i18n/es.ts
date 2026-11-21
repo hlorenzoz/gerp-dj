@@ -63,7 +63,10 @@ const es = {
   'about.title': 'Sobre {brand}',
   'about.p1':
     '{brand} pone la música y las luces en fiestas, bodas y celebraciones de {city} y de toda {region}, y anima la noche micrófono en mano.',
-  'about.story': '[Pendiente: la historia de {brand}, sus años de experiencia y cómo empezó]',
+  'about.story':
+    'Desde {since} ha pinchado en más de {performances} actuaciones: verbenas de aldea, terrazas, pubs y fiestas privadas.',
+  'bio.p3':
+    '¿Tienes una fecha en mente? Escríbele por WhatsApp con el día, el lugar y el tipo de celebración, y te responde en {responseHours} horas laborables.',
   'about.baseK': 'Base',
   'about.kitK': 'Equipo',
   'about.kitV': 'Sonido y luces propios',
@@ -188,7 +191,7 @@ const es = {
   'meta.book':
     'Contrata a {brand}, DJ en {city}, para fiestas populares, bodas, fiestas privadas y eventos de empresa en toda {region}. Envía tu solicitud por WhatsApp.',
   'meta.bio':
-    'Bio de {brand}, DJ en {city} con equipo de sonido e iluminación propio. Dossier de prensa y galería de fotos.',
+    '{brand}, DJ en {city} desde {since}: más de {performances} actuaciones con equipo de sonido e iluminación propio. Dossier de prensa y fotos.',
   'meta.privacy':
     'Política de privacidad de {brand}, DJ en {city}: qué datos tratamos cuando nos escribes por WhatsApp y cómo ejercer tus derechos.',
   'meta.cookies': 'Política de cookies de {brand}, DJ en {city}: esta web no usa cookies de análisis ni de publicidad.',

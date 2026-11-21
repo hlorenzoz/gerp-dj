@@ -14,7 +14,7 @@ const t = useT(locale);
 const waUrl = waLink(t('wa.hello'));
 const total = 6;
 const foot = (n: number) => ({ left: `${site.brand} · ${t('dossier.tag')}`, right: `${t('dossier.page')} ${n} / ${total}` });
-const bio = [t('about.p1'), t('bio.p2'), t('about.story')];
+const bio = [t('about.p1'), t('about.story'), t('bio.p2')];
 const facts = [
   [t('about.baseK'), site.location.locality],
   [t('about.kitK'), t('about.kitV')],
@@ -290,7 +290,7 @@ const img = {
         <div style="grid-column:span 7">
           <h2 class="display">{t('nav.bio')}</h2>
           <div style="margin-top:9mm">
-            {bio.map((p, i) => <p class:list={[{ lede: i === 0, muted: i === 2 }]}>{p}</p>)}
+            {bio.map((p, i) => <p class:list={[{ lede: i === 0 }]}>{p}</p>)}
           </div>
           <dl class="facts">
             {

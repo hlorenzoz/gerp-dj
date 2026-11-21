@@ -58,6 +58,15 @@ describe('useT', () => {
     expect(useT('gl')('footer.copy')).toBe('© 2026 GERP DJ · DJ en Ourense, Galicia');
   });
 
+  it('tells the experience from site.ts (since 2023, 15+ shows)', () => {
+    expect(useT('es')('about.story')).toBe(
+      'Desde 2023 ha pinchado en más de 15 actuaciones: verbenas de aldea, terrazas, pubs y fiestas privadas.',
+    );
+    expect(useT('gl')('about.story')).toBe(
+      'Dende 2023 pinchou en máis de 15 actuacións: verbenas de aldea, terrazas, pubs e festas privadas.',
+    );
+  });
+
   it('accepts extra variables', () => {
     expect(useT('es')('cta.bookFull', { brand: 'X' })).toBe('Contratar a X');
   });

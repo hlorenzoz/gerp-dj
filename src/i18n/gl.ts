@@ -64,7 +64,10 @@ const gl = {
   'about.title': 'Sobre {brand}',
   'about.p1':
     '{brand} pon a música e as luces en festas, vodas e celebracións de {city} e de toda {region}, e anima a noite micrófono na man.',
-  'about.story': '[Pendente: a historia de {brand}, os seus anos de experiencia e como comezou]',
+  'about.story':
+    'Dende {since} pinchou en máis de {performances} actuacións: verbenas de aldea, terrazas, pubs e festas privadas.',
+  'bio.p3':
+    'Tes unha data en mente? Escríbelle por WhatsApp co día, o lugar e o tipo de celebración, e respóndeche en {responseHours} horas laborables.',
   'about.baseK': 'Base',
   'about.kitK': 'Equipo',
   'about.kitV': 'Son e luces propios',
@@ -189,7 +192,7 @@ const gl = {
   'meta.book':
     'Contrata a {brand}, DJ en {city}, para festas populares, vodas, festas privadas e eventos de empresa en toda {region}. Envía a túa solicitude por WhatsApp.',
   'meta.bio':
-    'Bio de {brand}, DJ en {city} con equipo de son e iluminación propio. Dossier de prensa e galería de fotos.',
+    '{brand}, DJ en {city} dende {since}: máis de {performances} actuacións con equipo de son e iluminación propio. Dossier de prensa e fotos.',
   'meta.privacy':
     'Política de privacidade de {brand}, DJ en {city}: que datos tratamos cando nos escribes por WhatsApp e como exercer os teus dereitos.',
   'meta.cookies':
