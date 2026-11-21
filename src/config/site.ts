@@ -22,6 +22,8 @@ export const site = {
   channelUrl: 'https://whatsapp.com/channel/0029VbDytKl0rGiQqtirGx0W',
   /** Reply time promised for WhatsApp requests, in working hours. */
   responseHours: 48,
+  /** Track record shown in the bio, home and press kit (client-confirmed). */
+  experience: { since: 2023, performances: 15 },
   /** When WhatsApp requests are answered (schema.org day names). */
   hours: { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '19:00' },
   location: {
