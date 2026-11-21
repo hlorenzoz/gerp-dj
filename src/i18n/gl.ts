@@ -65,7 +65,7 @@ const gl = {
   'about.p1':
     '{brand} pon a música e as luces en festas, vodas e celebracións de {city} e de toda {region}, e anima a noite micrófono na man.',
   'about.story':
-    'Dende {since} pinchou en máis de {performances} actuacións: verbenas de aldea, terrazas, pubs e festas privadas.',
+    'Dende {since} pinchou en máis de {performances} actuacións: vodas, verbenas de aldea, terrazas, pubs e festas privadas.',
   'bio.p3':
     'Tes unha data en mente? Escríbelle por WhatsApp co día, o lugar e o tipo de celebración, e respóndeche en {responseHours} horas laborables.',
   'about.baseK': 'Base',

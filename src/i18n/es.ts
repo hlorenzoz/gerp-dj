@@ -64,7 +64,7 @@ const es = {
   'about.p1':
     '{brand} pone la música y las luces en fiestas, bodas y celebraciones de {city} y de toda {region}, y anima la noche micrófono en mano.',
   'about.story':
-    'Desde {since} ha pinchado en más de {performances} actuaciones: verbenas de aldea, terrazas, pubs y fiestas privadas.',
+    'Desde {since} ha pinchado en más de {performances} actuaciones: bodas, verbenas de aldea, terrazas, pubs y fiestas privadas.',
   'bio.p3':
     '¿Tienes una fecha en mente? Escríbele por WhatsApp con el día, el lugar y el tipo de celebración, y te responde en {responseHours} horas laborables.',
   'about.baseK': 'Base',
