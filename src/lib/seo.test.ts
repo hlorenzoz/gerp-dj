@@ -19,12 +19,13 @@ describe('pageUrl', () => {
 describe('buildGraph', () => {
   const graph = buildGraph({ base, locale: 'gl', path: '/gl/contratacion/', title: 'T', description: 'D' });
 
-  it('links WebSite, the business and the page by stable @ids', () => {
+  it('links WebSite, the business, the page and its breadcrumb by stable @ids', () => {
     expect(graph['@context']).toBe('https://schema.org');
     expect(nodes(graph).map((n) => [n['@type'], n['@id']])).toEqual([
       ['WebSite', 'https://example.org/#website'],
       ['EntertainmentBusiness', 'https://example.org/#business'],
       ['ContactPage', 'https://example.org/gl/contratacion/#webpage'],
+      ['BreadcrumbList', 'https://example.org/gl/contratacion/#breadcrumb'],
     ]);
     const page = byType(graph, 'ContactPage');
     expect(page).toMatchObject({
@@ -177,6 +178,36 @@ describe('buildLlmsTxt', () => {
   it('has no placeholders and no disabled features', () => {
     expect(txt).not.toMatch(/\{\w+\}/);
     expect(txt).not.toMatch(/gira|musica|sesiones|dossier\/|\/og\//);
+  });
+});
+
+describe('breadcrumbs (Google BreadcrumbList)', () => {
+  const base = 'https://example.org';
+  const crumbs = (locale: 'es' | 'gl', path: string) =>
+    buildGraph({ base, locale, path, title: 'T', description: 'D' })['@graph'].find(
+      (n) => n['@type'] === 'BreadcrumbList',
+    ) as { '@id': string; itemListElement: unknown[] } | undefined;
+
+  it('gives inner pages Home › Page with absolute, localized URLs and names', () => {
+    expect(crumbs('es', '/contratacion/')).toEqual({
+      '@type': 'BreadcrumbList',
+      '@id': 'https://example.org/contratacion/#breadcrumb',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://example.org/' },
+        { '@type': 'ListItem', position: 2, name: 'Contratación', item: 'https://example.org/contratacion/' },
+      ],
+    });
+    expect(crumbs('gl', '/gl/galeria/')?.itemListElement).toEqual([
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://example.org/gl/' },
+      { '@type': 'ListItem', position: 2, name: 'Galería', item: 'https://example.org/gl/galeria/' },
+    ]);
+  });
+
+  it('links the page node to its breadcrumb and leaves the home page without one', () => {
+    const graph = buildGraph({ base, locale: 'es', path: '/bio/', title: 'T', description: 'D' });
+    expect(byType(graph, 'AboutPage').breadcrumb).toEqual({ '@id': 'https://example.org/bio/#breadcrumb' });
+    expect(crumbs('es', '/')).toBeUndefined();
+    expect(crumbs('gl', '/gl/')).toBeUndefined();
   });
 });
 
