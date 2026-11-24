@@ -29,6 +29,17 @@ export function buildGraph({ base = site.url, locale, path, title, description }
   const url = base + localizePath(path, locale);
   const { countryCode, areaServed } = site.location;
   const places = areaServed.map(({ type, name }) => ({ '@type': type, name }));
+  // Google BreadcrumbList for every registered page below the home page: Home › Page (two levels on this site).
+  const breadcrumbId = `${url}#breadcrumb`;
+  const breadcrumb = page &&
+    page.path !== '/' && {
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t('nav.home'), item: pageUrl('/', locale, base) },
+        { '@type': 'ListItem', position: 2, name: t(page.title as Key), item: url },
+      ],
+    };
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -99,7 +110,9 @@ export function buildGraph({ base = site.url, locale, path, title, description }
         // Legal pages are about the site's policies, not about the business.
         ...(page && 'legal' in page ? {} : { about: { '@id': ids.business } }),
         primaryImageOfPage: { '@type': 'ImageObject', url: base + site.media.og.src },
+        ...(breadcrumb && { breadcrumb: { '@id': breadcrumbId } }),
       },
+      ...(breadcrumb ? [breadcrumb] : []),
     ],
   };
 }
