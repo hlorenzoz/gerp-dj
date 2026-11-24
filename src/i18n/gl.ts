@@ -95,6 +95,7 @@ const gl = {
     'Traballa co seu propio equipo: cabina co seu nome, altofalantes, iluminación LED e unha controladora Denon DJ. Móntao igual na praza dunha aldea, nunha terraza ou nun salón.',
   'press.title': 'Prensa',
   'press.placeholder': '[Pendente: citas de prensa reais con medio e data]',
+  'press.bioTitle': 'Dossier',
   'press.kit': 'Descargar dossier de prensa (PDF)',
   'press.photos': 'Fotos en alta resolución',
   'bio.gallery': 'Galería',
