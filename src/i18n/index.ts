@@ -86,6 +86,8 @@ export const siteVars = (locale: Locale) => ({
   country: countries[site.location.countryCode],
   phone: site.contact.display,
   responseHours: String(site.responseHours),
+  priceMin: String(site.price.min),
+  priceMax: String(site.price.max),
   since: String(site.experience.since),
   performances: String(site.experience.performances),
   days: formatDays(site.hours.days, locale),

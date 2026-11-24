@@ -43,8 +43,10 @@ export const site = {
     locality: 'Porqueira',
     province: 'Ourense',
   },
-  /** Typical booking price, schema.org `priceRange` format. */
-  priceRange: '€300-500',
+  /** Typical booking price in euros (JSON-LD `priceRange` and the FAQ). */
+  price: { min: 300, max: 500 },
+  /** FAQ question ids in display order (visible on /contratacion + JSON-LD FAQPage there); copy in `faq.<id>.q|a`. */
+  faq: ['booking', 'price', 'area', 'events', 'equipment', 'hours'],
   /** Service ids in display order; copy lives in the dictionaries as `svc.<id>.t|d|msg`. */
   services: ['popular', 'wedding', 'private', 'corporate'],
   /** Own equipment in display order; labels are `kit.<id>`. */
@@ -125,7 +127,7 @@ export const site = {
    * `type` is the schema.org WebPage subtype, `legal` pages are not about the business and go last in llms.txt. */
   pages: [
     { path: '/', title: 'ui.title', description: 'meta.description' },
-    { path: '/contratacion', title: 'book.title', description: 'meta.book', type: 'ContactPage' },
+    { path: '/contratacion', title: 'book.title', description: 'meta.book', type: 'ContactPage', faq: true },
     { path: '/gira', title: 'nav.tour', description: 'meta.tour', feature: 'tour' },
     { path: '/musica', title: 'nav.music', description: 'meta.music', feature: 'music' },
     { path: '/sesiones', title: 'nav.sets', description: 'meta.sets', feature: 'sets' },

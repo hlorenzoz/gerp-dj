@@ -31,14 +31,29 @@ export function buildGraph({ base = site.url, locale, path, title, description }
   const places = areaServed.map(({ type, name }) => ({ '@type': type, name }));
   // Google BreadcrumbList for every registered page below the home page: Home › Page (two levels on this site).
   const breadcrumbId = `${url}#breadcrumb`;
+  // Every registered page except the legal policies; the home page is a one-item list (Home).
   const breadcrumb = page &&
-    page.path !== '/' && {
+    !('legal' in page) && {
       '@type': 'BreadcrumbList',
       '@id': breadcrumbId,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: t('nav.home'), item: pageUrl('/', locale, base) },
-        { '@type': 'ListItem', position: 2, name: t(page.title as Key), item: url },
+        ...(page.path === '/' ? [] : [{ '@type': 'ListItem', position: 2, name: t(page.title as Key), item: url }]),
       ],
+    };
+  // FAQPage only where the FAQ is visible (site.pages `faq: true`), never repeated across pages.
+  const faq = page &&
+    'faq' in page && {
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      url,
+      inLanguage: locale,
+      isPartOf: { '@id': ids.website },
+      mainEntity: site.faq.map((id) => ({
+        '@type': 'Question',
+        name: t(`faq.${id}.q`),
+        acceptedAnswer: { '@type': 'Answer', text: t(`faq.${id}.a`) },
+      })),
     };
   return {
     '@context': 'https://schema.org',
@@ -67,7 +82,7 @@ export function buildGraph({ base = site.url, locale, path, title, description }
           addressRegion: site.address.province,
           addressCountry: countryCode,
         },
-        priceRange: site.priceRange,
+        priceRange: `€${site.price.min}-${site.price.max}`,
         areaServed: places,
         knowsLanguage: [...site.languages],
         sameAs: [...(site.features.socials ? site.socials.map((s) => s.url) : []), site.channelUrl],
@@ -113,6 +128,7 @@ export function buildGraph({ base = site.url, locale, path, title, description }
         ...(breadcrumb && { breadcrumb: { '@id': breadcrumbId } }),
       },
       ...(breadcrumb ? [breadcrumb] : []),
+      ...(faq ? [faq] : []),
     ],
   };
 }
