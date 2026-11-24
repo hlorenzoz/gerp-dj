@@ -184,6 +184,23 @@ const gl = {
   'aria.navMobile': 'Móbil',
   'aria.navFooter': 'Pé',
   'aria.socials': 'Redes',
+  'faq.title': 'Preguntas frecuentes',
+  'faq.booking.q': 'Como reservo unha data?',
+  'faq.booking.a':
+    'Escribe por WhatsApp ao {phone} co día, o lugar e o tipo de celebración, ou enche o formulario desta páxina, que prepara a mensaxe por ti. Recibirás resposta en {responseHours} horas laborables.',
+  'faq.price.q': 'Canto custa contratar a {brand}?',
+  'faq.price.a':
+    'Unha actuación custa normalmente entre {priceMin} e {priceMax} €. O prezo final depende da celebración; pide o teu orzamento por WhatsApp.',
+  'faq.area.q': 'Onde actúa {brand}?',
+  'faq.area.a': 'Ten a súa base en {city} e actúa en toda {region}.',
+  'faq.events.q': 'Para que tipo de eventos podo contratalo?',
+  'faq.events.a':
+    'Vodas, festas populares e de aldea, festas privadas e eventos de empresa. Tamén pincha en pubs e terrazas.',
+  'faq.equipment.q': 'Leva o seu propio equipo?',
+  'faq.equipment.a':
+    'Si. Chega coa súa cabina, equipo de son completo, iluminación LED e efectos de luz, e micrófono para dedicatorias e anuncios.',
+  'faq.hours.q': 'Cando podo contactar?',
+  'faq.hours.a': '{days}, de {hoursFrom} a {hoursTo}, por WhatsApp Business.',
   'footer.copy': '© 2026 {brand} · DJ en {city}, {region}',
   'footer.creditBy': 'Desenvolvido por',
   'footer.creditTitle': 'axencia de desenvolvemento web e solucións para negocios',

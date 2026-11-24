@@ -26,6 +26,7 @@ describe('buildGraph', () => {
       ['EntertainmentBusiness', 'https://example.org/#business'],
       ['ContactPage', 'https://example.org/gl/contratacion/#webpage'],
       ['BreadcrumbList', 'https://example.org/gl/contratacion/#breadcrumb'],
+      ['FAQPage', 'https://example.org/gl/contratacion/#faq'],
     ]);
     const page = byType(graph, 'ContactPage');
     expect(page).toMatchObject({
@@ -203,11 +204,50 @@ describe('breadcrumbs (Google BreadcrumbList)', () => {
     ]);
   });
 
-  it('links the page node to its breadcrumb and leaves the home page without one', () => {
+  it('links the page node to its breadcrumb; the home pages get a one-item list', () => {
     const graph = buildGraph({ base, locale: 'es', path: '/bio/', title: 'T', description: 'D' });
     expect(byType(graph, 'AboutPage').breadcrumb).toEqual({ '@id': 'https://example.org/bio/#breadcrumb' });
-    expect(crumbs('es', '/')).toBeUndefined();
-    expect(crumbs('gl', '/gl/')).toBeUndefined();
+    expect(crumbs('es', '/')?.itemListElement).toEqual([
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://example.org/' },
+    ]);
+    expect(crumbs('gl', '/gl/')?.itemListElement).toEqual([
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://example.org/gl/' },
+    ]);
+  });
+
+  it('leaves the privacy and cookie policies without breadcrumbs', () => {
+    for (const path of ['/privacidad/', '/cookies/', '/gl/privacidad/', '/gl/cookies/'])
+      expect(crumbs(path.startsWith('/gl/') ? 'gl' : 'es', path)).toBeUndefined();
+  });
+});
+
+describe('FAQPage (visible FAQ on the booking page only)', () => {
+  const base = 'https://example.org';
+  const faq = (locale: 'es' | 'gl', path: string) =>
+    buildGraph({ base, locale, path, title: 'T', description: 'D' })['@graph'].find((n) => n['@type'] === 'FAQPage') as
+      | { '@id': string; mainEntity: { name: string; acceptedAnswer: { text: string } }[] }
+      | undefined;
+
+  it('lists the questions and answers in the page language, filled from site.ts', () => {
+    const es = faq('es', '/contratacion/');
+    expect(es?.['@id']).toBe('https://example.org/contratacion/#faq');
+    expect(es?.mainEntity).toHaveLength(6);
+    expect(es?.mainEntity[0]).toEqual({
+      '@type': 'Question',
+      name: '¿Cómo reservo una fecha?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Escribe por WhatsApp al +34 613 34 05 00 con el día, el lugar y el tipo de celebración, o rellena el formulario de esta página, que prepara el mensaje por ti. Recibirás respuesta en 48 horas laborables.',
+      },
+    });
+    expect(faq('gl', '/gl/contratacion/')?.mainEntity[1].acceptedAnswer.text).toBe(
+      'Unha actuación custa normalmente entre 300 e 500 €. O prezo final depende da celebración; pide o teu orzamento por WhatsApp.',
+    );
+    expect(JSON.stringify(es)).not.toMatch(/\{\w+\}/);
+  });
+
+  it('is not repeated on other pages', () => {
+    for (const path of ['/', '/bio/', '/galeria/', '/privacidad/']) expect(faq('es', path)).toBeUndefined();
   });
 });
 
